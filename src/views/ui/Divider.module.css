@@ -1,0 +1,16 @@
+.divider {
+  position: relative;
+  z-index: 1;
+  padding: 60px 20px 14px;
+}
+
+@media (min-width: 1024px) {
+  .divider {
+    padding: 60px 60px 14px;
+  }
+}
+
+.line {
+  display: block;
+  margin-top: 6px;
+}

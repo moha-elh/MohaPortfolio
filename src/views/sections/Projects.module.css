@@ -1,0 +1,75 @@
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 0 36px;
+  }
+}
+
+/* ── Desktop: absolute scatter ── */
+.stage {
+  position: relative;
+  height: 520px;
+  overflow: visible;
+}
+
+/* ── Mobile: vertical stack ── */
+.stageMobile {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 16px;
+}
+
+.hint {
+  font-family: var(--f-hand);
+  font-size: 24px;
+  position: absolute;
+  top: 0;
+  left: 16px;
+  pointer-events: none;
+}
+
+.hintMobile {
+  font-family: var(--f-hand);
+  font-size: 22px;
+  pointer-events: none;
+}
+
+.hintSub {
+  font-size: 14px;
+  color: var(--faint);
+}
+
+/* Mobile cards: alternating rotation/offset via nth-child */
+.stageMobile > :nth-child(even) {
+  align-self: flex-end;
+  transform: rotate(2deg) !important;
+  margin-right: 8px;
+}
+
+.stageMobile > :nth-child(odd):not(:first-child) {
+  align-self: flex-start;
+  transform: rotate(-2deg) !important;
+  margin-left: 8px;
+}
+
+.sticky {
+  position: absolute;
+  top: 220px;
+  left: 460px;
+  width: 190px;
+  background: var(--yellow);
+  padding: 12px 14px;
+  box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.12);
+  transform: rotate(3deg);
+  font-family: var(--f-hand);
+  font-size: 18px;
+  line-height: 1.1;
+  pointer-events: none;
+}

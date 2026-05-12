@@ -1,0 +1,103 @@
+.filmstrip {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  padding: 18px 0;
+  box-shadow:
+    inset 0 6px 16px rgba(0, 0, 0, 0.4),
+    0 8px 22px rgba(0, 0, 0, 0.18);
+}
+
+/* Sprocket holes — top and bottom */
+.filmstrip::before,
+.filmstrip::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 16px;
+  background-image: radial-gradient(circle, var(--paper) 0, var(--paper) 4px, transparent 4.5px);
+  background-size: 28px 16px;
+  background-repeat: repeat-x;
+  pointer-events: none;
+  z-index: 2;
+}
+.filmstrip::before { top: 0; }
+.filmstrip::after  { bottom: 0; }
+
+/* Marquee outer: clips the scrolling track */
+.marqueeOuter {
+  overflow: hidden;
+  padding: 26px 0;
+}
+
+/* Marquee track: flex row, animates translateX */
+.marqueeTrack {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  padding: 0 22px;
+  /* translate exactly -50% = one set of frames (we have 2 sets) */
+  animation: marquee 36s linear infinite;
+}
+
+/* Pause on hover (desktop) */
+@media (hover: hover) {
+  .filmstrip:hover .marqueeTrack {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Respect reduced-motion: stop the marquee */
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack {
+    animation: none !important;
+  }
+}
+
+.frame {
+  background: #fff;
+  padding: 10px;
+  width: 200px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+.imgBox {
+  height: 140px;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 8px, rgba(0, 0, 0, 0.06) 8px 9px),
+    #ececea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--faint);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 8px;
+}
+
+.frameLabel {
+  font-family: var(--f-hand);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.frameDate {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  color: var(--faint);
+}

@@ -1,0 +1,43 @@
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: 32px 20px 0;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: 32px 60px 0;
+  }
+}
+
+.name {
+  font-family: var(--f-hand);
+  font-size: clamp(56px, 11vw, 118px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+
+.nameLine2 {
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .nameLine2 {
+    margin-left: 200px;
+  }
+}
+
+.scribble {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 14px;
+}
+
+/* Scale scribble SVG proportionally */
+.scribble svg {
+  width: clamp(120px, 20vw, 240px);
+  height: auto;
+}

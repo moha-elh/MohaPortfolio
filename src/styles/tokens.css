@@ -1,0 +1,26 @@
+:root {
+  /* Palette */
+  --ink:    #1a1a1a;
+  --faint:  #9a9a9a;
+  --paper:  #fafaf7;
+  --lime:   #c8f24a;
+  --yellow: #fef4a8;
+  --cream:  #fefbf2;
+  --white:  #ffffff;
+
+  /* Typography */
+  --f-hand: 'Caveat', cursive;
+  --f-body: 'Space Grotesk', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Shadows */
+  --shadow-card:  0 8px 18px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.04);
+  --shadow-lift:  0 22px 40px rgba(0,0,0,.20), 0 0 0 2px rgba(0,0,0,.06);
+  --shadow-paper: 0 12px 28px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.05);
+  --shadow-polar: 0 14px 28px rgba(0,0,0,.14), 0 0 0 1px rgba(0,0,0,.04);
+
+  /* Breakpoints (use in JS via getComputedStyle; in CSS use the values directly) */
+  --bp-tablet:  720px;
+  --bp-desktop: 1024px;
+  --bp-wide:    1280px;
+}

@@ -1,0 +1,40 @@
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 40px 20px 0;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 40px 60px 0;
+  }
+}
+
+/* Mobile-first: 1 col → 2 col → 4 col */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* No rotation on single-column mobile (rotated full-width cards overflow) */
+.grid > * {
+  transform: none !important;
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Restore subtle rotations at tablet+ */
+  .grid > * {
+    transform: unset !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

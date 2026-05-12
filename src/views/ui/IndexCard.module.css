@@ -1,0 +1,31 @@
+.card {
+  position: relative;
+  padding: 14px 16px 20px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.paperclip {
+  position: absolute;
+  top: -8px;
+  right: 14px;
+  width: 14px;
+  height: 30px;
+  border: 1.5px solid var(--faint);
+  border-radius: 7px 7px 4px 4px;
+  border-bottom: none;
+}
+
+.title {
+  font-family: var(--f-hand);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--faint);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}

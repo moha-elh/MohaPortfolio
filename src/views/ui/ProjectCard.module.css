@@ -1,0 +1,49 @@
+.card {
+  background: #fff;
+  padding: 10px;
+  box-shadow: var(--shadow-card);
+  user-select: none;
+  transition: box-shadow 0.2s;
+}
+
+.lifted {
+  box-shadow: var(--shadow-lift);
+}
+
+.imgBox {
+  width: 100%;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 8px, rgba(0, 0, 0, 0.04) 8px 9px),
+    #ececea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.imgPlaceholder {
+  font-family: var(--f-mono);
+  font-size: 24px;
+  color: var(--faint);
+}
+
+.name {
+  font-family: var(--f-hand);
+  font-size: 22px;
+  margin-top: 6px;
+}
+
+.tag {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
