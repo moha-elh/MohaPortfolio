@@ -13,7 +13,7 @@
 /* ── Desktop: absolute scatter ── */
 .stage {
   position: relative;
-  height: 520px;
+  height: 660px;
   overflow: visible;
 }
 
@@ -59,17 +59,18 @@
   margin-left: 8px;
 }
 
+/* Sticky note — centered in the gap between left and right columns */
 .sticky {
   position: absolute;
-  top: 220px;
-  left: 460px;
-  width: 190px;
+  top: 260px;
+  left: 390px;
+  width: 200px;
   background: var(--yellow);
-  padding: 12px 14px;
+  padding: 14px 16px;
   box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.12);
-  transform: rotate(3deg);
+  transform: rotate(-2deg);
   font-family: var(--f-hand);
   font-size: 18px;
-  line-height: 1.1;
+  line-height: 1.35;
   pointer-events: none;
 }

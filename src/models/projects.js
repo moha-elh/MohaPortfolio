@@ -1,17 +1,19 @@
 /**
  * Model: projects
- * Each entry describes one project polaroid card on the scattered board.
- * position / rotation / size control the initial layout — all draggable at runtime.
+ * Left cluster: DIRHAMY (behind/lower), SKILLIOS (top), BI Pipeline (bottom)
+ * Right cluster: PROJEXIS + CV Agents (top), +more (mid)
+ * Sticky note: dead center via CSS (left:50% top:50% translate -50%)
  */
 export const projects = [
+  /* ── Left cluster ── */
   {
     id: 'dirhamy',
     name: 'DIRHAMY',
     tag: 'finance · RAG · groq',
     img: '/assets/project-preview.png',
-    position: { x: 30,  y: 50  },
+    position: { x: 0,   y: 155 },
     rotation: -4,
-    size: { w: 230, h: 150 },
+    size: { w: 295, h: 205 },
     url: 'https://dirhamy.com',
   },
   {
@@ -19,29 +21,9 @@ export const projects = [
     name: 'SKILLIOS',
     tag: 'vue · team lead · x10',
     img: '/assets/project-preview.png',
-    position: { x: 290, y: 30  },
+    position: { x: 310, y: 10  },
     rotation: 3,
-    size: { w: 240, h: 160 },
-    url: null,
-  },
-  {
-    id: 'cv-agents',
-    name: 'CV Agents',
-    tag: 'langchain · gRPC · kafka',
-    img: '/assets/project-preview.png',
-    position: { x: 560, y: 70  },
-    rotation: -2,
-    size: { w: 230, h: 150 },
-    url: null,
-  },
-  {
-    id: 'projexis',
-    name: 'PROJEXIS',
-    tag: 'node · react · postgres',
-    img: '/assets/project-preview.png',
-    position: { x: 820, y: 40  },
-    rotation: 5,
-    size: { w: 235, h: 155 },
+    size: { w: 295, h: 205 },
     url: null,
   },
   {
@@ -49,9 +31,31 @@ export const projects = [
     name: 'BI Pipeline',
     tag: 'pentaho · powerBI · ETL',
     img: '/assets/project-preview.png',
-    position: { x: 170, y: 270 },
-    rotation: 6,
-    size: { w: 220, h: 145 },
+    position: { x: 70,  y: 362 },
+    rotation: -3,
+    size: { w: 295, h: 205 },
+    url: null,
+  },
+
+  /* ── Right cluster ── */
+  {
+    id: 'projexis',
+    name: 'PROJEXIS',
+    tag: 'node · react · postgres',
+    img: '/assets/project-preview.png',
+    position: { x: 840, y: 10  },
+    rotation: 5,
+    size: { w: 295, h: 205 },
+    url: null,
+  },
+  {
+    id: 'cv-agents',
+    name: 'CV Agents',
+    tag: 'langchain · gRPC · kafka',
+    img: '/assets/project-preview.png',
+    position: { x: 1140, y: 10  },
+    rotation: -2,
+    size: { w: 295, h: 205 },
     url: null,
   },
   {
@@ -59,9 +63,9 @@ export const projects = [
     name: '+ more',
     tag: 'see /work',
     img: null,
-    position: { x: 690, y: 280 },
-    rotation: -5,
-    size: { w: 230, h: 150 },
+    position: { x: 1060, y: 305 },
+    rotation: 4,
+    size: { w: 295, h: 205 },
     url: null,
   },
 ];
