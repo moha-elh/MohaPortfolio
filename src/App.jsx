@@ -1,17 +1,19 @@
 import { useState, useCallback } from 'react';
 import { projects } from './models/projects';
-import Cursor       from './views/ui/Cursor';
-import Nav          from './views/layout/Nav';
-import Footer       from './views/layout/Footer';
-import Hero         from './views/sections/Hero';
-import Intro        from './views/sections/Intro';
-import Divider      from './views/ui/Divider';
-import Projects     from './views/sections/Projects';
-import Toolbox      from './views/sections/Toolbox';
-import Achievements from './views/sections/Achievements';
-import Experience   from './views/sections/Experience';
-import Contact      from './views/sections/Contact';
-import Story        from './views/sections/Story';
+import { useKonami } from './controllers/useKonami';
+import Cursor        from './views/ui/Cursor';
+import PartyMode     from './views/ui/PartyMode';
+import Nav           from './views/layout/Nav';
+import Footer        from './views/layout/Footer';
+import Hero          from './views/sections/Hero';
+import Intro         from './views/sections/Intro';
+import Divider       from './views/ui/Divider';
+import Projects      from './views/sections/Projects';
+import Toolbox       from './views/sections/Toolbox';
+import Achievements  from './views/sections/Achievements';
+import Experience    from './views/sections/Experience';
+import Contact       from './views/sections/Contact';
+import Story         from './views/sections/Story';
 import ProjectDetail from './views/sections/ProjectDetail';
 import WorkPage      from './views/sections/WorkPage';
 import Thoughts      from './views/sections/Thoughts';
@@ -20,6 +22,8 @@ import DrawPage      from './views/sections/DrawPage';
 // page: null | 'story' | 'work' | 'thoughts' | 'draw' | { type: 'project', id: string }
 export default function App() {
   const [page, setPage] = useState(null);
+  const [party, setParty] = useState(false);
+  useKonami(useCallback(() => setParty(true), []));
 
   const goHome = useCallback(() => {
     setPage(null);
@@ -31,11 +35,14 @@ export default function App() {
     window.scrollTo(0, 0);
   }, []);
 
+  const party$ = <PartyMode active={party} onDone={() => setParty(false)} />;
+
   if (page === 'story') {
     return (
       <>
         <Cursor />
         <Story onBack={goHome} />
+        {party$}
       </>
     );
   }
@@ -45,6 +52,7 @@ export default function App() {
       <>
         <Cursor />
         <DrawPage onBack={goHome} />
+        {party$}
       </>
     );
   }
@@ -54,6 +62,7 @@ export default function App() {
       <>
         <Cursor />
         <Thoughts onBack={goHome} />
+        {party$}
       </>
     );
   }
@@ -63,6 +72,7 @@ export default function App() {
       <>
         <Cursor />
         <WorkPage onBack={goHome} onOpen={openProject} />
+        {party$}
       </>
     );
   }
@@ -73,6 +83,7 @@ export default function App() {
       <>
         <Cursor />
         <ProjectDetail project={project} onBack={goHome} />
+        {party$}
       </>
     );
   }
@@ -98,6 +109,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      {party$}
     </>
   );
 }

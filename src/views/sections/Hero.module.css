@@ -10,6 +10,10 @@
   }
 }
 
+.nameWrap {
+  display: block;
+}
+
 .name {
   font-family: var(--f-hand);
   font-size: clamp(56px, 11vw, 118px);
@@ -36,8 +40,62 @@
   margin-left: 14px;
 }
 
-/* Scale scribble SVG proportionally */
 .scribble svg {
   width: clamp(120px, 20vw, 240px);
   height: auto;
+}
+
+/* ── Easter egg popup ── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26, 26, 26, 0.35);
+  animation: fadeIn 0.15s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hint {
+  position: relative;
+  background: #fef4a8;
+  padding: 28px 32px 24px;
+  font-family: var(--f-hand);
+  font-size: clamp(17px, 2.4vw, 24px);
+  font-weight: 600;
+  line-height: 1.6;
+  color: #1a1a1a;
+  transform: rotate(-2.5deg);
+  box-shadow: 3px 6px 24px rgba(0, 0, 0, 0.18);
+  max-width: min(88vw, 380px);
+  animation: popIn 0.2s ease forwards;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: rotate(-2.5deg) scale(0.82); }
+  to   { opacity: 1; transform: rotate(-2.5deg) scale(1); }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-family: var(--f-mono);
+  font-size: 18px;
+  line-height: 1;
+  color: #888;
+  padding: 2px 4px;
+  transition: color 0.1s;
+}
+
+.closeBtn:hover {
+  color: #1a1a1a;
 }

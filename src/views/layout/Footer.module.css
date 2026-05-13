@@ -18,6 +18,36 @@
   }
 }
 
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.copy {
+  color: var(--faint);
+  transition: color 0.15s;
+}
+
+.copy:hover {
+  color: var(--ink);
+}
+
+.secret {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+.caret {
+  animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
 .top {
   color: var(--faint);
   text-decoration: none;
