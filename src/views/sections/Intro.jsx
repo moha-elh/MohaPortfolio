@@ -1,7 +1,21 @@
+import { useState, useCallback } from 'react';
 import { owner } from '../../models/contact';
 import styles from './Intro.module.css';
 
-export default function Intro() {
+export default function Intro({ onEasterEgg }) {
+  const [clicks, setClicks] = useState(0);
+
+  const handleSigClick = useCallback(() => {
+    setClicks(prev => {
+      const next = prev + 1;
+      if (next >= 7) {
+        onEasterEgg?.();
+        return 0;
+      }
+      return next;
+    });
+  }, [onEasterEgg]);
+
   return (
     <section id="intro" className={styles.intro} aria-label="About">
       {/* Portrait polaroid */}
@@ -44,7 +58,15 @@ export default function Intro() {
             <span className="hl">only breaks things occasionally</span>.
           </p>
           <div className={styles.memoFoot}>
-            <span className={styles.sig}>— claude.ai ✦</span>
+            <span
+              className={styles.sig}
+              onClick={handleSigClick}
+              role="button"
+              tabIndex={0}
+              onKeyDown={e => e.key === 'Enter' && handleSigClick()}
+              aria-label="Claude AI signature"
+              data-clicks={clicks || undefined}
+            >— claude.ai ✦</span>
             <span className="mono-cap">tangier, MA · 2026</span>
           </div>
         </div>

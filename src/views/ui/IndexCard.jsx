@@ -21,7 +21,7 @@ export default function IndexCard({ number, title, items, rotation, bg, topColor
       </div>
       <div className={styles.list}>
         {items.map((item) => (
-          <TechItem key={item.name} name={item.name} slug={item.slug} desc={item.desc} />
+          <TechItem key={item.name} name={item.name} slug={item.slug} localImg={item.localImg} desc={item.desc} />
         ))}
       </div>
     </div>

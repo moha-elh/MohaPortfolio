@@ -12,18 +12,20 @@ import { useCallback, useRef, useState } from 'react';
  *   const drag = useDraggable({ x: 30, y: 50 }, -4, getNextZ);
  *   <div style={drag.style} {...drag.handlers} />
  */
-export function useDraggable(initialPos, rotation, getNextZ, disabled = false) {
+export function useDraggable(initialPos, rotation, getNextZ, disabled = false, onClickIntent = null) {
   const [pos,    setPos]    = useState(initialPos);
   const [zIndex, setZIndex] = useState(1);
   const [lifted, setLifted] = useState(false);
 
-  const origin = useRef(null);
+  const origin   = useRef(null);
+  const dragDist = useRef(0);
 
   const onPointerDown = useCallback((e) => {
     if (disabled) return;
     e.preventDefault();
     e.currentTarget.setPointerCapture(e.pointerId);
-    origin.current = { sx: e.clientX, sy: e.clientY, sl: pos.x, st: pos.y };
+    origin.current   = { sx: e.clientX, sy: e.clientY, sl: pos.x, st: pos.y };
+    dragDist.current = 0;
     setZIndex(getNextZ());
     setLifted(true);
   }, [pos, getNextZ, disabled]);
@@ -31,13 +33,19 @@ export function useDraggable(initialPos, rotation, getNextZ, disabled = false) {
   const onPointerMove = useCallback((e) => {
     if (!origin.current) return;
     const { sx, sy, sl, st } = origin.current;
-    setPos({ x: sl + e.clientX - sx, y: st + e.clientY - sy });
+    const dx = e.clientX - sx;
+    const dy = e.clientY - sy;
+    dragDist.current = Math.max(dragDist.current, Math.abs(dx) + Math.abs(dy));
+    setPos({ x: sl + dx, y: st + dy });
   }, []);
 
   const onPointerUp = useCallback(() => {
+    if (dragDist.current < 6 && onClickIntent) {
+      onClickIntent();
+    }
     origin.current = null;
     setLifted(false);
-  }, []);
+  }, [onClickIntent]);
 
   if (disabled) {
     return { pos: initialPos, style: {}, handlers: {}, lifted: false };

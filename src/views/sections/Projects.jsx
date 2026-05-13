@@ -3,9 +3,17 @@ import { projects } from '../../models/projects';
 import ProjectCard from '../ui/ProjectCard';
 import styles from './Projects.module.css';
 
-export default function Projects() {
+export default function Projects({ onOpenProject, onOpenWork }) {
   const zCounter = useRef(projects.length);
   const getNextZ = useCallback(() => { zCounter.current += 1; return zCounter.current; }, []);
+
+  const handleOpen = useCallback((projectId) => {
+    if (projectId === 'more') {
+      onOpenWork?.();
+    } else {
+      onOpenProject?.(projectId);
+    }
+  }, [onOpenProject, onOpenWork]);
 
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== 'undefined' && window.matchMedia('(max-width: 1023px)').matches
@@ -32,7 +40,13 @@ export default function Projects() {
         )}
 
         {projects.map((p) => (
-          <ProjectCard key={p.id} project={p} getNextZ={getNextZ} isMobile={isMobile} />
+          <ProjectCard
+            key={p.id}
+            project={p}
+            getNextZ={getNextZ}
+            isMobile={isMobile}
+            onOpen={() => handleOpen(p.id)}
+          />
         ))}
 
         {!isMobile && (

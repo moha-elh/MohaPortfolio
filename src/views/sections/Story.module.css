@@ -1,0 +1,242 @@
+.page {
+  min-height: 100vh;
+  background: var(--paper);
+  padding: 0 20px 80px;
+}
+
+@media (min-width: 720px) {
+  .page {
+    padding: 0 60px 100px;
+  }
+}
+
+/* ── Top bar ── */
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  border-bottom: 1px dashed var(--faint);
+  margin-bottom: 60px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: none;
+  border: 1.5px solid var(--ink);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.back:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.topLabel {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ── Dossier header ── */
+.dossier {
+  max-width: 720px;
+  margin: 0 auto 70px;
+  border: 2px solid var(--ink);
+  padding: 28px 32px;
+  position: relative;
+}
+
+.dossierStamp {
+  position: absolute;
+  top: -16px;
+  right: 24px;
+  background: var(--lime);
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  font-weight: 700;
+}
+
+.dossierLabel {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 6px;
+}
+
+.dossierTitle {
+  font-family: var(--f-hand);
+  font-size: clamp(42px, 8vw, 72px);
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 0 16px;
+}
+
+.dossierMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #555;
+  border-top: 1px solid var(--ink);
+  padding-top: 14px;
+  margin-top: 14px;
+}
+
+.dossierMeta span strong {
+  color: var(--ink);
+}
+
+/* ── Chapters ── */
+.chapters {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.chapter {
+  position: relative;
+}
+
+.chapterNum {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 6px;
+}
+
+.chapterTitle {
+  font-family: var(--f-hand);
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.chapterBody {
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.chapterBody p + p {
+  margin-top: 16px;
+}
+
+/* Washi tape accent on alternate chapters */
+.tape {
+  position: absolute;
+  top: -8px;
+  left: -24px;
+  width: 70px;
+  height: 18px;
+  background: rgba(200, 242, 74, 0.6);
+  transform: rotate(-2deg);
+}
+
+.tape.right {
+  left: auto;
+  right: -20px;
+  transform: rotate(2.5deg);
+}
+
+/* ── Highlight ── */
+.hl {
+  background: rgba(200, 242, 74, 0.4);
+  padding: 0 3px;
+}
+
+/* ── Sticky note aside ── */
+.aside {
+  float: right;
+  clear: right;
+  width: 180px;
+  background: var(--yellow);
+  padding: 14px 16px;
+  margin: 0 0 20px 30px;
+  transform: rotate(2deg);
+  box-shadow: 2px 3px 0 rgba(0,0,0,.10);
+  font-family: var(--f-hand);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+@media (max-width: 560px) {
+  .aside {
+    float: none;
+    width: 100%;
+    margin: 0 0 20px 0;
+    transform: rotate(1deg);
+  }
+}
+
+/* ── Stack list ── */
+.stackList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.tag {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1.5px solid var(--ink);
+}
+
+/* ── Sign-off ── */
+.signoff {
+  max-width: 720px;
+  margin: 80px auto 0;
+  border-top: 1px dashed var(--faint);
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.sigText {
+  font-family: var(--f-hand);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.sigSub {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}

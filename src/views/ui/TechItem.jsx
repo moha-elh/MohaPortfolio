@@ -6,17 +6,18 @@ import styles from './TechItem.module.css';
  * Shows the simple-icons logo if slug is provided, falls back to a monogram circle.
  * On hover: lime background tint + `desc` fades in from the right.
  */
-export default function TechItem({ name, slug, desc }) {
+export default function TechItem({ name, slug, localImg, desc }) {
   const [imgFailed, setImgFailed] = useState(false);
   const monogram = name.replace(/[^A-Za-z0-9]/g, '').slice(0, 2).toUpperCase();
-  const showLogo  = slug && !imgFailed;
+  const src = localImg || (slug ? `https://cdn.simpleicons.org/${slug}/1a1a1a` : null);
+  const showLogo = src && !imgFailed;
 
   return (
     <div className={styles.row} title={desc}>
       <div className={styles.iconWrap}>
         {showLogo ? (
           <img
-            src={`https://cdn.simpleicons.org/${slug}/1a1a1a`}
+            src={src}
             alt=""
             loading="lazy"
             width={18}

@@ -1,0 +1,239 @@
+.page {
+  min-height: 100vh;
+  background: var(--paper);
+  padding: 0 20px 80px;
+}
+
+@media (min-width: 720px) {
+  .page {
+    padding: 0 60px 100px;
+  }
+}
+
+/* ── Top bar ── */
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  border-bottom: 1px dashed var(--faint);
+  margin-bottom: 60px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: none;
+  border: 1.5px solid var(--ink);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.back:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.topLabel {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ── Content ── */
+.inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ── Status + year row ── */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.status {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  font-weight: 700;
+}
+
+.status.live        { background: var(--lime); }
+.status.private     { background: var(--yellow); }
+.status.inProgress  { background: rgba(200,242,74,0.35); border: 1px dashed var(--ink); }
+
+.year {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+  text-transform: uppercase;
+}
+
+/* ── Title ── */
+.title {
+  font-family: var(--f-hand);
+  font-size: clamp(42px, 9vw, 80px);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.tag {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+  margin-bottom: 40px;
+}
+
+/* ── Preview image ── */
+.imgBox {
+  width: 100%;
+  height: 260px;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 8px, rgba(0,0,0,.05) 8px 9px),
+    #e8e0cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tape {
+  position: absolute;
+  top: -10px;
+  left: 60px;
+  width: 90px;
+  height: 22px;
+  background: rgba(200, 242, 74, 0.65);
+  transform: rotate(-2deg);
+}
+
+/* ── Description ── */
+.desc {
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+/* ── Highlights ── */
+.highlightsLabel {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 14px;
+}
+
+.highlights {
+  list-style: none;
+  margin: 0 0 40px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.highlight {
+  display: flex;
+  gap: 12px;
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.highlight::before {
+  content: '→';
+  font-family: var(--f-mono);
+  color: var(--ink);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Tech tags ── */
+.techLabel {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 14px;
+}
+
+.techList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+
+.techTag {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border: 1.5px solid var(--ink);
+}
+
+/* ── CTA ── */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  padding: 10px 22px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.cta:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.ctaDisabled {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  border: 2px dashed var(--faint);
+  padding: 10px 22px;
+}

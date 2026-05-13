@@ -2,8 +2,8 @@ import { useDraggable } from '../../controllers/useDraggable';
 import { useHover } from '../../context/CursorContext';
 import styles from './ProjectCard.module.css';
 
-export default function ProjectCard({ project, getNextZ, isMobile }) {
-  const drag  = useDraggable(project.position, project.rotation, getNextZ, isMobile);
+export default function ProjectCard({ project, getNextZ, isMobile, onOpen }) {
+  const drag  = useDraggable(project.position, project.rotation, getNextZ, isMobile, onOpen);
   const hover = useHover();
 
   const cardStyle = isMobile
@@ -16,6 +16,7 @@ export default function ProjectCard({ project, getNextZ, isMobile }) {
       style={cardStyle}
       {...(isMobile ? {} : drag.handlers)}
       {...(isMobile ? {} : hover)}
+      onClick={isMobile ? onOpen : undefined}
       data-draggable={!isMobile ? '' : undefined}
     >
       <div className={styles.imgBox} style={{ height: project.size.h }}>

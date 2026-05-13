@@ -59,16 +59,16 @@
   margin-left: 8px;
 }
 
-/* Sticky note — centered in the gap between left and right columns */
+/* Sticky note — dead center of the stage */
 .sticky {
   position: absolute;
-  top: 260px;
-  left: 390px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-2deg);
   width: 200px;
   background: var(--yellow);
   padding: 14px 16px;
   box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.12);
-  transform: rotate(-2deg);
   font-family: var(--f-hand);
   font-size: 18px;
   line-height: 1.35;
