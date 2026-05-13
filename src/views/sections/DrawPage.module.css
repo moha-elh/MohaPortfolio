@@ -117,6 +117,14 @@
   border: 1.5px dashed var(--faint);
   padding: 5px 12px;
   margin-left: auto;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.clearBtn:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  border-style: solid;
 }
 
 .topLabel {
