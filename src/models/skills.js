@@ -34,7 +34,7 @@ export const skillCategories = [
       { name: 'Embeddings', slug: 'huggingface',   desc: 'vector reps of text'            },
       { name: 'LangChain',  slug: 'langchain',     desc: 'agent + chain orchestration'    },
       { name: 'PGVector',   slug: 'postgresql',    desc: 'vector DB in Postgres'          },
-      { name: 'Power BI',   slug: 'microsoftpowerbi', desc: 'dashboards & KPIs'           },
+      { name: 'Power BI',   slug: 'powerbi',          desc: 'dashboards & KPIs'           },
       { name: 'Pentaho',    slug: null,            desc: 'ETL pipelines'                  },
     ],
   },

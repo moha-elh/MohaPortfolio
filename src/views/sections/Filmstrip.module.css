@@ -1,11 +1,13 @@
+/* Old 35mm film reel: very dark warm brown-black, like aged celluloid */
 .filmstrip {
   position: relative;
   overflow: hidden;
-  background: var(--ink);
+  background: #1c1008;
   padding: 18px 0;
   box-shadow:
-    inset 0 6px 16px rgba(0, 0, 0, 0.4),
-    0 8px 22px rgba(0, 0, 0, 0.18);
+    inset 0 8px 20px rgba(0, 0, 0, 0.55),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.55),
+    0 10px 28px rgba(0, 0, 0, 0.22);
 }
 
 /* Sprocket holes — top and bottom */
@@ -15,9 +17,10 @@
   position: absolute;
   left: 0;
   right: 0;
-  height: 16px;
-  background-image: radial-gradient(circle, var(--paper) 0, var(--paper) 4px, transparent 4.5px);
-  background-size: 28px 16px;
+  height: 18px;
+  /* Slightly cream/ivory holes — like real film perforations */
+  background-image: radial-gradient(circle, #f0ead8 0, #f0ead8 4.5px, transparent 5px);
+  background-size: 26px 18px;
   background-repeat: repeat-x;
   pointer-events: none;
   z-index: 2;
@@ -71,12 +74,12 @@
 .imgBox {
   height: 140px;
   background:
-    repeating-linear-gradient(135deg, transparent 0 8px, rgba(0, 0, 0, 0.06) 8px 9px),
-    #ececea;
+    repeating-linear-gradient(135deg, transparent 0 8px, rgba(0, 0, 0, 0.05) 8px 9px),
+    #e8e0cc;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--faint);
+  color: #a89880;
   font-family: var(--f-mono);
   font-size: 10px;
   letter-spacing: 0.05em;

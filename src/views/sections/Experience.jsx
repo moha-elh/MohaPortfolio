@@ -95,8 +95,10 @@ export default function Experience() {
 
       {/* ── Filmstrip contact sheet ── */}
       <div className={styles.filmstripWrap}>
-        <p className="sec-label">/ contact sheet · drag to scroll →</p>
-        <h3 className={styles.filmstripTitle}>a few moments from the way.</h3>
+        <div className={styles.filmstripHeader}>
+          <p className="sec-label">/ contact sheet · scroll →</p>
+          <h3 className={styles.filmstripTitle}>a few moments from the way.</h3>
+        </div>
         <Filmstrip />
       </div>
     </section>

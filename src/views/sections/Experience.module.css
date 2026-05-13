@@ -189,15 +189,40 @@
 }
 
 /* ── Filmstrip block ── */
+
+/* Break out of the section's side padding so the strip goes edge-to-edge */
 .filmstripWrap {
   margin-top: 60px;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+@media (min-width: 1024px) {
+  .filmstripWrap {
+    margin-left: -60px;
+    margin-right: -60px;
+  }
+}
+
+/* Restore padding only for the text header above the strip */
+.filmstripHeader {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 14px;
+}
+
+@media (min-width: 1024px) {
+  .filmstripHeader {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
 }
 
 .filmstripTitle {
   font-family: var(--f-hand);
   font-size: clamp(22px, 4vw, 30px);
   font-weight: 700;
-  margin: 4px 0 14px;
+  margin: 4px 0 0;
 }
 
 /* Hide hover hint on touch devices */
