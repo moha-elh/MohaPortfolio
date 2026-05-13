@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback, useState } from 'react';
+import { useCursor } from '../../context/CursorContext';
 import styles from './DrawPage.module.css';
 
 const COLORS = [
@@ -15,12 +16,20 @@ const COLORS = [
 const SIZES = [2, 5, 10, 20];
 
 export default function DrawPage({ onBack }) {
-  const canvasRef = useRef(null);
-  const drawing   = useRef(false);
-  const lastPos   = useRef(null);
+  const { pos } = useCursor();          // lerped cursor position — same as pencil tip
+  const canvasRef  = useRef(null);
+  const drawing    = useRef(false);
+  const lastPos    = useRef(null);
   const [color, setColor] = useState('#1a1a1a');
   const [size,  setSize]  = useState(5);
 
+  // Keep refs so the draw effect always reads the latest values
+  const colorRef = useRef(color);
+  const sizeRef  = useRef(size);
+  useEffect(() => { colorRef.current = color; }, [color]);
+  useEffect(() => { sizeRef.current  = size;  }, [size]);
+
+  // Init canvas
   useEffect(() => {
     const canvas = canvasRef.current;
     canvas.width  = canvas.offsetWidth;
@@ -30,33 +39,30 @@ export default function DrawPage({ onBack }) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }, []);
 
-  const getPos = (e) => {
-    const rect = canvasRef.current.getBoundingClientRect();
-    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
-  };
-
-  // Use mouse events (not pointer events) so the document-level
-  // mousemove that drives the custom cursor keeps firing while drawing.
-  const onMouseDown = useCallback((e) => {
-    drawing.current = true;
-    lastPos.current = getPos(e);
-  }, []);
-
-  const onMouseMove = useCallback((e) => {
-    if (!drawing.current) return;
+  // This runs every rAF frame via CursorContext — if mouse is held, draw to current lerped pos
+  useEffect(() => {
+    if (!drawing.current || !lastPos.current) return;
     const canvas = canvasRef.current;
+    const rect   = canvas.getBoundingClientRect();
+    const cur    = { x: pos.x - rect.left, y: pos.y - rect.top };
     const ctx    = canvas.getContext('2d');
-    const pos    = getPos(e);
     ctx.beginPath();
     ctx.moveTo(lastPos.current.x, lastPos.current.y);
-    ctx.lineTo(pos.x, pos.y);
-    ctx.strokeStyle = color;
-    ctx.lineWidth   = size;
+    ctx.lineTo(cur.x, cur.y);
+    ctx.strokeStyle = colorRef.current;
+    ctx.lineWidth   = sizeRef.current;
     ctx.lineCap     = 'round';
     ctx.lineJoin    = 'round';
     ctx.stroke();
-    lastPos.current = pos;
-  }, [color, size]);
+    lastPos.current = cur;
+  }, [pos]);
+
+  const onMouseDown = useCallback(() => {
+    const canvas = canvasRef.current;
+    const rect   = canvas.getBoundingClientRect();
+    drawing.current = true;
+    lastPos.current = { x: pos.x - rect.left, y: pos.y - rect.top };
+  }, [pos]);
 
   const stopDraw = useCallback(() => {
     drawing.current = false;
@@ -76,7 +82,6 @@ export default function DrawPage({ onBack }) {
         <button className={styles.back} onClick={onBack}>← back</button>
 
         <div className={styles.tools}>
-          {/* Colour palette */}
           <div className={styles.palette}>
             {COLORS.map(c => (
               <button
@@ -89,7 +94,6 @@ export default function DrawPage({ onBack }) {
             ))}
           </div>
 
-          {/* Brush sizes */}
           <div className={styles.sizes}>
             {SIZES.map(s => (
               <button
@@ -118,7 +122,6 @@ export default function DrawPage({ onBack }) {
         ref={canvasRef}
         className={styles.canvas}
         onMouseDown={onMouseDown}
-        onMouseMove={onMouseMove}
         onMouseUp={stopDraw}
         onMouseLeave={stopDraw}
       />

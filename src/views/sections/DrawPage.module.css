@@ -4,7 +4,6 @@
   height: 100vh;
   background: var(--paper);
   overflow: hidden;
-  cursor: default;
 }
 
 /* ── Top bar ── */
@@ -38,7 +37,6 @@
   background: none;
   border: 1.5px solid var(--ink);
   padding: 6px 14px;
-  cursor: default;
   transition: background 0.15s, color 0.15s;
   flex-shrink: 0;
 }
@@ -70,7 +68,6 @@
   border-radius: 50%;
   border: 2.5px solid transparent;
   box-sizing: border-box;
-  cursor: default;
   padding: 0;
   flex-shrink: 0;
   transition: border-color 0.15s;
@@ -97,7 +94,6 @@
   height: 28px;
   background: none;
   border: 1.5px solid transparent;
-  cursor: default;
   color: var(--ink);
   transition: border-color 0.15s;
 }
@@ -120,13 +116,7 @@
   background: none;
   border: 1.5px dashed var(--faint);
   padding: 5px 12px;
-  cursor: default;
-  transition: border-color 0.15s, color 0.15s;
   margin-left: auto;
-}
-
-.clearBtn:hover {
-  border-color: var(--ink);
 }
 
 .topLabel {
@@ -143,5 +133,4 @@
   display: block;
   width: 100%;
   touch-action: none;
-  cursor: crosshair;
 }

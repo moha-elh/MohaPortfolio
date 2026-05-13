@@ -6,10 +6,10 @@
   padding: 0;
 }
 
-/* Custom cursor only on pointer-fine (mouse) devices */
+/* Custom cursor only on pointer-fine (mouse) devices — !important beats any component override */
 @media (pointer: fine) {
   *, *::before, *::after {
-    cursor: none;
+    cursor: none !important;
   }
 }
 
