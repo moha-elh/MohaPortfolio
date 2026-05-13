@@ -18,7 +18,7 @@ export const skillCategories = [
       { name: 'Angular',    slug: 'angular',       desc: '+ RxJS, .NET stack'          },
       { name: 'Node.js',    slug: 'nodedotjs',     desc: 'Express, REST, sockets'      },
       { name: 'ASP.NET',    slug: 'dotnet',        desc: 'gRPC microservices'          },
-      { name: 'gRPC',       slug: null, localImg: '/assets/icons/Grpc--Streamline-Svg-Logos.svg',           desc: 'service-to-service RPC'      },
+      { name: 'gRPC',       slug: null, localImg: '/assets/icons/grpc--logo.svg',                          desc: 'service-to-service RPC'      },
       { name: 'Kafka',      slug: 'apachekafka',   desc: 'event streaming bus'         },
     ],
   },
@@ -35,7 +35,7 @@ export const skillCategories = [
       { name: 'LangChain',  slug: 'langchain',     desc: 'agent + chain orchestration'    },
       { name: 'PGVector',   slug: 'postgresql',    desc: 'vector DB in Postgres'          },
       { name: 'Power BI',   slug: null, localImg: '/assets/icons/Microsoft-Power-Bi--Streamline-Svg-Logos.svg', desc: 'dashboards & KPIs'           },
-      { name: 'Pentaho',    slug: null, localImg: 'https://cdn.worldvectorlogo.com/logos/pentaho-2.svg',                desc: 'ETL pipelines'                  },
+      { name: 'Pentaho',    slug: null, localImg: '/assets/icons/pentaho-logo.png',                              desc: 'ETL pipelines'                  },
     ],
   },
   {

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" class="auto-dark-mode">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Integrate Pentaho with SFTP - SFTP To Go</title>
+		<meta name="HandheldFriendly" content="True">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&family=Spartan:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=6736601b80">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.32.2/tocbot.css">
+		<style>
+			.gh-content {
+			    position: relative;
+			 }
+
+			.gh-toc > .toc-list {
+			    position: relative;
+			}
+
+			.toc-list {
+			    overflow: hidden;
+			    list-style: none !important;
+			}
+
+			.gh-toc .is-active-link::before {
+			    background-color: var(--ghost-accent-color); /* Defines TOC   accent color based on Accent color set in Ghost Admin */
+			} 
+		</style>
+		<meta name="description" content="How to integrate Pentaho with SFTP, trigger Pentaho jobs when files upload to SFTP To Go, use Pentaho to process data from SFTP To Go, and more.">
+    <link rel="icon" href="https://res-4.cloudinary.com/hlvzggbe7/image/upload/q_auto/v1/images/logo.png" type="image/png">
+    <link rel="canonical" href="https://sftptogo.com/integrations/pentaho/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="https://sftptogo.com/integrations/pentaho/amp/">
+    
+    <meta property="og:site_name" content="SFTP To Go: Managed SFTP Cloud Storage as a Service">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Integrate Pentaho with SFTP - SFTP To Go">
+    <meta property="og:description" content="Learn how to connect Pentaho with SFTP to trigger Pentaho jobs when files are uploaded to SFTP To Go and use Pentaho to read, process and write data to or from SFTP To Go.">
+    <meta property="og:url" content="https://sftptogo.com/integrations/pentaho/">
+    <meta property="og:image" content="https://res-5.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/pentaho-logo.png">
+    <meta property="article:published_time" content="2022-03-10T13:35:52.000Z">
+    <meta property="article:modified_time" content="2026-03-11T17:09:03.000Z">
+    <meta property="article:tag" content="Data Integration">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Integrate Pentaho with SFTP - SFTP To Go">
+    <meta name="twitter:description" content="Learn how to connect Pentaho with SFTP to trigger Pentaho jobs when files are uploaded to SFTP To Go and use Pentaho to read, process and write data to or from SFTP To Go.">
+    <meta name="twitter:url" content="https://sftptogo.com/integrations/pentaho/">
+    <meta name="twitter:image" content="https://res-5.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/pentaho-logo.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Saggi Neumann">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Data Integration">
+    <meta name="twitter:site" content="@ant_labs">
+    <meta property="og:image:width" content="163">
+    <meta property="og:image:height" content="163">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "SFTP To Go: Managed SFTP Cloud Storage as a Service",
+        "url": "https://sftptogo.com/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://res-4.cloudinary.com/hlvzggbe7/image/upload/q_auto/v1/images/logo.png",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Saggi Neumann",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://res-2.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/sag.png",
+            "width": 178,
+            "height": 178
+        },
+        "url": "https://sftptogo.com/blog/author/saggi/",
+        "sameAs": []
+    },
+    "headline": "Integrate Pentaho with SFTP - SFTP To Go",
+    "url": "https://sftptogo.com/integrations/pentaho/",
+    "datePublished": "2022-03-10T13:35:52.000Z",
+    "dateModified": "2026-03-11T17:09:03.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://res-5.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/pentaho-logo.png",
+        "width": 163,
+        "height": 163
+    },
+    "keywords": "Data Integration",
+    "description": "Learn how to connect Pentaho with SFTP to trigger Pentaho jobs when files are uploaded to SFTP To Go and use Pentaho to read, process and write data to or from SFTP To Go.",
+    "mainEntityOfPage": "https://sftptogo.com/integrations/pentaho/"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 5.90">
+    <link rel="alternate" type="application/rss+xml" title="SFTP To Go: Managed SFTP Cloud Storage as a Service" href="">
+    
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="68fe0ce002718e3f99a9ee0823" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="https://sftptogo.com/" crossorigin="anonymous"></script>
+    
+    <link href="https://sftptogo.com/webmentions/receive/" rel="webmention">
+    <script defer src="/public/cards.min.js?v=6736601b80"></script><style>:root {--ghost-accent-color: #3c34ff;}</style>
+    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=6736601b80">
+    <style>
+    
+:root {
+   --height-logo-header: 45px;
+   --height-logo-footer: 45px;
+   --color-details: #3e37ff;
+   --color-font-two: #1f2937;
+}
+@media (prefers-color-scheme:dark) {
+    .global-hash-auto-dark-version {
+        /* Fonts */
+        --color-details: #3e37ff;
+        --color-font-two: #e5e7eb;       
+    }
+}
+
+  .faq-item { margin-bottom: 10px; }
+  .faq-item summary { list-style: none; cursor: pointer; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::before { content: '►'; display: inline-block; padding-right: 0.5em; }
+  .faq-item[open] summary::before { content: '▼'; }
+  .faq-item p, .faq-item ul { margin-left: 1.5em; margin-top: 0.5em; margin-bottom: 0.2em; }
+  .faq-item ul { list-style-type: disc; padding-left: 1em; }
+
+</style>
+<script>
+    const search_api_key = '199a8152c2a74cc7605d332270';
+</script>
+<script>
+  window.intercomSettings = { 
+      // Brand specific
+      action_color: '#3e37ff',
+      background_color: '#3e37ff'
+  }
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window.analytics.initialized)return window.analytics[e].apply(window.analytics,arguments);var i=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");i.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}i.unshift(e);analytics.push(i);return analytics}};for(var i=0;i<analytics.methods.length;i++){var key=analytics.methods[i];analytics[key]=analytics.factory(key)}analytics.load=function(key,i){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=i};analytics._writeKey="kRG7p1zdjirXXpiiFDwM2TKE37unZIVf";;analytics.SNIPPET_VERSION="5.2.0";
+  analytics.load("kRG7p1zdjirXXpiiFDwM2TKE37unZIVf", { integrations: { 'FullStory': false } })
+  analytics.page();
+  }}();
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/toolbar/prism-toolbar.min.css" integrity="sha512-Dqf5696xtofgH089BgZJo2lSWTvev4GFo+gA2o4GullFY65rzQVQLQVlzLvYwTo0Bb2Gpb6IqwxYWtoMonfdhQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+div.code-toolbar>.toolbar>.toolbar-item>a.copy-to-clipboard-button, 
+div.code-toolbar>.toolbar>.toolbar-item>button.copy-to-clipboard-button, 
+div.code-toolbar>.toolbar>.toolbar-item>span.copy-to-clipboard-button {
+    border: 1px solid #9ca3af;
+    box-shadow: none;
+    background: none;
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+}
+
+div.code-toolbar>.toolbar>.toolbar-item>span {
+    display: block;
+    margin-left: 0.5rem;
+    border: none;
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+    background: none;
+    box-shadow: none;
+    color: #9ca3af;
+}
+pre[class*=language-].line-numbers {
+    border: 1px solid rgba(249,250,251,.125);
+    background: #1f2937;  
+    box-shadow: 0 0 13px 0 rgb(249 250 251 / 5%);
+}
+pre[class*=language-] code {
+    padding: 0;
+    font-size: 0.8rem;
+}
+</style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://sftptogo.com/#organization",
+  "name": "SFTP To Go: Managed SFTP Cloud Storage as a Service",
+  "url": "https://sftptogo.com/",
+  "logo": {
+    "@type": "ImageObject",
+    "@id": "https://sftptogo.com/#logo",
+    "url": "https://res-4.cloudinary.com/hlvzggbe7/image/upload/q_auto/v1/images/logo.png",
+    "width": 60,
+    "height": 60
+  },
+  "sameAs": [
+    "https://twitter.com/ant_labs"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://sftptogo.com/#website",
+  "name": "SFTP To Go: Managed SFTP Cloud Storage as a Service",
+  "url": "https://sftptogo.com/",
+  "publisher": {
+    "@id": "https://sftptogo.com/#organization"
+  },
+  "inLanguage": "en"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://sftptogo.com/integrations/pentaho/#webpage",
+  "url": "https://sftptogo.com/integrations/pentaho/",
+  "name": "Integrate SFTP with Pentaho",
+  "description": "Start Pentaho jobs when files are uploaded to SFTP To Go and use Pentaho to read, process and write data to or from SFTP To Go.",
+  "isPartOf": {
+    "@id": "https://sftptogo.com/#website"
+  },
+  "about": [
+    { "@type": "Thing", "name": "Pentaho" },
+    { "@type": "Thing", "name": "Data Integration" },
+    { "@type": "Thing", "name": "SFTP" },
+    { "@type": "Thing", "name": "Business intelligence" },
+    { "@type": "Thing", "name": "ETL" },
+    { "@type": "Thing", "name": "Data processing" }
+  ],
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "@id": "https://sftptogo.com/integrations/pentaho/#primaryimage",
+    "url": "https://res-5.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/pentaho-logo.png",
+    "width": 163,
+    "height": 163
+  },
+  "datePublished": "2022-03-10T13:35:52.000Z",
+  "dateModified": "2024-02-26T15:54:02.000Z",
+  "inLanguage": "en",
+  "keywords": "pentaho sftp, sftp pentaho, connect pentaho and sftp, integrate pentaho with sftp, pentaho sftp integration, pentaho data integration, sftp data integration, pentaho etl sftp, trigger pentaho jobs from sftp, pentaho read write sftp files"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://sftptogo.com/integrations/pentaho/#blogposting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sftptogo.com/integrations/pentaho/#webpage"
+  },
+  "headline": "Integrate SFTP with Pentaho",
+  "description": "Start Pentaho jobs when files are uploaded to SFTP To Go and use Pentaho to read, process and write data to or from SFTP To Go.",
+  "image": [
+    "https://res-5.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/pentaho-logo.png"
+  ],
+  "datePublished": "2022-03-10T13:35:52.000Z",
+  "dateModified": "2024-02-26T15:54:02.000Z",
+  "author": {
+    "@type": "Person",
+    "@id": "https://sftptogo.com/blog/author/saggi/#person",
+    "name": "Saggi Neumann",
+    "url": "https://sftptogo.com/blog/author/saggi/"
+  },
+  "publisher": {
+    "@id": "https://sftptogo.com/#organization"
+  },
+  "articleSection": [
+    "Integrations",
+    "Data Integration"
+  ],
+  "keywords": "pentaho sftp, sftp pentaho, connect pentaho and sftp, integrate pentaho with sftp, pentaho sftp integration, pentaho data integration, sftp data integration, pentaho etl sftp, pentaho read sftp files, pentaho write sftp files, trigger pentaho jobs from sftp, pentaho file processing, pentaho business intelligence sftp, pentaho data pipeline sftp, automate pentaho sftp workflows, pentaho file transfer integration",
+  "inLanguage": "en",
+  "url": "https://sftptogo.com/integrations/pentaho/"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": "https://sftptogo.com/integrations/pentaho/#breadcrumbs",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "SFTP To Go",
+      "item": "https://sftptogo.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Integrations",
+      "item": "https://sftptogo.com/integrations/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Pentaho",
+      "item": "https://sftptogo.com/integrations/pentaho/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "@id": "https://sftptogo.com/integrations/pentaho/#howto",
+  "name": "Connect Pentaho and SFTP To Go for file-based data integration",
+  "description": "How to use Pentaho with SFTP To Go to start jobs when files are uploaded and to read, process, and write data to or from SFTP storage.",
+  "inLanguage": "en",
+  "mainEntityOfPage": "https://sftptogo.com/integrations/pentaho/",
+  "image": "https://res-5.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/pentaho-logo.png",
+  "tool": [
+    { "@type": "HowToTool", "name": "Pentaho" },
+    { "@type": "HowToTool", "name": "SFTP To Go account" },
+    { "@type": "HowToTool", "name": "Pentaho job or transformation" }
+  ],
+  "supply": [
+    { "@type": "HowToSupply", "name": "SFTP To Go connection details" },
+    { "@type": "HowToSupply", "name": "Pentaho job or transformation configuration" },
+    { "@type": "HowToSupply", "name": "Files or data to read, process, or write" }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Connect Pentaho to SFTP To Go",
+      "text": "Configure Pentaho with your SFTP To Go connection details so it can access files stored in the SFTP environment."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Start jobs from file uploads",
+      "text": "Set up the workflow so Pentaho jobs can start when files are uploaded to SFTP To Go."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Read and process the data",
+      "text": "Use Pentaho to read files from SFTP To Go and process or transform the data as needed."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Write output back to SFTP",
+      "text": "Use Pentaho to write processed data or output files back to SFTP To Go or another connected destination."
+    }
+  ],
+  "keywords": "pentaho sftp, sftp pentaho, connect pentaho and sftp, integrate pentaho with sftp, pentaho sftp integration, trigger pentaho jobs from sftp, pentaho read sftp files, pentaho write sftp files, sftp data integration"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": "https://sftptogo.com/integrations/pentaho/#benefits-itemlist",
+  "name": "Benefits of integrating Pentaho with SFTP To Go",
+  "description": "Key outcomes when you integrate Pentaho with SFTP To Go for data integration and file-based automation.",
+  "itemListOrder": "https://schema.org/ItemListOrderAscending",
+  "numberOfItems": 3,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Start jobs from file uploads"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Read, process, and write data across systems"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Support ETL, analytics, and business intelligence workflows"
+    }
+  ],
+  "url": "https://sftptogo.com/integrations/pentaho/"
+}
+</script>
+		<style>:root {--color-announcements: #fed672;}</style>
+	</head>
+	<body class="post-template tag-data-integration tag-integrations global-hash-auto-dark-version global-hash-hubbi-jiao global-hash-import-2023-10-04-07-32 global-integrations global-jp global-kr global-hash-product-name global-hash-start-free-trial global-hash-enzinia global-hash-gaido global-hash-chu-xin-zhe global-hash-ji-chu global-hash-bi-jiao global-hash-gu-ke-shi-li">
+		<div class="global-wrap">
+			<div class="global-content">
+				<header class="header-section">
+	<div class="header-wrap">
+		<div class="header-logo">
+			<a href="https://sftptogo.com" class="is-image"><img src="https://res-4.cloudinary.com/hlvzggbe7/image/upload/q_auto/v1/images/logo.png" alt="SFTP To Go: Managed SFTP Cloud Storage as a Service"></a>
+		</div>
+		<div class="header-nav">
+			<input id="toggle" class="header-checkbox" type="checkbox">
+			<label class="header-toggle" for="toggle">
+				<span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</span>
+			</label>
+			<nav class="is-search">
+				<ul>
+<li><a href="https://sftptogo.com" >SFTP To Go</a></li>
+<li><a href="https://sftptogo.com/blog/guides/" >Guides</a></li>
+<li><a href="https://sftptogo.com/blog/customers/" >Customers</a></li>
+<li class="header-nav-dropdown">
+	<svg role="img" viewBox="0 0 20 4" xmlns="http://www.w3.org/2000/svg"><path d="M2 4A2 2 0 102.001.001 2 2 0 002 4zm8 0a2 2 0 10.001-3.999A2 2 0 0010 4zm8 0a2 2 0 10.001-3.999A2 2 0 0018 4z"/></svg>	<ul>
+		<li><a href="https://sftptogo.com/blog/engineering/" >Engineering</a></li>
+		<li><a href="https://sftptogo.com/blog/news/" >News &amp; Updates</a></li>
+		<li><a href="https://sftptogo.com/integrations/" >Integrations</a></li>
+		<li><a href="https://sftptogo.com/blog/comparison-hub/" >Comparison Hub</a></li>
+	</ul>
+</li>
+</ul>
+				<ul>
+										<li class="header-search" id="search-open"><span>Search</span><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.063 16.384l4.325 4.323c.391.392.63.924.611 1.475-.032.926-.646 1.649-1.68 1.736-.551.046-1.086-.22-1.476-.61l-4.325-4.325c-1.706 1.131-4.034 1.895-6.08 1.893C4.673 20.875 0 16.202 0 10.438 0 4.673 4.673 0 10.438 0c5.764 0 10.437 4.673 10.437 10.438 0 2.127-.718 4.294-1.812 5.945v.001zm-8.625 1.032c3.839 0 6.997-3.161 6.997-7 0-3.84-3.16-7-6.999-7-3.84 0-7.001 3.16-7.001 7 0 3.839 3.161 6.998 7.001 6.998l.002.002z"/></svg></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>				<main class="global-main">
+					<link rel="stylesheet" type="text/css" href="/assets/css/integrations.css?v=6736601b80">
+<progress class="post-progress"></progress>
+<article class="post-section integration-section">
+	<div class="post-header  is-first is-image">
+		<div class="integration-header d-flex justify-content-center my-5 py-5">
+			<a href="https://sftptogo.com" class="is-image d-flex align-items-center flex-column color-primary fw-bold text-center w-50"><img src="https://res-4.cloudinary.com/hlvzggbe7/image/upload/q_auto/v1/images/logo.png" class="mb-3"
+					alt="SFTP To Go: Managed SFTP Cloud Storage as a Service" width="130">
+						SFTP To Go
+			</a>
+			<div class="plus-icon mx-4 mx-md-5"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg></div>
+			<div class="integration-item pr-color fw-bold d-flex align-items-center flex-column text-center w-50">
+				<div class="feature-image d-flex align-items-center justify-content-center mb-3 ">
+					<img srcset="https://res-5.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/pentaho-logo.png 500w, 
+			 https://res-5.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/pentaho-logo.png 800w,
+			 https://res-5.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/pentaho-logo.png 1100w"
+	 sizes="(max-width:480px) 240px, (max-width:768px) 200px, (max-width:1024px) 290px, 350px"
+	 src="https://res-5.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/pentaho-logo.png"
+	 alt="Pentaho">				</div>
+				Pentaho
+			</div>
+
+		</div>
+	</div>
+	<div class="integration-content">
+		<div class="integrations-info py-5 px-5 mb-4">
+			<h2 class="item-title text-center">Pentaho</h2>
+			<div class="item-category text-center global-tags">
+						<div class="tag-data-integration global-tags-hash-sign">Data Integration</div>
+			</div>
+				
+			
+<!--kg-card-begin: html-->
+<style>
+.pr-color { 
+   color: #009cde;
+}
+</style>
+<div class="integrations-feature d-flex my-5 flex-column flex-md-row">
+                                <section class="me-5 w-100 mb-4 mb-md-0">
+                                        <h2>SFTP To Go                                    </h2>
+                                        <div >
+                                                 <p class="my-4">SFTP To Go is a fully managed secure, scalable and reliable cloud file storage with support for the SFTP, FTPS, S3 and HTTPS protocols. It allows to share and integrate with 3rd parties using popular and secure protocols and automate data management and processing using APIs and webhooks.</p>
+                                                <ul>
+<li><span class="pr-color"><i class="fas fa-check"></i></span>1-click setup and you're ready to go</li>
+<li><span class="pr-color"><i class="fas fa-check"></i></span>
+Use your own domain</li>
+<li><span class="pr-color"><i class="fas fa-check"></i></span>
+Integrate data without worrying about APIs and automate everything</li></ul>
+                                        </div>
+                                </section>
+                                <section class="w-100">
+                                        <h2>Pentaho                                        </h2>
+                                        <div>
+                                                 <p class="my-4">Pentaho is a business intelligence system that couples 
+data integration with business analytics in a modern 
+platform, helping users harness the value from all their 
+data and make data-driven decisions.                                                </p>
+                                                <ul><li><span class="pr-color"><i class="fas fa-check"></i></span>Codeless pipeline development</li>
+<li><span class="pr-color"><i class="fas fa-check"></i></span>
+Enterprise-scale load balancing and scheduling </li>
+<li><span class="pr-color"><i class="fas fa-check"></i></span>
+Streaming data support </li></ul>
+                                        </div>
+                                </section>
+                        </div>
+
+                        <div class="px-3 px-md-5">
+                                <div class="mb-5">
+                                        <h2>How does it work?</h2>
+                                                <p>Use Pentaho to read, process and write data to or from SFTP To Go.</p>
+                                                <ol>
+<li>Create a new job in Pentaho Data Integration.</li>
+<li>Add either Get a file with SFTP to pull files from SFTP To Go, or Put a file with SFTP to upload files to SFTP To Go.</li>
+<li>In SFTP To Go, create or select the credential Pentaho will use, then copy the host, username, password, and use port 22.</li>
+<li>Enter those details in Pentaho and set the remote and local paths.</li>
+<li>Run the job and confirm Pentaho can read from or write to the selected SFTP To Go folder.</li>
+</ol>
+<p class="mt-3">For further reading, see <a href="https://docs.pentaho.com/pdia-data-integration/9.3-data-integration/pdi-job-entries-reference-overview?ref=sftptogo.com" target="_blank" rel="noopener noreferrer">Pentaho job entries reference</a> and <a href="https://sftptogo.com/docs/how-to-connect/connect-using-sftp" target="_blank" rel="noopener noreferrer">connect using SFTP</a>.</p>
+                                </div>
+
+                        </div>
+
+                </div>
+<!--kg-card-end: html-->
+
+		<div class="getting-started">
+<h1 class="mb-3">Ready to get started?</h1>
+<p class="mb-4">
+     Be up and running with your secure cloud storage in seconds
+</p>
+<a href=https://sftptogo.com/pricing target="_blank" class="btn btn-default btn-lg">Get started with a free trial <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" class="svg-inline--fa fa-arrow-right fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"></path></svg></a>
+</div>
+		
+	</div>
+
+</article>
+
+									</main>
+				<footer class="footer-section global-footer">
+	<div class="footer-wrap">
+		<div class="footer-data">
+			<div class="footer-logo">
+				<a href="https://sftptogo.com" class="is-image"><img src="https://res-4.cloudinary.com/hlvzggbe7/image/upload/q_auto/v1/images/logo.png" alt="SFTP To Go: Managed SFTP Cloud Storage as a Service"></a>
+			</div>
+			<p class="footer-description">Secure cloud storage made simple, with SFTP/FTPS/S3 and intuitive web portal file access. Designed for smooth and easy data transfer.</p>
+			<div class="footer-icons">
+				<a href="https://twitter.com/ant_labs" aria-label="link Twitter"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg></a>
+				
+
+			</div>
+		</div>
+		<div class="footer-nav">
+			
+
+
+
+<div class="footer-nav-column">
+	<ul>
+		<li><a href="https://sftptogo.com/terms-of-service/">Terms</a></li>
+		<li><a href="https://sftptogo.com/privacy/">Privacy</a></li>
+		<li><a href="https://sftptogo.com/security/">Security</a></li>
+		<li><a href="https://status.crazyantlabs.com/">Status</a></li>
+	</ul>
+</div>
+
+<div class="footer-nav-column">
+	<ul>
+		<li><a href="https://sftptogo.com/docs/">Docs</a></li>
+		<li><a href="https://sftptogo.com/pricing/">Pricing</a></li>
+		<li><a href="https://sftptogo.com/about/">About</a></li>
+	</ul>
+</div>
+
+
+
+		</div>
+	</div>
+	<div class="footer-copyright">
+		SFTP To Go: Managed SFTP Cloud Storage as a Service &copy; 2026.
+		All Rights Reserved. Published with <a href="https://ghost.org" target="_blank" rel="noopener noreferrer">Ghost</a> & <a href="https://fueko.net" target="_blank" rel="noopener">Renge</a>.
+	</div>
+</footer>			</div>
+		</div>
+		<div id="notifications" class="global-notification">
+	<div class="subscribe">You’ve successfully subscribed to SFTP To Go: Managed SFTP Cloud Storage as a Service</div>
+	<div class="signin">Welcome back! You’ve successfully signed in.</div>
+	<div class="signup">Great! You’ve successfully signed up.</div>
+	<div class="update-email">Success! Your email is updated.</div>
+	<div class="expired">Your link has expired</div>
+	<div class="checkout-success">Success! Check your email for magic link to sign-in.</div>
+</div>
+		<div id="search-section" class="search-section">
+	<span id="search-close" class="search-close"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8.242L20.242 0 24 3.76 15.758 12 24 20.242 20.242 24 12 15.758 3.759 24 0 20.242 8.242 12 0 3.759 3.76 0 12 8.242z"/></svg></span>
+	<div id="search-content" class="search-content">
+		<form class="search-form" onsubmit="return false">
+			<input id="search-input" type="text" placeholder="Type your keywords">
+			<div class="search-meta">
+				<span id="search-info">Please enter at least 3 characters</span>
+				<span id="search-counter" class="is-hide">
+					<span id="search-counter-results">0</span>
+				Results for your search</span>
+			</div>
+		</form>
+		<div id="search-results" class="search-results"></div>
+	</div>
+	<div id="search-overlay" class="search-overlay"></div>
+</div>
+		<script src="/assets/js/global.js?v=6736601b80"></script>
+		<script src="/assets/js/post.js?v=6736601b80"></script>
+		<script>
+!function(){"use strict";const p=new URLSearchParams(window.location.search),isAction=p.has("action"),isStripe=p.has("stripe"),success=p.get("success"),action=p.get("action"),stripe=p.get("stripe"),n=document.getElementById("notifications"),a="is-subscribe",b="is-signin",c="is-signup",f="is-update-email",d="is-expired",e="is-checkout-success";p&&(isAction&&(action=="subscribe"&&success=="true"&&n.classList.add(a),action=="signup-paid"&&success=="true"&&n.classList.add(a),action=="signin"&&success=="true"&&n.classList.add(b),action=="signup"&&success=="true"&&n.classList.add(c),action=="updateEmail"&&success=="true"&&n.classList.add(f),success=="false"&&n.classList.add(d)),isStripe&&stripe=="success"&&n.classList.add(e),(isAction||isStripe)&&setTimeout(function(){window.history.replaceState(null,null,window.location.pathname),n.classList.remove(a,b,c,d,e,f)},5000))}();
+</script>
+
+		<script>
+const searchPublished = 'Published',
+	  searchUrl = 'https://sftptogo.com',
+	  searchKey = "52dd7d1249db38cd904813036d",
+	  searchAPI = searchUrl+'/ghost/api/content/posts/?key='+searchKey+'&limit=all&fields=url,title,published_at,custom_excerpt,visibility,html';
+</script>
+
+		
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.32.2/tocbot.min.js"></script>
+		<script>
+		    tocbot.init({
+		        // Where to render the table of contents.
+		        tocSelector: '.gh-toc',
+		        // Where to grab the headings to build the table of contents.
+		        contentSelector: '.post-section',
+		        // Which headings to grab inside of the contentSelector element.
+		        headingSelector: 'h1, h2[id], h3[id]',
+		        // Ensure correct positioning
+		        hasInnerContainers: true,
+		        orderedList: false, 
+		    });
+		</script>		
+		<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('pre[class*=language-]').forEach(function(node) {
+            node.classList.add('line-numbers');
+        });
+        Prism.highlightAll();
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/toolbar/prism-toolbar.min.js" integrity="sha512-st608h+ZqzliahyzEpETxzU0f7z7a9acN6AFvYmHvpFhmcFuKT8a22TT5TpKpjDa3pt3Wv7Z3SdQBCBdDPhyWA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/show-language/prism-show-language.min.js" integrity="sha512-3W0oV/Hgpx0zjwyJC+XcOlqzfVakj8hRPvP5G8kPIhg3Alaq7wYscSD0hcV44P9ViuqTJYcWKbnkWCfKkNTA7g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js" integrity="sha512-/kVH1uXuObC0iYgxxCKY41JdWOkKOxorFVmip+YVifKsJ4Au/87EisD1wty7vxN2kAhnWh6Yc8o/dSAXj6Oz7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  const BANNERS_MAP = {
+    "promo-compliance": `
+<figure class="kg-card kg-image-card"><a href="https://sftptogo.com/compliance" class="banner-promo-link" style="display: block; margin: 20px 0;"><img src="https://res-3.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/sftptogo-secure-compliant-awesome.png" class="kg-image lightense-target" alt="Meet SOC 2 and HIPAA requirements from day one" loading="lazy" width="1200" height="463"/></a></figure>
+    `,
+
+    "promo-simple-secure-awesome": `
+<figure class="kg-card kg-image-card"><a href="https://sftptogo.com/" class="banner-promo-link" style="display: block; margin: 20px 0;"><img src="https://res-4.cloudinary.com/hbdyf1hp4/image/upload/q_auto/v1/images/sftptogo-secure-easy-awesome.png" class="kg-image lightense-target" alt="Get secure file transfwer that's easy to use and backed by awesome support" loading="lazy" width="1200" height="463"/></a></figure>
+    `,
+    
+    // Add as many banners here as you need.
+};
+
+
+// 2. Dynamic Replacement Logic
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all placeholders defined by the class name
+    const placeholders = document.querySelectorAll('.dynamic-banner-placeholder');
+
+    placeholders.forEach(placeholder => {
+        // Read the specific ID the author assigned to this placeholder
+        const bannerId = placeholder.dataset.bannerId;
+        
+        // Look up the corresponding HTML in the BANNERS_MAP
+        const bannerHTML = BANNERS_MAP[bannerId];
+        
+        // Only proceed if the bannerId is valid and exists in our map
+        if (bannerHTML) {
+            placeholder.outerHTML = bannerHTML;
+        } else {
+             // OPTIONAL: Hide the placeholder if the ID is unknown or show an error
+             console.warn(`Banner ID "${bannerId}" not found in BANNERS_MAP.`);
+             placeholder.style.display = 'none'; // Prevents an empty box from showing
+        }
+    });
+});
+
+</script>
+	</body>
+</html>
