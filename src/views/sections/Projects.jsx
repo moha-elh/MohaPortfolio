@@ -39,7 +39,7 @@ export default function Projects({ onOpenProject, onOpenWork }) {
           </p>
         )}
 
-        {projects.map((p) => (
+        {projects.filter(p => p.board !== false).map((p) => (
           <ProjectCard
             key={p.id}
             project={p}

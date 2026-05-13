@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { owner } from '../../models/contact';
 import styles from './Intro.module.css';
 
-export default function Intro({ onEasterEgg }) {
+export default function Intro({ onEasterEgg, onOpenThoughts }) {
   const [clicks, setClicks] = useState(0);
 
   const handleSigClick = useCallback(() => {
@@ -18,8 +18,15 @@ export default function Intro({ onEasterEgg }) {
 
   return (
     <section id="intro" className={styles.intro} aria-label="About">
-      {/* Portrait polaroid */}
-      <div className={styles.polaroid}>
+      {/* Portrait polaroid — click to open thoughts page */}
+      <div
+        className={styles.polaroid}
+        onClick={() => onOpenThoughts?.()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={e => e.key === 'Enter' && onOpenThoughts?.()}
+        aria-label="Open thoughts and moments"
+      >
         <div className={styles.tape} />
         <div className={styles.photoBox}>
           <img src={owner.photo} alt={owner.name} className={styles.photo} />

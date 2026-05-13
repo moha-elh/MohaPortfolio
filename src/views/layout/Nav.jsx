@@ -13,7 +13,7 @@ const links = [
   { label: 'hi',      href: '#contact'      },
 ];
 
-export default function Nav() {
+export default function Nav({ onLogoClick }) {
   const scrolled     = useNavScroll();
   const hover        = useHover();
   const [open, setOpen]         = useState(false);
@@ -49,9 +49,13 @@ export default function Nav() {
   return (
     <>
       <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
-        <a href="#hero" className={styles.logo} {...hover}>
-          m. el haouary
-        </a>
+        <button
+          className={styles.logo}
+          onClick={onLogoClick}
+          aria-label="Open drawing canvas"
+        >
+          melh
+        </button>
 
         {/* Desktop tag chips */}
         <div className={styles.tags}>

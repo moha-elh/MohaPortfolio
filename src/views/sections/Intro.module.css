@@ -168,11 +168,11 @@
   font-family: var(--f-hand);
   font-size: 26px;
   font-weight: 700;
-  cursor: pointer;
+  cursor: none;
   transition: color 0.2s ease;
   user-select: none;
 }
 
 .sig:hover {
-  color: var(--lime);
+  color: #6ea80e;
 }

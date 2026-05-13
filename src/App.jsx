@@ -13,9 +13,11 @@ import Experience   from './views/sections/Experience';
 import Contact      from './views/sections/Contact';
 import Story        from './views/sections/Story';
 import ProjectDetail from './views/sections/ProjectDetail';
-import WorkPage     from './views/sections/WorkPage';
+import WorkPage      from './views/sections/WorkPage';
+import Thoughts      from './views/sections/Thoughts';
+import DrawPage      from './views/sections/DrawPage';
 
-// page: null | 'story' | 'work' | { type: 'project', id: string }
+// page: null | 'story' | 'work' | 'thoughts' | 'draw' | { type: 'project', id: string }
 export default function App() {
   const [page, setPage] = useState(null);
 
@@ -34,6 +36,24 @@ export default function App() {
       <>
         <Cursor />
         <Story onBack={goHome} />
+      </>
+    );
+  }
+
+  if (page === 'draw') {
+    return (
+      <>
+        <Cursor />
+        <DrawPage onBack={goHome} />
+      </>
+    );
+  }
+
+  if (page === 'thoughts') {
+    return (
+      <>
+        <Cursor />
+        <Thoughts onBack={goHome} />
       </>
     );
   }
@@ -60,10 +80,13 @@ export default function App() {
   return (
     <>
       <Cursor />
-      <Nav />
+      <Nav onLogoClick={() => { setPage('draw'); window.scrollTo(0, 0); }} />
       <main>
         <Hero />
-        <Intro onEasterEgg={() => { setPage('story'); window.scrollTo(0, 0); }} />
+        <Intro
+          onEasterEgg={() => { setPage('story'); window.scrollTo(0, 0); }}
+          onOpenThoughts={() => { setPage('thoughts'); window.scrollTo(0, 0); }}
+        />
         <Divider label="/ section · 02 · work" />
         <Projects
           onOpenProject={openProject}

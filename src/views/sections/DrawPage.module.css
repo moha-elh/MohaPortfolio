@@ -1,0 +1,147 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--paper);
+  overflow: hidden;
+  cursor: default;
+}
+
+/* ── Top bar ── */
+.topBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px dashed var(--faint);
+  background: var(--paper);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 720px) {
+  .topBar {
+    padding: 12px 36px;
+    flex-wrap: nowrap;
+  }
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: none;
+  border: 1.5px solid var(--ink);
+  padding: 6px 14px;
+  cursor: default;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.back:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ── Tool groups ── */
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+/* Color swatches */
+.palette {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2.5px solid transparent;
+  box-sizing: border-box;
+  cursor: default;
+  padding: 0;
+  flex-shrink: 0;
+  transition: border-color 0.15s;
+}
+
+.swatchActive {
+  border-color: var(--ink);
+}
+
+/* Size buttons */
+.sizes {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-left: 1px dashed var(--faint);
+  padding-left: 14px;
+}
+
+.sizeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: 1.5px solid transparent;
+  cursor: default;
+  color: var(--ink);
+  transition: border-color 0.15s;
+}
+
+.sizeBtn:hover {
+  border-color: var(--faint);
+}
+
+.sizeBtnActive {
+  border-color: var(--ink);
+}
+
+/* Clear button */
+.clearBtn {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: none;
+  border: 1.5px dashed var(--faint);
+  padding: 5px 12px;
+  cursor: default;
+  transition: border-color 0.15s, color 0.15s;
+  margin-left: auto;
+}
+
+.clearBtn:hover {
+  border-color: var(--ink);
+}
+
+.topLabel {
+  font-family: var(--f-hand);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--faint);
+  flex-shrink: 0;
+}
+
+/* ── Canvas ── */
+.canvas {
+  flex: 1;
+  display: block;
+  width: 100%;
+  touch-action: none;
+  cursor: crosshair;
+}

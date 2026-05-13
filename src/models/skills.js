@@ -63,7 +63,7 @@ export const skillCategories = [
     items: [
       { name: 'PostgreSQL', slug: 'postgresql',  desc: 'my default DB'             },
       { name: 'MySQL',      slug: 'mysql',       desc: 'legacy projects'           },
-      { name: 'Oracle',     slug: 'oracle',      desc: 'university coursework'     },
+      { name: 'Oracle',     slug: null, localImg: '/assets/icons/oracle logo.png', desc: 'university coursework'     },
       { name: 'Prisma',     slug: 'prisma',      desc: 'typesafe ORM'              },
       { name: 'TypeORM',    slug: null, localImg: '/assets/icons/Typeorm--Streamline-Simple-Icons.svg', desc: '.NET-friendly ORM'         },
       { name: 'MinIO',      slug: 'minio',       desc: 'S3-compatible object store'},

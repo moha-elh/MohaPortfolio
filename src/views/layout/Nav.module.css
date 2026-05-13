@@ -28,6 +28,15 @@
   font-weight: 700;
   text-decoration: none;
   color: var(--ink);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: none;
+  transition: color 0.15s;
+}
+
+.logo:hover {
+  color: var(--faint);
 }
 
 /* ── Desktop tag chips ── */
