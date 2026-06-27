@@ -1,3 +1,4 @@
+import { QRCodeSVG } from 'qrcode.react';
 import { contactLinks, owner } from '../../models/contact';
 import { useHover } from '../../context/CursorContext';
 import styles from './Contact.module.css';
@@ -21,7 +22,7 @@ const SERVICE_ICONS = {
   ),
 };
 
-export default function Contact() {
+export default function Contact({ onOpenCv }) {
   const hover = useHover();
 
   return (
@@ -76,11 +77,17 @@ export default function Contact() {
           <div className={styles.phone} aria-label="Scan to download CV">
             <div className={styles.screen}>
               <span className="mono-cap">scan / download</span>
-              <div className={styles.qr} />
+              <QRCodeSVG
+                value={window.location.origin + owner.cvPdf}
+                size={130}
+                bgColor="transparent"
+                fgColor="#1a1a1a"
+                className={styles.qr}
+              />
               <a
-                href={owner.cvPdf}
+                href="/cv"
                 className={styles.phoneLabel}
-                download
+                onClick={(e) => { e.preventDefault(); onOpenCv?.(); }}
                 {...hover}
               >
                 CV.pdf →

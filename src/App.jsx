@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { projects } from './models/projects';
 import { useKonami } from './controllers/useKonami';
 import Cursor        from './views/ui/Cursor';
@@ -18,10 +18,37 @@ import ProjectDetail from './views/sections/ProjectDetail';
 import WorkPage      from './views/sections/WorkPage';
 import Thoughts      from './views/sections/Thoughts';
 import DrawPage      from './views/sections/DrawPage';
+import CvPage        from './views/sections/CvPage';
+
+function pageToPath(page) {
+  if (!page) return '/';
+  if (typeof page === 'string') return `/${page}`;
+  if (page?.type === 'project') return `/work/${page.id}`;
+  return '/';
+}
+
+function pathToPage(path) {
+  if (path === '/' || path === '') return null;
+  const parts = path.split('/').filter(Boolean);
+  if (parts[0] === 'work' && parts[1]) return { type: 'project', id: parts[1] };
+  if (parts[0]) return parts[0];
+  return null;
+}
 
 // page: null | 'story' | 'work' | 'thoughts' | 'draw' | { type: 'project', id: string }
 export default function App() {
-  const [page, setPage] = useState(null);
+  const [page, setPage] = useState(() => pathToPage(window.location.pathname));
+
+  useEffect(() => {
+    const path = pageToPath(page);
+    if (window.location.pathname !== path) history.pushState(null, '', path);
+  }, [page]);
+
+  useEffect(() => {
+    const onPop = () => setPage(pathToPage(window.location.pathname));
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
   const [party, setParty] = useState(false);
   useKonami(useCallback(() => setParty(true), []));
 
@@ -67,6 +94,16 @@ export default function App() {
     );
   }
 
+  if (page === 'cv') {
+    return (
+      <>
+        <Cursor />
+        <CvPage onBack={goHome} />
+        {party$}
+      </>
+    );
+  }
+
   if (page === 'work') {
     return (
       <>
@@ -91,7 +128,10 @@ export default function App() {
   return (
     <>
       <Cursor />
-      <Nav onLogoClick={() => { setPage('draw'); window.scrollTo(0, 0); }} />
+      <Nav
+        onLogoClick={() => { setPage('draw'); window.scrollTo(0, 0); }}
+        onCvClick={() => { setPage('cv'); window.scrollTo(0, 0); }}
+      />
       <main>
         <Hero />
         <Intro
@@ -106,7 +146,7 @@ export default function App() {
         <Toolbox />
         <Achievements />
         <Experience />
-        <Contact />
+        <Contact onOpenCv={() => { setPage('cv'); window.scrollTo(0, 0); }} />
       </main>
       <Footer />
       {party$}

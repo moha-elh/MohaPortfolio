@@ -37,16 +37,31 @@ export default function ProjectDetail({ project, onBack }) {
         <h1 className={styles.title}>{project.name}</h1>
         <p className={styles.tag}>{project.tag}</p>
 
-        {/* ── Preview ── */}
-        <div className={styles.imgBox}>
-          <div className={styles.tape} />
-          {project.img ? (
-            <img src={project.img} alt={project.name} className={styles.img} />
-          ) : null}
-        </div>
+        {/* ── Hero preview ── */}
+        {project.imgs.length > 0 ? (
+          <div className={styles.imgBox}>
+            <div className={styles.tape} />
+            <img src={project.imgs[0]} alt={`${project.name} screenshot 1`} className={styles.img} />
+          </div>
+        ) : (
+          <div className={styles.imgPlaceholder}>
+            <div className={styles.tape} />
+          </div>
+        )}
 
-        {/* ── Description ── */}
-        <p className={styles.desc}>{detail.description}</p>
+        {/* ── Description + secondary preview beside it ── */}
+        <div className={styles.descRow}>
+          <p className={styles.desc}>{detail.description}</p>
+          {project.imgs.length > 1 && (
+            <div className={styles.descAside}>
+              {project.imgs.slice(1).map((src, i) => (
+                <div key={i} className={styles.imgBoxSmall}>
+                  <img src={src} alt={`${project.name} screenshot ${i + 2}`} className={styles.imgSmall} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* ── Highlights ── */}
         <p className={styles.highlightsLabel}>/ what I built</p>
@@ -65,15 +80,19 @@ export default function ProjectDetail({ project, onBack }) {
         </div>
 
         {/* ── CTA ── */}
-        {project.url ? (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.cta}
-          >
-            visit live site →
-          </a>
+        {(project.githubUrl || project.siteUrl) ? (
+          <div className={styles.ctaRow}>
+            {project.githubUrl && (
+              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className={styles.cta}>
+                view on github →
+              </a>
+            )}
+            {project.siteUrl && (
+              <a href={project.siteUrl} target="_blank" rel="noopener noreferrer" className={styles.cta}>
+                visit live site →
+              </a>
+            )}
+          </div>
         ) : (
           <span className={styles.ctaDisabled}>private / not yet public</span>
         )}

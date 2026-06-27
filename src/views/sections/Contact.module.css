@@ -151,11 +151,7 @@
 .qr {
   width: 130px;
   height: 130px;
-  border: 2px solid var(--ink);
-  background: repeating-conic-gradient(
-    var(--ink) 0% 25%,
-    transparent 0% 50%
-  ) 50% / 22px 22px;
+  display: block;
 }
 
 .phoneLabel {

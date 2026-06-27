@@ -4,11 +4,12 @@ export const projects = [
     id: 'dirhamy',
     name: 'DIRHAMY',
     tag: 'finance · RAG · groq',
-    img: '/assets/project-preview.png',
+    imgs: ['/assets/projects/dirhamy.png'], // TODO: uncomment once image is added
     position: { x: 0, y: 50 },
     rotation: -4,
     size: { w: 295, h: 205 },
-    url: 'https://github.com/MYH-Projet/dirhamy',
+    githubUrl: 'https://github.com/MYH-Projet/dirhamy',
+    siteUrl: 'https://dirhamy.com',
     detail: {
       status: 'live',
       year: '2024',
@@ -27,11 +28,12 @@ export const projects = [
     id: 'skillios',
     name: 'SKILLIOS',
     tag: 'vue · team lead · x10',
-    img: '/assets/project-preview.png',
+    imgs: [], // TODO: add real image e.g. ['/assets/projects/skillios.png']
     position: { x: 320, y: 45 },
     rotation: 3,
     size: { w: 295, h: 205 },
-    url: 'https://github.com/BilalMagg/Softskills-App',
+    githubUrl: 'https://github.com/BilalMagg/Softskills-App',
+    siteUrl: null,
     detail: {
       status: 'private',
       year: '2024',
@@ -50,11 +52,12 @@ export const projects = [
     id: 'bi-pipeline',
     name: 'BI Pipeline',
     tag: 'pentaho · powerBI · ETL',
-    img: '/assets/project-preview.png',
+    imgs: ['/assets/projects/PowerBi&ETL Result.png', '/assets/projects/ETL in Pentaho.png'],
     position: { x: 170, y: 328 },
     rotation: -3,
     size: { w: 295, h: 205 },
-    url: null,
+    githubUrl: 'https://github.com/moha-elh/PowerBi-ETL.git',
+    siteUrl: null,
     detail: {
       status: 'private',
       year: '2023',
@@ -70,39 +73,60 @@ export const projects = [
     },
   },
 
+  /* ── Middle ── */
+  {
+    id: 'bezel',
+    name: 'BEZEL',
+    tag: 'TODO: tech stack', // TODO: update tag
+    imgs: [], // TODO: add real image e.g. ['/assets/projects/bezel.png']
+    position: { x: 840, y: 30 },
+    rotation: 5,
+    size: { w: 295, h: 205 },
+    githubUrl: 'https://github.com/moha-elh/Bezel.git',
+    siteUrl: 'https://trybezel.xyz/',
+    detail: {
+      status: 'live',
+      year: '2025',
+      description: 'TODO: describe Bezel.',
+      highlights: ['TODO: key feature or tech decision'],
+      tech: [], // TODO: full tech stack
+    },
+  },
+
   /* ── Work page only (board: false) ── */
   {
-    id: 'breqd',
+    id: 'bready-on-fire',
     board: false,
-    name: 'BREQD',
-    tag: 'typescript · web · app',
-    img: '/assets/project-preview.png',
-    position: { x: 600, y: 30 },
+    name: 'Bready on Fire',
+    tag: 'typescript · web · app', // TODO: update tag
+    imgs: [], // TODO: add real image e.g. ['/assets/projects/bready-on-fire.png']
+    position: { x: 600, y: 280 },
     rotation: -2,
     size: { w: 295, h: 205 },
-    url: 'https://github.com/moha-elh/Breqd',
+    githubUrl: 'https://github.com/moha-elh/Breqd',
+    siteUrl: null,
     detail: {
-      status: 'in-progress',
+      status: 'in-progress', // TODO: 'live' | 'private' | 'in-progress'
       year: '2024',
-      description:
-        'A TypeScript web application. Details to be added.',
+      description: 'TODO: one or two sentences about what BREQD is and why it exists.',
       highlights: [
-        'Built with TypeScript',
-        'Modern web stack',
+        'TODO: key feature or tech decision',
+        'TODO: outcome or result',
       ],
-      tech: ['TypeScript'],
+      tech: ['TypeScript'], // TODO: full tech stack
     },
   },
   {
-    id: 'cv-generator',
+    id: 'propel',
     board: false,
-    name: 'CV Generator',
+    name: 'Propel',
     tag: 'c# · asp.net · pdf',
-    img: '/assets/project-preview.png',
+    imgs: [], // TODO: add real image e.g. ['/assets/projects/propel.png']
     position: { x: 610, y: 290 },
     rotation: 3,
     size: { w: 295, h: 205 },
-    url: 'https://github.com/BilalMagg/CV-Generator',
+    githubUrl: 'https://github.com/BilalMagg/CV-Generator',
+    siteUrl: null,
     detail: {
       status: 'private',
       year: '2024',
@@ -120,13 +144,15 @@ export const projects = [
   /* ── Right cluster ── */
   {
     id: 'projexis',
+    board: false,
     name: 'PROJEXIS',
     tag: 'node · react · postgres',
-    img: '/assets/project-preview.png',
+    imgs: [], // TODO: add real image e.g. ['/assets/projects/projexis.png']
     position: { x: 840, y: 30 },
     rotation: 5,
     size: { w: 295, h: 205 },
-    url: 'https://github.com/moha-elh/Projexis',
+    githubUrl: 'https://github.com/moha-elh/Projexis',
+    siteUrl: null,
     detail: {
       status: 'in-progress',
       year: '2024',
@@ -145,32 +171,34 @@ export const projects = [
     id: 'vimo',
     board: false,
     name: 'VIMO',
-    tag: 'javascript · web · app',
-    img: '/assets/project-preview.png',
+    tag: 'javascript · web · app', // TODO: update tag
+    imgs: [], // TODO: add real image e.g. ['/assets/projects/vimo.png']
     position: { x: 870, y: 275 },
     rotation: -3,
     size: { w: 295, h: 205 },
-    url: 'https://github.com/said101112/VIMO',
+    githubUrl: 'https://github.com/said101112/VIMO',
+    siteUrl: null,
     detail: {
-      status: 'private',
+      status: 'private', // TODO: 'live' | 'private' | 'in-progress'
       year: '2024',
-      description:
-        'A JavaScript web application. Details to be added.',
+      description: 'TODO: one or two sentences about what VIMO is and why it exists.',
       highlights: [
-        'Built with JavaScript',
+        'TODO: key feature or tech decision',
+        'TODO: outcome or result',
       ],
-      tech: ['JavaScript'],
+      tech: ['JavaScript'], // TODO: full tech stack
     },
   },
   {
     id: 'cv-agents',
     name: 'CV Agents',
     tag: 'langchain · gRPC · kafka',
-    img: '/assets/project-preview.png',
+    imgs: [], // TODO: add real image e.g. ['/assets/projects/cv-agents.png']
     position: { x: 1155, y: 30 },
     rotation: -2,
     size: { w: 295, h: 205 },
-    url: null,
+    githubUrl: null,
+    siteUrl: null,
     detail: {
       status: 'private',
       year: '2024',
@@ -189,32 +217,34 @@ export const projects = [
     id: 'vc-worldwide',
     board: false,
     name: 'VC Worldwide',
-    tag: 'node · react · global',
-    img: '/assets/project-preview.png',
+    tag: 'node · react · global', // TODO: update tag
+    imgs: [], // TODO: add real image e.g. ['/assets/projects/vc-worldwide.png']
     position: { x: 1155, y: 275 },
     rotation: 4,
     size: { w: 295, h: 205 },
-    url: 'https://github.com/moha-elh/vc_worldwide',
+    githubUrl: 'https://github.com/moha-elh/vc_worldwide',
+    siteUrl: null,
     detail: {
-      status: 'in-progress',
+      status: 'in-progress', // TODO: 'live' | 'private' | 'in-progress'
       year: '2024',
-      description:
-        'A global-scale web application. Details to be added.',
+      description: 'TODO: one or two sentences about what VC Worldwide is and why it exists.',
       highlights: [
-        'Full-stack web application',
+        'TODO: key feature or tech decision',
+        'TODO: outcome or result',
       ],
-      tech: ['Node.js', 'React'],
+      tech: ['Node.js', 'React'], // TODO: full tech stack
     },
   },
   {
     id: 'more',
     name: '+ more',
     tag: 'see /work',
-    img: null,
+    imgs: [],
     position: { x: 1020, y: 330 },
     rotation: 4,
     size: { w: 295, h: 205 },
-    url: null,
+    githubUrl: null,
+    siteUrl: null,
     detail: null,
   },
 ];

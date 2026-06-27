@@ -9,11 +9,11 @@ const links = [
   { label: 'skills',  href: '#toolbox'      },
   { label: 'wins',    href: '#achievements' },
   { label: 'xp',      href: '#experience'  },
-  { label: 'cv',      href: '/assets/cv.pdf', external: true },
+  { label: 'cv',      href: '/cv', page: 'cv' },
   { label: 'hi',      href: '#contact'      },
 ];
 
-export default function Nav({ onLogoClick }) {
+export default function Nav({ onLogoClick, onCvClick }) {
   const scrolled     = useNavScroll();
   const hover        = useHover();
   const [open, setOpen]         = useState(false);
@@ -67,6 +67,7 @@ export default function Nav({ onLogoClick }) {
               style={{ transform: `rotate(${(['-1deg','1deg','-0.5deg','1.5deg','-1deg','1deg','-0.5deg'])[i]})` }}
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noopener' : undefined}
+              onClick={link.page === 'cv' ? (e) => { e.preventDefault(); onCvClick(); } : undefined}
               {...hover}
             >
               {link.label}
@@ -99,7 +100,7 @@ export default function Nav({ onLogoClick }) {
             className={`${styles.drawerLink} ${link.href === activeHref ? styles.drawerLinkActive : ''}`}
             target={link.external ? '_blank' : undefined}
             rel={link.external ? 'noopener' : undefined}
-            onClick={close}
+            onClick={link.page === 'cv' ? (e) => { e.preventDefault(); onCvClick(); close(); } : close}
           >
             {link.label}
           </a>
