@@ -18,7 +18,8 @@ import ProjectDetail from './views/sections/ProjectDetail';
 import WorkPage      from './views/sections/WorkPage';
 import Thoughts      from './views/sections/Thoughts';
 import DrawPage      from './views/sections/DrawPage';
-import CvPage        from './views/sections/CvPage';
+import CvPage            from './views/sections/CvPage';
+import CertificatesPage  from './views/sections/CertificatesPage';
 
 function pageToPath(page) {
   if (!page) return '/';
@@ -94,6 +95,16 @@ export default function App() {
     );
   }
 
+  if (page === 'certificates') {
+    return (
+      <>
+        <Cursor />
+        <CertificatesPage onBack={goHome} />
+        {party$}
+      </>
+    );
+  }
+
   if (page === 'cv') {
     return (
       <>
@@ -144,7 +155,7 @@ export default function App() {
           onOpenWork={() => { setPage('work'); window.scrollTo(0, 0); }}
         />
         <Toolbox />
-        <Achievements />
+        <Achievements onOpenCerts={() => { setPage('certificates'); window.scrollTo(0, 0); }} />
         <Experience />
         <Contact onOpenCv={() => { setPage('cv'); window.scrollTo(0, 0); }} />
       </main>

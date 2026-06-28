@@ -1,12 +1,19 @@
+import { useHover } from '../../context/CursorContext';
 import styles from './Certificate.module.css';
 
-/**
- * Paper certificate card with double-rule border + wax seal.
- * rot and sealColor are per-instance, applied via inline styles.
- */
-export default function Certificate({ rank, title, org, sealColor, rot }) {
+export default function Certificate({ rank, title, org, sealColor, rot, onClick }) {
+  const hover = useHover();
+
   return (
-    <div className={styles.cert} style={{ '--rot': `${rot}deg`, '--seal': sealColor }}>
+    <div
+      className={styles.cert}
+      style={{ '--rot': `${rot}deg`, '--seal': sealColor }}
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClick?.(); }}
+      {...hover}
+    >
       <div className={styles.innerFrame} />
 
       <div className={styles.content}>

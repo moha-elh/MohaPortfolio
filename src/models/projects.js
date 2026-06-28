@@ -4,7 +4,8 @@ export const projects = [
     id: 'dirhamy',
     name: 'DIRHAMY',
     tag: 'finance · RAG · groq',
-    imgs: ['/assets/projects/dirhamy.png'], // TODO: uncomment once image is added
+    logo: '/assets/projects/logos/dirhamyLogo.png',
+    imgs: [], // TODO: add screenshots e.g. ['/assets/projects/dirhamy-screenshot.png']
     position: { x: 0, y: 50 },
     rotation: -4,
     size: { w: 295, h: 205 },
@@ -28,7 +29,8 @@ export const projects = [
     id: 'skillios',
     name: 'SKILLIOS',
     tag: 'vue · team lead · x10',
-    imgs: [], // TODO: add real image e.g. ['/assets/projects/skillios.png']
+    logo: '/assets/projects/logos/SkilliosLogo.png',
+    imgs: [], // TODO: add screenshots e.g. ['/assets/projects/skillios-screenshot.png']
     position: { x: 320, y: 45 },
     rotation: 3,
     size: { w: 295, h: 205 },
@@ -52,6 +54,7 @@ export const projects = [
     id: 'bi-pipeline',
     name: 'BI Pipeline',
     tag: 'pentaho · powerBI · ETL',
+    logo: '/assets/projects/logos/PowerBiLogo.png',
     imgs: ['/assets/projects/PowerBi&ETL Result.png', '/assets/projects/ETL in Pentaho.png'],
     position: { x: 170, y: 328 },
     rotation: -3,
@@ -78,7 +81,8 @@ export const projects = [
     id: 'bezel',
     name: 'BEZEL',
     tag: 'TODO: tech stack', // TODO: update tag
-    imgs: [], // TODO: add real image e.g. ['/assets/projects/bezel.png']
+    logo: '/assets/projects/logos/BezelLogo.png',
+    imgs: [], // TODO: add screenshots e.g. ['/assets/projects/bezel-screenshot.png']
     position: { x: 840, y: 30 },
     rotation: 5,
     size: { w: 295, h: 205 },
@@ -99,7 +103,8 @@ export const projects = [
     board: false,
     name: 'Bready on Fire',
     tag: 'typescript · web · app', // TODO: update tag
-    imgs: [], // TODO: add real image e.g. ['/assets/projects/bready-on-fire.png']
+    logo: '/assets/projects/logos/BreadyLogo.png',
+    imgs: [], // TODO: add screenshots e.g. ['/assets/projects/bready-on-fire-screenshot.png']
     position: { x: 600, y: 280 },
     rotation: -2,
     size: { w: 295, h: 205 },
@@ -108,7 +113,7 @@ export const projects = [
     detail: {
       status: 'in-progress', // TODO: 'live' | 'private' | 'in-progress'
       year: '2024',
-      description: 'TODO: one or two sentences about what BREQD is and why it exists.',
+      description: 'TODO: one or two sentences about what Bready on Fire is and why it exists.',
       highlights: [
         'TODO: key feature or tech decision',
         'TODO: outcome or result',
@@ -118,12 +123,12 @@ export const projects = [
   },
   {
     id: 'propel',
-    board: false,
     name: 'Propel',
-    tag: 'c# · asp.net · pdf',
-    imgs: [], // TODO: add real image e.g. ['/assets/projects/propel.png']
-    position: { x: 610, y: 290 },
-    rotation: 3,
+    tag: 'langchain · gRPC · kafka · c#',
+    logo: '/assets/projects/logos/PropelLogo.png',
+    imgs: [], // TODO: add screenshots e.g. ['/assets/projects/propel-screenshot.png']
+    position: { x: 1155, y: 30 },
+    rotation: -2,
     size: { w: 295, h: 205 },
     githubUrl: 'https://github.com/BilalMagg/CV-Generator',
     siteUrl: null,
@@ -131,13 +136,16 @@ export const projects = [
       status: 'private',
       year: '2024',
       description:
-        'A CV/resume generator built in C# that lets users input their details and export a formatted PDF document. Built as a team project.',
+        'A distributed AI recruitment pipeline that ingests CVs, extracts structured candidate profiles using LangChain agents, routes them through Kafka topics, and exposes results via gRPC microservices — with a C# PDF generation layer for producing formatted resume outputs.',
       highlights: [
-        'C# .NET backend for PDF generation',
-        'Template-based resume formatting',
+        'LangChain agents for CV parsing and skill extraction',
+        'Kafka for async event-driven routing between services',
+        'gRPC for typed, high-performance inter-service communication',
+        'ASP.NET microservices + Python AI layer',
+        'C# .NET backend for PDF generation and template-based resume formatting',
         'Collaborative team build',
       ],
-      tech: ['C#', 'ASP.NET', 'PDF generation'],
+      tech: ['LangChain', 'Kafka', 'gRPC', 'Python', 'ASP.NET', 'C#', 'Docker'],
     },
   },
 
@@ -147,7 +155,8 @@ export const projects = [
     board: false,
     name: 'PROJEXIS',
     tag: 'node · react · postgres',
-    imgs: [], // TODO: add real image e.g. ['/assets/projects/projexis.png']
+    logo: '/assets/projects/logos/ProjexisLogo.png',
+    imgs: [], // TODO: add screenshots e.g. ['/assets/projects/projexis-screenshot.png']
     position: { x: 840, y: 30 },
     rotation: 5,
     size: { w: 295, h: 205 },
@@ -168,57 +177,12 @@ export const projects = [
     },
   },
   {
-    id: 'vimo',
-    board: false,
-    name: 'VIMO',
-    tag: 'javascript · web · app', // TODO: update tag
-    imgs: [], // TODO: add real image e.g. ['/assets/projects/vimo.png']
-    position: { x: 870, y: 275 },
-    rotation: -3,
-    size: { w: 295, h: 205 },
-    githubUrl: 'https://github.com/said101112/VIMO',
-    siteUrl: null,
-    detail: {
-      status: 'private', // TODO: 'live' | 'private' | 'in-progress'
-      year: '2024',
-      description: 'TODO: one or two sentences about what VIMO is and why it exists.',
-      highlights: [
-        'TODO: key feature or tech decision',
-        'TODO: outcome or result',
-      ],
-      tech: ['JavaScript'], // TODO: full tech stack
-    },
-  },
-  {
-    id: 'cv-agents',
-    name: 'CV Agents',
-    tag: 'langchain · gRPC · kafka',
-    imgs: [], // TODO: add real image e.g. ['/assets/projects/cv-agents.png']
-    position: { x: 1155, y: 30 },
-    rotation: -2,
-    size: { w: 295, h: 205 },
-    githubUrl: null,
-    siteUrl: null,
-    detail: {
-      status: 'private',
-      year: '2024',
-      description:
-        'A distributed AI recruitment pipeline that ingests CVs, extracts structured candidate profiles using LangChain agents, routes them through Kafka topics, and exposes results via gRPC microservices.',
-      highlights: [
-        'LangChain agents for CV parsing and skill extraction',
-        'Kafka for async event-driven routing between services',
-        'gRPC for typed, high-performance inter-service communication',
-        'ASP.NET microservices + Python AI layer',
-      ],
-      tech: ['LangChain', 'Kafka', 'gRPC', 'Python', 'ASP.NET', 'Docker'],
-    },
-  },
-  {
     id: 'vc-worldwide',
     board: false,
     name: 'VC Worldwide',
     tag: 'node · react · global', // TODO: update tag
-    imgs: [], // TODO: add real image e.g. ['/assets/projects/vc-worldwide.png']
+    logo: '/assets/projects/logos/VCLogo.png',
+    imgs: [], // TODO: add screenshots e.g. ['/assets/projects/vc-worldwide-screenshot.png']
     position: { x: 1155, y: 275 },
     rotation: 4,
     size: { w: 295, h: 205 },
@@ -239,6 +203,7 @@ export const projects = [
     id: 'more',
     name: '+ more',
     tag: 'see /work',
+    logo: null,
     imgs: [],
     position: { x: 1020, y: 330 },
     rotation: 4,

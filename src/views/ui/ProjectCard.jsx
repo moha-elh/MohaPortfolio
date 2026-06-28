@@ -20,9 +20,9 @@ export default function ProjectCard({ project, getNextZ, isMobile, onOpen }) {
       data-draggable={!isMobile ? '' : undefined}
     >
       <div className={styles.imgBox} style={{ height: project.size.h }}>
-        {project.imgs[0] ? (
+        {project.logo ? (
           <img
-            src={project.imgs[0]}
+            src={project.logo}
             alt={project.name}
             className={styles.img}
             loading="lazy"

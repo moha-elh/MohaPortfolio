@@ -3,6 +3,8 @@
  * Each entry becomes a paper cert card with a wax seal.
  * sealColor  → the wax seal background colour
  * rot        → base rotation in degrees
+ * img        → path to certificate image, e.g. '/assets/certificates/solihack.jpg'
+ * verifyUrl  → optional link to verify the certificate online
  */
 export const certificates = [
   {
@@ -12,6 +14,8 @@ export const certificates = [
     org:       'ITWAVE · 2025',
     sealColor: '#c8f24a',
     rot:       -1.5,
+    img:       null, // TODO: '/assets/certificates/solihack.jpg'
+    verifyUrl: null,
   },
   {
     id:        'gemma',
@@ -20,6 +24,8 @@ export const certificates = [
     org:       'Google · 2025',
     sealColor: '#fef4a8',
     rot:       1,
+    img:       null, // TODO: '/assets/certificates/gemma.jpg'
+    verifyUrl: null,
   },
   {
     id:        'bac',
@@ -28,6 +34,8 @@ export const certificates = [
     org:       'Lycée Alwahda · 2022',
     sealColor: '#e8dcc4',
     rot:       -1,
+    img:       null, // TODO: '/assets/certificates/bac.jpg'
+    verifyUrl: null,
   },
   {
     id:        'blue',
@@ -36,6 +44,8 @@ export const certificates = [
     org:       '2025',
     sealColor: '#cde7ff',
     rot:       1.5,
+    img:       null, // TODO: '/assets/certificates/blue.jpg'
+    verifyUrl: null,
   },
   {
     id:        'ids',
@@ -44,6 +54,8 @@ export const certificates = [
     org:       '2025',
     sealColor: '#fce0d4',
     rot:       -1,
+    img:       null, // TODO: '/assets/certificates/ids.jpg'
+    verifyUrl: null,
   },
   {
     id:        'csc',
@@ -52,5 +64,7 @@ export const certificates = [
     org:       '80+ members · 2025',
     sealColor: '#c8f24a',
     rot:       1,
+    img:       null, // TODO: '/assets/certificates/csc.jpg'
+    verifyUrl: null,
   },
 ];

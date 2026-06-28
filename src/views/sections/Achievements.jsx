@@ -1,18 +1,21 @@
+import { useState } from 'react';
 import { certificates } from '../../models/achievements';
 import Certificate from '../ui/Certificate';
+import CertSkeleton from '../ui/CertSkeleton';
+import CertModal from '../ui/CertModal';
 import styles from './Achievements.module.css';
 
-/**
- * "Certificates & wins" section — replaces the old Rosettes section.
- * Uses paper cert cards with wax seals in a 3-column grid.
- */
-export default function Achievements() {
+export default function Achievements({ onOpenCerts }) {
+  const [selected, setSelected] = useState(null);
+  const visible = certificates.slice(0, 5);
+
   return (
     <section id="achievements" className={styles.section} aria-label="Certificates">
       <p className="sec-label">/ section · 04 · certificates</p>
       <h2 className="sec-title">certificates &amp; wins.</h2>
+
       <div className={styles.grid}>
-        {certificates.map((cert) => (
+        {visible.map((cert) => (
           <Certificate
             key={cert.id}
             rank={cert.rank}
@@ -20,9 +23,15 @@ export default function Achievements() {
             org={cert.org}
             sealColor={cert.sealColor}
             rot={cert.rot}
+            onClick={() => setSelected(cert)}
           />
         ))}
+
+        {/* 1 skeleton card — teases more certificates on the full page */}
+        <CertSkeleton rot={1.5} onClick={onOpenCerts} />
       </div>
+
+      <CertModal cert={selected} onClose={() => setSelected(null)} />
     </section>
   );
 }

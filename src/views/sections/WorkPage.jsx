@@ -43,7 +43,7 @@ export default function WorkPage({ onBack, onOpen }) {
             aria-label={`Open ${p.name} project`}
           >
             <div className={styles.cardImg}>
-              {p.img && <img src={p.img} alt={p.name} loading="lazy" />}
+              {p.logo && <img src={p.logo} alt={p.name} loading="lazy" />}
             </div>
             <div className={styles.cardBody}>
               <p className={styles.cardName}>{p.name}</p>
