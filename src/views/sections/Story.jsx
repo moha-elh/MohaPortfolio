@@ -33,6 +33,10 @@ export default function Story({ onBack }) {
           <p className={styles.chapterNum}>chapter 01</p>
           <h2 className={styles.chapterTitle}>the city at the edge of the world.</h2>
           <div className={styles.chapterBody}>
+            <div className={styles.photo}>
+              <img src="/assets/moments/story/tangier-home.jpg" alt="In Tangier" loading="lazy" />
+              <p className={styles.photoCap}>tangier, home base</p>
+            </div>
             <p>
               Tangier. The city where Africa and Europe nearly touch across a narrow strip of sea,
               where the Atlantic meets the Mediterranean, where{' '}
@@ -60,6 +64,10 @@ export default function Story({ onBack }) {
           <div className={styles.chapterBody}>
             <div className={styles.aside}>
               "I used to think sleep was optional. Then I took distributed systems." — him, probably
+            </div>
+            <div className={styles.photo}>
+              <img src="/assets/moments/story/bac-year-crew.jpg" alt="Right before ENSA" loading="lazy" />
+              <p className={styles.photoCap}>the crew, bac year</p>
             </div>
             <p>
               He enrolled at{' '}
@@ -144,6 +152,10 @@ export default function Story({ onBack }) {
             <div className={styles.aside}>
               ships something that works ✦ only breaks things occasionally ✦ certified 47-tabs-open engineer
             </div>
+            <div className={styles.photo}>
+              <img src="/assets/moments/story/silly-me.jpg" alt="Not taking himself too seriously" loading="lazy" />
+              <p className={styles.photoCap}>not all serious</p>
+            </div>
             <p>
               It's not the stack. It's not the titles. It's the moment when something that
               didn't exist becomes something that does — and it <em>works</em>. That moment
@@ -168,6 +180,10 @@ export default function Story({ onBack }) {
           <p className={styles.chapterNum}>chapter 06</p>
           <h2 className={styles.chapterTitle}>what comes next.</h2>
           <div className={styles.chapterBody}>
+            <div className={styles.photo}>
+              <img src="/assets/moments/story/good-people.jpg" alt="With good people" loading="lazy" />
+              <p className={styles.photoCap}>good people</p>
+            </div>
             <p>
               He's looking for a <span className={styles.hl}>PFA internship</span> — the kind
               where the work is real, the problem is hard, and the team actually cares about

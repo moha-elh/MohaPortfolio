@@ -1,13 +1,19 @@
 import styles from './Filmstrip.module.css';
 
 const FRAMES = [
-  { label: 'workshop · IaC',       date: '04/2025', rot: -2 },
-  { label: 'Ceres standup',        date: '07/2025', rot:  1 },
-  { label: 'SoliHackathon · 3rd',  date: '03/2025', rot: -1 },
-  { label: "IT Day'z keynote",     date: '11/2025', rot:  2 },
-  { label: 'CSC welcome day',      date: '10/2024', rot: -2 },
-  { label: 'team @ Skillios',      date: '06/2025', rot:  1 },
-  { label: 'late-night demo',      date: '02/2026', rot: -1 },
+  { src: '/assets/moments/scroll/it-dayz-team-day-one.jpeg',        label: "IT Day'z · day one",  rot: -2 },
+  { src: '/assets/moments/scroll/it-dayz-winning-team.jpeg',        label: 'winning team ✦',      rot:  1 },
+  { src: '/assets/moments/scroll/it-dayz-squad.jpg',                label: 'the squad',           rot: -1 },
+  { src: '/assets/moments/scroll/it-dayz-media.jpg',                label: 'on media',            rot:  2 },
+  { src: '/assets/moments/scroll/it-dayz-team.jpeg',                label: "IT Day'z team",       rot: -2 },
+  { src: '/assets/moments/scroll/it-dayz-fun.jpeg',                 label: 'good company',        rot:  1 },
+  { src: '/assets/moments/scroll/ids-event.jpg',                    label: 'IDS event',           rot: -1 },
+  { src: '/assets/moments/scroll/with-supervisor.jpg',              label: 'with my supervisor',  rot:  2 },
+  { src: '/assets/moments/scroll/project-team-mentor.jpg',          label: 'team + mentor',       rot: -2 },
+  { src: '/assets/moments/scroll/csc-committee.jpg',                label: 'the committee',       rot:  1 },
+  { src: '/assets/moments/scroll/csc-formation.jpg',                label: 'CSC formation',       rot: -1 },
+  { src: '/assets/moments/scroll/suited-up.jpg',                    label: 'suited up',           rot:  2 },
+  { src: '/assets/moments/scroll/after-the-presentation.jpg',       label: 'after *that* presentation 😅', rot: -2 },
 ];
 
 /**
@@ -28,10 +34,11 @@ export default function Filmstrip() {
               style={{ transform: `rotate(${f.rot}deg)` }}
               aria-hidden={i >= FRAMES.length}
             >
-              <div className={styles.imgBox}>{f.label}</div>
+              <div className={styles.imgBox}>
+                <img src={f.src} alt={f.label} loading="lazy" className={styles.img} />
+              </div>
               <div className={styles.meta}>
                 <span className={styles.frameLabel}>{f.label}</span>
-                <span className={styles.frameDate}>{f.date}</span>
               </div>
             </div>
           ))}

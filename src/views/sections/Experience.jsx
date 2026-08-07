@@ -65,8 +65,9 @@ export default function Experience() {
             >
               <div className={styles.polaroidInner}>
                 <div className={styles.washi} />
-                {/* Replace the div below with <img src={exp.imgSrc} alt={exp.title} /> */}
-                <div className={styles.imgPlaceholder}>{exp.img}</div>
+                <div className={styles.imgPlaceholder}>
+                  <img src={exp.imgSrc} alt={exp.title} loading="lazy" className={styles.img} />
+                </div>
                 <p className={styles.polaroidCaption}>{exp.img}</p>
               </div>
             </div>

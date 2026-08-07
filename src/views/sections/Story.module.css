@@ -197,6 +197,55 @@
   }
 }
 
+/* ── Taped-in photo (polaroid) ── */
+.photo {
+  float: left;
+  clear: left;
+  width: 190px;
+  margin: 4px 26px 14px 0;
+  padding: 9px 9px 30px;
+  background: var(--white);
+  box-shadow: var(--shadow-polar);
+  transform: rotate(-2.5deg);
+  position: relative;
+}
+.photo:nth-of-type(even) { transform: rotate(2deg); }
+
+/* Washi tape accent on the photo */
+.photo::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 60px;
+  height: 18px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: rgba(200, 242, 74, 0.55);
+}
+
+.photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+.photoCap {
+  font-family: var(--f-hand);
+  font-size: 15px;
+  text-align: center;
+  margin-top: 8px;
+  color: var(--ink);
+}
+
+@media (max-width: 560px) {
+  .photo {
+    float: none;
+    width: 60%;
+    margin: 0 auto 20px;
+  }
+}
+
 /* ── Stack list ── */
 .stackList {
   display: flex;

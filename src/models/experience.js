@@ -1,7 +1,7 @@
 /**
  * Model: experience
- * img → label shown in the hover polaroid placeholder.
- *       Swap for an actual image path (e.g. '/assets/csc-workshop.jpg') when ready.
+ * img    → handwritten caption shown under the hover polaroid.
+ * imgSrc → photo shown in the hover polaroid (from /public/assets/moments).
  * accent: true → full lime washi badge, false → 50% opacity lime.
  */
 export const experiences = [
@@ -10,7 +10,8 @@ export const experiences = [
     period: '2025 → now',
     title:  'President · CSC Computer Club, ENSAT',
     detail: '80+ members · 20+ workshops · IaC mentorship',
-    img:    'CSC workshop · 2025',
+    img:    'CSC team · 2025',
+    imgSrc: '/assets/moments/exp/csc-team.jpeg',
     accent: true,
   },
   {
@@ -18,7 +19,8 @@ export const experiences = [
     period: 'Jul – Sep 2025',
     title:  'Full-Stack Intern · Ceres Blockchain Solutions',
     detail: 'Remote (Belgrade) · Node, React, PostgreSQL · agile',
-    img:    'Ceres office · Belgrade',
+    img:    'internship days',
+    imgSrc: '/assets/moments/exp/ceres-internship.jpg',
     accent: false,
   },
   {
@@ -26,7 +28,8 @@ export const experiences = [
     period: '2025 → 2026',
     title:  "Advisor · IT Day'z — 11th edition",
     detail: 'Strategic framing for organizing team',
-    img:    "IT Day'z keynote · 2025",
+    img:    "IT Day'z · round table",
+    imgSrc: '/assets/moments/exp/it-dayz-round-table.jpeg',
     accent: false,
   },
   {
@@ -34,7 +37,8 @@ export const experiences = [
     period: '2022 → now',
     title:  'Engineering Cycle · ENSA Tanger',
     detail: 'Computer engineering (Génie Informatique), 2nd of 3 years',
-    img:    'ENSAT campus · Tangier',
+    img:    'IAC · formation',
+    imgSrc: '/assets/moments/exp/iac-formation.jpg',
     accent: false,
   },
 ];
