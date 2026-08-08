@@ -5,48 +5,48 @@ import styles from './Thoughts.module.css';
 const MOMENTS = [
   {
     src: '/assets/moments/thoughts/portrait.jpg',
-    caption: '— me',
-    thought: "the demos people remember are the ones the whole team believed in.",
+    caption: 'Me',
+    thought: "Am I destined for something big, or am I just a stupid person with a big ego?",
   },
   {
     src: '/assets/moments/thoughts/tangier.jpg',
     caption: 'tangier',
-    thought: "step away from the screen and the bug usually solves itself on the walk back.",
+    thought: "the city where I felt alone even when surrounded by people",
   },
   {
     src: '/assets/moments/thoughts/me-1.jpg',
     caption: 'me, again',
-    thought: "the best code I ever wrote was the code I deleted.",
+    thought: "Nothing complicated, just thinking about how wonderful I am",
   },
   {
     src: '/assets/moments/thoughts/plage-des-nations.jpg',
     caption: 'plage des nations',
-    thought: "distributed systems taught me that failure is the default state. in code and in life.",
+    thought: "why do we want and envision a life, yet make no effort toward achieving it?",
   },
   {
     src: '/assets/moments/thoughts/with-dad.jpg',
     caption: 'me & dad',
-    thought: "every senior dev I admire has a graveyard of side projects. I'm building mine.",
+    thought: "My family was and still is my biggest support, but their overconfidence is killing me",
   },
   {
     src: '/assets/moments/thoughts/rabat-beach-view.jpg',
     caption: 'the view from here',
-    thought: "Tangier is at the edge of the world — perfect place to be when you want to build something new.",
+    thought: "I love nature, but I hate being surrounded by people",
   },
   {
     src: '/assets/moments/thoughts/with-a-cow.jpg',
     caption: 'me & a cow',
-    thought: "shipping something broken is better than shipping nothing. fix it next week.",
+    thought: "Moooooooooooooo",
   },
   {
     src: '/assets/moments/thoughts/petite-vallee-dor-night.jpg',
     caption: 'petite vallée d\'or, night',
-    thought: "the 47-tab phase is not procrastination. it's research. mostly.",
+    thought: "Can someone enjoy something that was a source of fear for him?",
   },
   {
     src: '/assets/moments/thoughts/me-in-between.jpg',
     caption: 'somewhere in between',
-    thought: "still figuring it out. that's the whole point.",
+    thought: "still figuring it out, that's the whole point, I guess",
   },
 ];
 
