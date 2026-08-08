@@ -54,7 +54,7 @@ export default function Nav({ onLogoClick, onCvClick }) {
           onClick={onLogoClick}
           aria-label="Open drawing canvas"
         >
-          melh
+          Moha
         </button>
 
         {/* Desktop tag chips */}

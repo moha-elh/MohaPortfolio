@@ -115,7 +115,7 @@ export default function DrawPage({ onBack }) {
           <button className={styles.clearBtn} onClick={clear}>clear canvas</button>
         </div>
 
-        <span className={styles.topLabel}>draw something. ✦</span>
+        <span className={styles.topLabel}>draw something.</span>
       </div>
 
       <canvas

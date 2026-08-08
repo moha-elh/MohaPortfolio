@@ -9,7 +9,9 @@ const CursorCtx = createContext(null);
 export function CursorProvider({ children }) {
   const [pos,     setPos]     = useState({ x: 0, y: 0 });
   const [visible, setVisible] = useState(false);
-  const [hovered, setHovered] = useState(false);
+  // Count of currently-hovered interactive elements. A counter (not a bool) so
+  // overlapping enters/leaves stay balanced and one stuck element can't pin it.
+  const [hoverCount, setHoverCount] = useState(0);
 
   const current = useRef({ x: 0, y: 0 });
   const target  = useRef({ x: 0, y: 0 });
@@ -38,11 +40,11 @@ export function CursorProvider({ children }) {
     };
   }, []);
 
-  const onEnter = useCallback(() => setHovered(true),  []);
-  const onLeave = useCallback(() => setHovered(false), []);
+  const inc = useCallback(() => setHoverCount(c => c + 1), []);
+  const dec = useCallback(() => setHoverCount(c => Math.max(0, c - 1)), []);
 
   return (
-    <CursorCtx.Provider value={{ pos, visible, hovered, onEnter, onLeave }}>
+    <CursorCtx.Provider value={{ pos, visible, hovered: hoverCount > 0, inc, dec }}>
       {children}
     </CursorCtx.Provider>
   );
@@ -56,8 +58,23 @@ export const useCursor = () => useContext(CursorCtx);
  *
  * const hover = useHover();
  * <a {...hover} href="...">
+ *
+ * Tracks its own enter/leave with a ref so an unmount mid-hover (navigation,
+ * modal close, list re-render) still releases the count — otherwise the "click"
+ * label stays pinned forever.
  */
 export function useHover() {
-  const { onEnter, onLeave } = useCursor();
-  return { onMouseEnter: onEnter, onMouseLeave: onLeave };
+  const { inc, dec } = useCursor();
+  const active = useRef(false);
+
+  const onMouseEnter = useCallback(() => {
+    if (!active.current) { active.current = true; inc(); }
+  }, [inc]);
+  const onMouseLeave = useCallback(() => {
+    if (active.current) { active.current = false; dec(); }
+  }, [dec]);
+
+  useEffect(() => () => { if (active.current) dec(); }, [dec]);
+
+  return { onMouseEnter, onMouseLeave };
 }

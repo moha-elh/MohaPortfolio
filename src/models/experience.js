@@ -5,22 +5,31 @@
  * accent: true → full lime washi badge, false → 50% opacity lime.
  */
 export const experiences = [
-  {
-    id:     'csc',
-    period: '2025 → now',
-    title:  'President · CSC Computer Club, ENSAT',
-    detail: '80+ members · 20+ workshops · IaC mentorship',
-    img:    'CSC team · 2025',
-    imgSrc: '/assets/moments/exp/csc-team.jpeg',
+    {
+    id:     'fnc',
+    period: 'Jul – Aug 2026',
+    title:  'Full-Stack Intern · Focus Next Computing',
+    detail: 'On-Site (Casablanca) · Spring Boot, React, PostgreSQL · FHIR',
+    img:    'internship days',
+    imgSrc: '/assets/moments/exp/ceres-internship.jpg',
     accent: true,
   },
   {
+    id:     'csc',
+    period: '2025 → 2026',
+    title:  'President · CSC Computer Club, ENSAT',
+    detail: '80+ members · 20+ workshops · IaC mentorship',
+    img:    'CSC team',
+    imgSrc: '/assets/moments/exp/csc-team.jpeg',
+    accent: false,
+  },
+    {
     id:     'ceres',
     period: 'Jul – Sep 2025',
     title:  'Full-Stack Intern · Ceres Blockchain Solutions',
-    detail: 'Remote (Belgrade) · Node, React, PostgreSQL · agile',
-    img:    'internship days',
-    imgSrc: '/assets/moments/exp/ceres-internship.jpg',
+    detail: 'On-Site (Casablanca) · Node, React, PostgreSQL · Agile',
+    img:    'best mentor',
+    imgSrc: '/assets/moments/exp/lazar-mentor.jpg',
     accent: false,
   },
   {

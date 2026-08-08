@@ -2,7 +2,7 @@ import { useHover } from '../../context/CursorContext';
 import { useState, useEffect, useRef } from 'react';
 import styles from './Footer.module.css';
 
-const SECRET = "cs student @ ensa tanger · open to pfa internship · built with react, vite & obsession ✦";
+const SECRET = "cs student @ ensa tanger · open to pfa internship · built with react, vite & obsession";
 
 export default function Footer() {
   const hover = useHover();

@@ -1,4 +1,12 @@
 import styles from './Story.module.css';
+import AccordionGallery from '../ui/AccordionGallery';
+
+const designWork = [
+  { image: '/assets/moments/design/design-2.jpg', label: 'Design work', alt: 'Old design work' },
+  { image: '/assets/moments/design/design-3.jpg', label: 'Design work', alt: 'Old design work' },
+  { image: '/assets/moments/design/design-1.jpg', label: 'Design work', alt: 'Old design work' },
+  { image: '/assets/moments/design/design-4.jpg', label: 'Design work', alt: 'Old design work' },
+];
 
 export default function Story({ onBack }) {
   return (
@@ -8,19 +16,19 @@ export default function Story({ onBack }) {
         <button className={styles.back} onClick={onBack} aria-label="Back to portfolio">
           ← back
         </button>
-        <span className={styles.topLabel}>/ easter egg · unlocked ✦</span>
+        <span className={styles.topLabel}>/ easter egg · unlocked</span>
       </div>
 
       {/* ── Dossier header ── */}
       <div className={styles.dossier}>
         <span className={styles.dossierStamp}>classified</span>
-        <p className={styles.dossierLabel}>case file · subject profile · compiled by claude.ai</p>
+        <p className={styles.dossierLabel}>case file · subject profile</p>
         <h1 className={styles.dossierTitle}>the full story.</h1>
         <div className={styles.dossierMeta}>
           <span><strong>Subject:</strong> Mouhssine El Haouary</span>
           <span><strong>Location:</strong> Tangier, Morocco</span>
           <span><strong>Status:</strong> Engineering student, 2nd year</span>
-          <span><strong>Filed:</strong> 2026</span>
+          <span><strong>Year:</strong> 2026</span>
         </div>
       </div>
 
@@ -31,27 +39,55 @@ export default function Story({ onBack }) {
         <div className={styles.chapter}>
           <div className={styles.tape} />
           <p className={styles.chapterNum}>chapter 01</p>
-          <h2 className={styles.chapterTitle}>the city at the edge of the world.</h2>
+          <h2 className={styles.chapterTitle}>the kid with a hundred phases.</h2>
           <div className={styles.chapterBody}>
-            <div className={styles.photo}>
-              <img src="/assets/moments/story/tangier-home.jpg" alt="In Tangier" loading="lazy" />
-              <p className={styles.photoCap}>tangier, home base</p>
+            <div className={`${styles.photo} ${styles.photoRight} ${styles.photoSmall}`}>
+              <img src="/assets/moments/story/silly-me.jpg" alt="A hundred phases" loading="lazy" />
+              <p className={styles.photoCap}>A silly pic of me</p>
             </div>
             <p>
-              Tangier. The city where Africa and Europe nearly touch across a narrow strip of sea,
-              where the Atlantic meets the Mediterranean, where{' '}
-              <span className={styles.hl}>everything feels like it's on the edge of something</span>.
-              That's where this story starts.
+              Before I even discovered my toxic relationship with coding, and became a
+              gambling addict (waiting for Claude's results), I was just that kid who
+              tried everything.
             </p>
             <p>
-              Growing up here means growing up curious. You're surrounded by two continents, two seas,
-              a dozen languages, and a port that's been trading ideas for centuries. It also means
-              the internet was the window to a much bigger world — and Mouhssine pressed his face
-              against it early.
+              I tried drawing, and lost my drawing book to sheer carelessness.
+              <br></br>
+              I tried inventing things, mostly just getting electrified.
+              <br></br>
+              I even tried designing, which didn't go so well.
+            </p>
+            <figure className={styles.designGallery}>
+              <AccordionGallery
+                items={designWork}
+                defaultIndex={2}
+                trigger="hover"
+                height={300}
+                gap={14}
+                radius={2}
+                expandRatio={0.5}
+                showLabels={false}
+                grayscale={false}
+                overlayColor="transparent"
+                className="accordion-gallery--polaroid"
+              />
+            </figure>
+            <p>
+              My biggest phase, I'd say, was <span className={styles.hl}>video editing</span>.
+              <br></br>
+              I worked inside an agency making compelling videos that racked up millions of views,
+              before I ended up quitting to figure out my path in the tech world.
             </p>
             <p>
-              The first computer. The first "how does this work?" The first time he opened DevTools
-              and the whole illusion came apart. That was it. Game over. He was hooked.
+              You can still see it here:{' '}
+              <a
+                className={styles.storyLink}
+                href="https://mouhssineedits.carrd.co/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                my editing portfolio →
+              </a>
             </p>
           </div>
         </div>
@@ -60,28 +96,36 @@ export default function Story({ onBack }) {
         <div className={styles.chapter}>
           <div className={`${styles.tape} ${styles.right}`} />
           <p className={styles.chapterNum}>chapter 02</p>
-          <h2 className={styles.chapterTitle}>ENSA Tanger: controlled chaos.</h2>
+          <h2 className={styles.chapterTitle}>my origins.</h2>
           <div className={styles.chapterBody}>
-            <div className={styles.aside}>
-              "I used to think sleep was optional. Then I took distributed systems." — him, probably
-            </div>
-            <div className={styles.photo}>
-              <img src="/assets/moments/story/bac-year-crew.jpg" alt="Right before ENSA" loading="lazy" />
-              <p className={styles.photoCap}>the crew, bac year</p>
+            <div className={`${styles.photo} ${styles.photoBig}`}>
+              <img src="/assets/moments/story/bac-year-crew.jpg" alt="Home" loading="lazy" />
+              <p className={styles.photoCap}>My best friends back then</p>
             </div>
             <p>
-              He enrolled at{' '}
-              <span className={styles.hl}>École Nationale des Sciences Appliquées de Tanger</span>{' '}
-              — one of Morocco's top engineering schools. Engineering. The real kind. Where they
-              make you prove theorems before breakfast and build concurrent systems before lunch.
+              I grew up in a small village in Morocco called{' '}
+              <span className={styles.hl}>Oued Amlil</span>, known for its ground beef and
+              brutal summer heat.
             </p>
             <p>
-              Second year in, the pattern is clear: give him a hard problem, a deadline, and a
-              Wi-Fi connection, and something will ship. It might not be pretty on day one.
-              There will be at least 47 browser tabs open. But it will work.
+              There I spent the first 18 years of my life as the shy kid who watched movies in
+              his father's room whenever he wasn't around, which led to me learning English
+              without even trying. Best thing that ever happened to me.
             </p>
             <p>
-              ENSA gave him the fundamentals. The rest — the real stuff — he built himself.
+              I was gifted. I always did well in my studies without really trying, which
+              sometimes led people to call me a liar, because they didn't believe me. And I hated
+              being boxed in as a "study nerd," which led to more than a few fights with my
+              friends, lol.
+            </p>
+            <p>
+              After getting my baccalauréat (the equivalent of finishing high school), I joined
+              ENSA Tanger, which was my only option.
+            </p>
+            <p>
+              And you might be wondering: why Tangier and not one of the other twelve ENSAs?
+              The answer is simple. I was thinking about summer and swimming season more than
+              actual studies. Ironically, I never once swam there, even after four years, lol.
             </p>
           </div>
         </div>
@@ -90,113 +134,23 @@ export default function Story({ onBack }) {
         <div className={styles.chapter}>
           <div className={styles.tape} />
           <p className={styles.chapterNum}>chapter 03</p>
-          <h2 className={styles.chapterTitle}>the stack keeps growing.</h2>
-          <div className={styles.chapterBody}>
-            <p>
-              It started with HTML and a dream. Then CSS because things needed to look good.
-              Then JavaScript because things needed to <em>do</em> things. Then React because
-              "what if it was a component?" Then Node because "what if there was a backend?"
-              Then Docker because "what if it ran anywhere?" Then{' '}
-              <span className={styles.hl}>he stopped asking what if and just built it</span>.
-            </p>
-            <p>
-              Today the stack is wide. TypeScript, React, Vue, Angular, Node, ASP.NET, gRPC,
-              Kafka, Python, LangChain, RAG pipelines, Terraform, Ansible, AWS — it's all in
-              there. Not because he collected them, but because each project demanded them.
-            </p>
-            <div className={styles.stackList}>
-              {['TypeScript','React','Vue','Node','ASP.NET','gRPC','Kafka','Python','LangChain',
-                'Terraform','Docker','AWS','PostgreSQL','Prisma','Grafana'].map(t => (
-                <span key={t} className={styles.tag}>{t}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Chapter 4 */}
-        <div className={styles.chapter}>
-          <div className={`${styles.tape} ${styles.right}`} />
-          <p className={styles.chapterNum}>chapter 04</p>
-          <h2 className={styles.chapterTitle}>the things he actually shipped.</h2>
-          <div className={styles.chapterBody}>
-            <p>
-              <span className={styles.hl}>DIRHAMY</span> — a finance assistant for Moroccan
-              users powered by RAG and Groq. Real-time retrieval, context-aware answers, actual
-              deployed product. Not a side project that dies in a GitHub repo — a live thing
-              people use.
-            </p>
-            <p>
-              <span className={styles.hl}>SKILLIOS</span> — he didn't just build it, he led
-              a team of 10 on it. Vue.js frontend, full product lifecycle, stakeholder management,
-              sprint planning. At year 2 of engineering school. That's not nothing.
-            </p>
-            <p>
-              <span className={styles.hl}>BI Pipeline</span> — an enterprise ETL pipeline
-              on Pentaho with Power BI dashboards on top. The kind of thing that turns raw
-              messy data into a board meeting slide deck.
-            </p>
-            <p>
-              <span className={styles.hl}>CV Agents</span> — an AI system that reads CVs with
-              LangChain, routes them through Kafka, and communicates via gRPC. A distributed,
-              event-driven, AI-augmented recruitment pipeline. Because why not.
-            </p>
-          </div>
-        </div>
-
-        {/* Chapter 5 */}
-        <div className={styles.chapter}>
-          <div className={styles.tape} />
-          <p className={styles.chapterNum}>chapter 05</p>
-          <h2 className={styles.chapterTitle}>what actually drives him.</h2>
-          <div className={styles.chapterBody}>
-            <div className={styles.aside}>
-              ships something that works ✦ only breaks things occasionally ✦ certified 47-tabs-open engineer
-            </div>
-            <div className={styles.photo}>
-              <img src="/assets/moments/story/silly-me.jpg" alt="Not taking himself too seriously" loading="lazy" />
-              <p className={styles.photoCap}>not all serious</p>
-            </div>
-            <p>
-              It's not the stack. It's not the titles. It's the moment when something that
-              didn't exist becomes something that does — and it <em>works</em>. That moment
-              when the build passes, the API responds, the user gets what they needed.
-            </p>
-            <p>
-              He gets depressed at the start of every hard problem. He spirals a little.
-              He opens 47 tabs. Then he closes 46 of them and gets to work. That's the process.
-              <span className={styles.hl}> That's always the process.</span>
-            </p>
-            <p>
-              Full-stack. AI. Cloud. He touches it all because each layer matters. The user
-              experience matters. The backend that powers it matters. The infrastructure that
-              keeps it running matters. You can't care about one and ignore the others.
-            </p>
-          </div>
-        </div>
-
-        {/* Chapter 6 */}
-        <div className={styles.chapter}>
-          <div className={`${styles.tape} ${styles.right}`} />
-          <p className={styles.chapterNum}>chapter 06</p>
-          <h2 className={styles.chapterTitle}>what comes next.</h2>
+          <h2 className={styles.chapterTitle}>what I want in life.</h2>
           <div className={styles.chapterBody}>
             <div className={styles.photo}>
-              <img src="/assets/moments/story/good-people.jpg" alt="With good people" loading="lazy" />
-              <p className={styles.photoCap}>good people</p>
+              <img src="/assets/moments/story/good-people.jpg" alt="The people" loading="lazy" />
+              <p className={styles.photoCap}>what's next</p>
             </div>
             <p>
-              He's looking for a <span className={styles.hl}>PFA internship</span> — the kind
-              where the work is real, the problem is hard, and the team actually cares about
-              what they're building. Not a "shadow someone for 3 months" situation. A
-              "here's a real problem, go figure it out" situation.
+              What actually drives me is still a mystery, even to me. For now, I just want to see
+              my family proud and living a comfortable life.
             </p>
             <p>
-              Full-stack, AI/ML pipelines, cloud architecture, distributed systems — he can
-              contribute on all of these. Preferably on something that matters to actual people.
+              But I do want to make a change in the world, by being honest, bringing a smile, and
+              creating something useful.
             </p>
             <p>
-              The city at the edge of the world produced someone who isn't afraid of edges.
-              He'll ship. He'll figure it out. He always does.
+              Something that'll make me{' '}
+              <span className={styles.hl}>proud of myself</span>.
             </p>
           </div>
         </div>
@@ -205,7 +159,7 @@ export default function Story({ onBack }) {
 
       {/* ── Sign-off ── */}
       <div className={styles.signoff}>
-        <span className={styles.sigText}>— claude.ai ✦</span>
+        <span className={styles.sigText}>Mouhssine's Story</span>
         <span className={styles.sigSub}>filed · tangier, MA · 2026 · you found the easter egg.</span>
       </div>
     </div>

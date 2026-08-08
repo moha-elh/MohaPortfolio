@@ -150,20 +150,19 @@
   margin-top: 16px;
 }
 
-/* Washi tape accent on alternate chapters */
+/* Washi tape accent, pinned over the chapter number/title */
 .tape {
   position: absolute;
-  top: -8px;
-  left: -24px;
-  width: 70px;
-  height: 18px;
+  top: -5px;
+  left: -8px;
+  width: 90px;
+  height: 22px;
   background: rgba(200, 242, 74, 0.6);
   transform: rotate(-2deg);
+  z-index: 2;
 }
 
 .tape.right {
-  left: auto;
-  right: -20px;
   transform: rotate(2.5deg);
 }
 
@@ -172,6 +171,30 @@
   background: rgba(200, 242, 74, 0.4);
   padding: 0 3px;
 }
+
+/* ── Design-era accordion gallery ── */
+.designGallery {
+  clear: both;
+  margin: 26px 0 24px;
+}
+.designCap {
+  font-family: var(--f-hand);
+  font-size: 15px;
+  text-align: center;
+  margin-top: 14px;
+  color: var(--ink);
+}
+
+/* ── Inline external link ── */
+.storyLink {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  transition: background 0.15s;
+}
+.storyLink:hover { background: rgba(200, 242, 74, 0.4); }
 
 /* ── Sticky note aside ── */
 .aside {
@@ -210,6 +233,23 @@
   position: relative;
 }
 .photo:nth-of-type(even) { transform: rotate(2deg); }
+
+/* Float a photo on the right instead of the left */
+.photoRight {
+  float: right;
+  clear: right;
+  margin: -40px 0 20px 10px;
+}
+
+/* A slightly larger photo */
+.photoBig {
+  width: 230px;
+}
+
+/* A smaller photo */
+.photoSmall {
+  width: 150px;
+}
 
 /* Washi tape accent on the photo */
 .photo::before {

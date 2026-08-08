@@ -73,7 +73,7 @@ export default function Intro({ onEasterEgg, onOpenThoughts }) {
               onKeyDown={e => e.key === 'Enter' && handleSigClick()}
               aria-label="Claude AI signature"
               data-clicks={clicks || undefined}
-            >— claude.ai ✦</span>
+            >claude.ai</span>
             <span className="mono-cap">tangier, MA · 2026</span>
           </div>
         </div>

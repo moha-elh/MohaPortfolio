@@ -2,18 +2,18 @@ import styles from './Filmstrip.module.css';
 
 const FRAMES = [
   { src: '/assets/moments/scroll/it-dayz-team-day-one.jpeg',        label: "IT Day'z · day one",  rot: -2 },
-  { src: '/assets/moments/scroll/it-dayz-winning-team.jpeg',        label: 'winning team ✦',      rot:  1 },
+  { src: '/assets/moments/scroll/it-dayz-winning-team.jpeg',        label: 'winning team',        rot:  1 },
   { src: '/assets/moments/scroll/it-dayz-squad.jpg',                label: 'the squad',           rot: -1 },
   { src: '/assets/moments/scroll/it-dayz-media.jpg',                label: 'on media',            rot:  2 },
   { src: '/assets/moments/scroll/it-dayz-team.jpeg',                label: "IT Day'z team",       rot: -2 },
   { src: '/assets/moments/scroll/it-dayz-fun.jpeg',                 label: 'good company',        rot:  1 },
   { src: '/assets/moments/scroll/ids-event.jpg',                    label: 'IDS event',           rot: -1 },
-  { src: '/assets/moments/scroll/with-supervisor.jpg',              label: 'with my supervisor',  rot:  2 },
-  { src: '/assets/moments/scroll/project-team-mentor.jpg',          label: 'team + mentor',       rot: -2 },
+  { src: '/assets/moments/scroll/project-team-mentor.jpg',          label: 'team & mentor',       rot: -2 },
   { src: '/assets/moments/scroll/csc-committee.jpg',                label: 'the committee',       rot:  1 },
   { src: '/assets/moments/scroll/csc-formation.jpg',                label: 'CSC formation',       rot: -1 },
-  { src: '/assets/moments/scroll/suited-up.jpg',                    label: 'suited up',           rot:  2 },
-  { src: '/assets/moments/scroll/after-the-presentation.jpg',       label: 'after *that* presentation 😅', rot: -2 },
+  { src: '/assets/moments/scroll/learning-to-swim.jpg',             label: 'swimming lesson',     rot: -1 },
+  { src: '/assets/moments/scroll/tangier-coach.jpg',                label: "with tangier's coach",       rot: -1 },
+  { src: '/assets/moments/scroll/padel.jpg',                        label: 'playing padel',       rot: -2 },
 ];
 
 /**

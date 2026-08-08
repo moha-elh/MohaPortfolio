@@ -92,7 +92,7 @@ There is no router library. `App.jsx` manages a `page` state:
 | State | What renders |
 |---|---|
 | `null` | Main portfolio (all sections) |
-| `'story'` | Easter-egg story page (triggered by clicking `— claude.ai ✦` 7 times) |
+| `'story'` | Easter-egg story page (triggered by clicking `claude.ai` 7 times) |
 | `'work'` | All-projects grid page (triggered by clicking the `+ more` polaroid) |
 | `{ type: 'project', id }` | Project detail page for the given project ID |
 
@@ -185,7 +185,7 @@ Drop the PDF into `public/assets/` and update `cvPdf` in `src/models/contact.js`
 
 ## Easter egg
 
-Clicking `— claude.ai ✦` in the Intro memo **7 times** opens the Story page — a full narrative about the person behind the portfolio. The signature turns lime green on hover as the only hint.
+Clicking `— claude.ai` in the Intro memo **7 times** opens the Story page — a full narrative about the person behind the portfolio. The signature turns lime green on hover as the only hint.
 
 ---
 

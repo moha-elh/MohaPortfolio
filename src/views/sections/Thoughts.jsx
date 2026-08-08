@@ -4,24 +4,19 @@ import styles from './Thoughts.module.css';
 // Add your photo src when ready: { src: '/assets/your-photo.jpg', ... }
 const MOMENTS = [
   {
-    src: '/assets/moments/thoughts/rabat-beach.jpg',
-    caption: 'rabat, by the sea',
+    src: '/assets/moments/thoughts/portrait.jpg',
+    caption: '— me',
+    thought: "the demos people remember are the ones the whole team believed in.",
+  },
+  {
+    src: '/assets/moments/thoughts/tangier.jpg',
+    caption: 'tangier',
+    thought: "step away from the screen and the bug usually solves itself on the walk back.",
+  },
+  {
+    src: '/assets/moments/thoughts/me-1.jpg',
+    caption: 'me, again',
     thought: "the best code I ever wrote was the code I deleted.",
-  },
-  {
-    src: '/assets/moments/thoughts/rabat-morning.jpg',
-    caption: 'rabat, morning',
-    thought: "shipping something broken is better than shipping nothing. fix it next week.",
-  },
-  {
-    src: '/assets/moments/thoughts/rabat-beach-view.jpg',
-    caption: 'the view from here',
-    thought: "Tangier is at the edge of the world — perfect place to be when you want to build something new.",
-  },
-  {
-    src: '/assets/moments/thoughts/petite-vallee-dor-night.jpg',
-    caption: 'petite vallée d\'or, night',
-    thought: "the 47-tab phase is not procrastination. it's research. mostly.",
   },
   {
     src: '/assets/moments/thoughts/plage-des-nations.jpg',
@@ -29,19 +24,24 @@ const MOMENTS = [
     thought: "distributed systems taught me that failure is the default state. in code and in life.",
   },
   {
-    src: '/assets/moments/thoughts/rabat-morning-2.jpg',
-    caption: 'early, rabat',
+    src: '/assets/moments/thoughts/with-dad.jpg',
+    caption: 'me & dad',
     thought: "every senior dev I admire has a graveyard of side projects. I'm building mine.",
   },
   {
-    src: '/assets/moments/thoughts/portrait.jpg',
-    caption: '— me',
-    thought: "the demos people remember are the ones the whole team believed in.",
+    src: '/assets/moments/thoughts/rabat-beach-view.jpg',
+    caption: 'the view from here',
+    thought: "Tangier is at the edge of the world — perfect place to be when you want to build something new.",
   },
   {
-    src: '/assets/moments/thoughts/rabat.jpg',
-    caption: 'rabat',
-    thought: "step away from the screen and the bug usually solves itself on the walk back.",
+    src: '/assets/moments/thoughts/with-a-cow.jpg',
+    caption: 'me & a cow',
+    thought: "shipping something broken is better than shipping nothing. fix it next week.",
+  },
+  {
+    src: '/assets/moments/thoughts/petite-vallee-dor-night.jpg',
+    caption: 'petite vallée d\'or, night',
+    thought: "the 47-tab phase is not procrastination. it's research. mostly.",
   },
   {
     src: '/assets/moments/thoughts/me-in-between.jpg',
@@ -58,7 +58,7 @@ export default function Thoughts({ onBack }) {
         <button className={styles.back} onClick={onBack} aria-label="Back to portfolio">
           ← back
         </button>
-        <span className={styles.topLabel}>/ easter egg · unlocked ✦</span>
+        <span className={styles.topLabel}>/ easter egg · unlocked</span>
       </div>
 
       {/* ── Header ── */}

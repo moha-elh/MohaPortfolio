@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section id="hero" className={styles.hero} aria-label="Hero">
       <p className="mono-cap" style={{ marginBottom: 12 }}>
-        · portfolio / 2026 · ENSA Tanger
+        · My personal portfolio / made with love
       </p>
       <div className={styles.nameWrap}>
         <div className={styles.name} onClick={() => setHint(true)}>Mouhssine</div>
@@ -39,7 +39,7 @@ export default function Hero() {
             aria-label="Easter egg hint"
           >
             <button className={styles.closeBtn} onClick={close} aria-label="Close">×</button>
-            psst — this site is full of easter eggs.<br />find them all ✦
+            psst — this site is full of easter eggs.<br />find them all
           </div>
         </div>,
         document.body
