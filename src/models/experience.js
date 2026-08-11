@@ -35,7 +35,7 @@ export const experiences = [
   {
     id:     'itdayz',
     period: '2025 → 2026',
-    title:  "Advisor · IT Day'z — 11th edition",
+    title:  "Advisor · IT Day'z (11th edition)",
     detail: 'Strategic framing for organizing team',
     img:    "IT Day'z · round table",
     imgSrc: '/assets/moments/exp/it-dayz-round-table.jpeg',

@@ -15,7 +15,7 @@ export const projects = [
       status: 'live',
       year: '2024',
       description:
-        "A finance assistant tailored for Moroccan users. Ask it anything about budgeting, spending, or financial concepts — it retrieves context from a curated knowledge base and answers in plain language using Groq's LLM.",
+        "A finance assistant tailored for Moroccan users. Ask it anything about budgeting, spending, or financial concepts. It retrieves context from a curated knowledge base and answers in plain language using Groq's LLM.",
       highlights: [
         'RAG pipeline: documents → embeddings → PGVector retrieval → LLM answer',
         'Groq API for low-latency inference on Llama models',
@@ -79,21 +79,28 @@ export const projects = [
   /* ── Middle ── */
   {
     id: 'bezel',
-    name: 'BEZEL',
-    tag: 'TODO: tech stack', // TODO: update tag
+    name: 'Bezel',
+    tag: 'react · typescript · canvas · vite',
     logo: '/assets/projects/logos/BezelLogo.png',
     imgs: [], // TODO: add screenshots e.g. ['/assets/projects/bezel-screenshot.png']
     position: { x: 840, y: 30 },
     rotation: 5,
     size: { w: 295, h: 205 },
-    githubUrl: 'https://github.com/moha-elh/Bezel.git',
+    githubUrl: 'https://github.com/moha-elh/Bezel',
     siteUrl: 'https://trybezel.xyz/',
     detail: {
       status: 'live',
-      year: '2025',
-      description: 'TODO: describe Bezel.',
-      highlights: ['TODO: key feature or tech decision'],
-      tech: [], // TODO: full tech stack
+      year: '2026',
+      description:
+        'A browser-based generator for custom LinkedIn profile frames. Upload a photo, pick a template, tweak the ring and text, and export a ready-to-upload 500×500 PNG, with no login and no server upload. Everything runs client-side.',
+      highlights: [
+        'All image rendering done natively with the Canvas 2D API (custom arc-text and crescent draw services), no canvas libraries',
+        '7 ready-made templates plus a fully customizable ring: color, thickness, arc length, and fade',
+        'Photo upload with drag-to-reposition crop, live preview, and one-click PNG export',
+        'Zero-backend privacy model: images never leave the browser; deployed on Vercel with security headers',
+        'Zustand for state, React Router multi-page site (editor, landing, guide, legal), analytics + speed insights',
+      ],
+      tech: ['React', 'TypeScript', 'Vite', 'Zustand', 'React Router', 'Canvas 2D API', 'react-colorful', 'Vercel'],
     },
   },
 
@@ -102,23 +109,27 @@ export const projects = [
     id: 'bready-on-fire',
     board: false,
     name: 'Bready on Fire',
-    tag: 'typescript · web · app', // TODO: update tag
+    tag: 'react · typescript · game · vite',
     logo: '/assets/projects/logos/BreadyLogo.png',
     imgs: [], // TODO: add screenshots e.g. ['/assets/projects/bready-on-fire-screenshot.png']
     position: { x: 600, y: 280 },
     rotation: -2,
     size: { w: 295, h: 205 },
     githubUrl: 'https://github.com/moha-elh/Breqd',
-    siteUrl: null,
+    siteUrl: 'https://breadyonfire.xyz/',
     detail: {
-      status: 'in-progress', // TODO: 'live' | 'private' | 'in-progress'
-      year: '2024',
-      description: 'TODO: one or two sentences about what Bready on Fire is and why it exists.',
+      status: 'live',
+      year: '2026', // UNSURE: no dates in repo, but deps (React 19, Vite 7) are recent — confirm year
+      description:
+        'A Flappy Bird-style browser game where a piece of bread flaps through gaps between fire pipes. Built for fun as a way to sharpen my React fundamentals. The physics, collision, and game loop are all hand-rolled.',
       highlights: [
-        'TODO: key feature or tech decision',
-        'TODO: outcome or result',
+        'Hand-written game loop, gravity/flap physics, and collision detection, no game engine or animation library',
+        'Component-driven design: Bread, FirePipe, Background, and a Game container orchestrating state',
+        'Viewport-aware rendering (safe-area insets) so it plays cleanly on mobile',
+        'React 19 + TypeScript on Vite, styled with Tailwind CSS',
+        'Deployed live on Vercel at breadyonfire.xyz with analytics + speed insights',
       ],
-      tech: ['TypeScript'], // TODO: full tech stack
+      tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vercel'],
     },
   },
   {
@@ -136,7 +147,7 @@ export const projects = [
       status: 'private',
       year: '2024',
       description:
-        'A distributed AI recruitment pipeline that ingests CVs, extracts structured candidate profiles using LangChain agents, routes them through Kafka topics, and exposes results via gRPC microservices — with a C# PDF generation layer for producing formatted resume outputs.',
+        'A distributed AI recruitment pipeline that ingests CVs, extracts structured candidate profiles using LangChain agents, routes them through Kafka topics, and exposes results via gRPC microservices, with a C# PDF generation layer for producing formatted resume outputs.',
       highlights: [
         'LangChain agents for CV parsing and skill extraction',
         'Kafka for async event-driven routing between services',
@@ -166,7 +177,7 @@ export const projects = [
       status: 'in-progress',
       year: '2024',
       description:
-        'A project management tool built from scratch — task boards, team collaboration, time tracking, and reporting. Full-stack with a clean React UI and a robust Node/Postgres backend.',
+        'A project management tool built from scratch: task boards, team collaboration, time tracking, and reporting. Full-stack with a clean React UI and a robust Node/Postgres backend.',
       highlights: [
         'Kanban boards with drag-and-drop task management',
         'Team workspaces with role-based permissions',

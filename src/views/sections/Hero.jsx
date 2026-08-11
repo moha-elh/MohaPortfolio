@@ -39,7 +39,7 @@ export default function Hero() {
             aria-label="Easter egg hint"
           >
             <button className={styles.closeBtn} onClick={close} aria-label="Close">×</button>
-            psst — this site is full of easter eggs.<br />find them all
+            psst, this site is full of easter eggs.<br />find them all
           </div>
         </div>,
         document.body

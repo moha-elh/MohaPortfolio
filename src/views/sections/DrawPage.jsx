@@ -69,6 +69,33 @@ export default function DrawPage({ onBack }) {
     lastPos.current = null;
   }, []);
 
+  // Touch drawing: the lerped cursor is mouse-only, so on touch we draw
+  // straight from the touch coordinates. touch-action:none (CSS) blocks scroll.
+  const touchPos = (t) => {
+    const rect = canvasRef.current.getBoundingClientRect();
+    return { x: t.clientX - rect.left, y: t.clientY - rect.top };
+  };
+
+  const onTouchStart = useCallback((e) => {
+    drawing.current = true;
+    lastPos.current = touchPos(e.touches[0]);
+  }, []);
+
+  const onTouchMove = useCallback((e) => {
+    if (!drawing.current || !lastPos.current) return;
+    const cur = touchPos(e.touches[0]);
+    const ctx = canvasRef.current.getContext('2d');
+    ctx.beginPath();
+    ctx.moveTo(lastPos.current.x, lastPos.current.y);
+    ctx.lineTo(cur.x, cur.y);
+    ctx.strokeStyle = colorRef.current;
+    ctx.lineWidth   = sizeRef.current;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+    ctx.stroke();
+    lastPos.current = cur;
+  }, []);
+
   const clear = useCallback(() => {
     const canvas = canvasRef.current;
     const ctx    = canvas.getContext('2d');
@@ -124,6 +151,10 @@ export default function DrawPage({ onBack }) {
         onMouseDown={onMouseDown}
         onMouseUp={stopDraw}
         onMouseLeave={stopDraw}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={stopDraw}
+        onTouchCancel={stopDraw}
       />
     </div>
   );

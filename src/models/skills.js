@@ -12,7 +12,7 @@ export const skillCategories = [
     bg: '#ffffff',
     topColor: '#c8f24a',
     items: [
-      { name: 'TypeScript', slug: 'typescript',    desc: 'typed JS — safer code'       },
+      { name: 'TypeScript', slug: 'typescript',    desc: 'typed JS, safer code'       },
       { name: 'React.js',   slug: 'react',         desc: 'my main UI library'          },
       { name: 'Vue.js',     slug: 'vuedotjs',      desc: 'used it on Skillios'         },
       { name: 'Angular',    slug: 'angular',       desc: '+ RxJS, .NET stack'          },
