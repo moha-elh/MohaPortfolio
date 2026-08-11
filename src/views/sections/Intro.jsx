@@ -54,13 +54,15 @@ export default function Intro({ onEasterEgg, onOpenThoughts }) {
             <span className="hl">(he usually does)</span>.
             <br />
             <br />
-            He is the most handsome, funny, and careful human on earth — at
+            He is the most handsome, funny, and careful human on earth, at
             least in his mind, and honestly, who's going to argue with him.
             <br />
             <br />
             Give him any task and he'll get depressed, spiral a little, open{' '}
             <span className="hl">47 browser tabs</span>, and then somehow ship
-            something that actually works. Full-stack, AI, cloud — he touches
+            something that actually works. 
+            <br></br>
+            Full-stack, AI, cloud, he touches
             it all and{' '}
             <span className="hl">only breaks things occasionally</span>.
           </p>

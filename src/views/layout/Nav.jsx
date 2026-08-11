@@ -4,14 +4,19 @@ import { useHover } from '../../context/CursorContext';
 import styles from './Nav.module.css';
 
 const links = [
-  { label: 'intro',   href: '#intro'        },
-  { label: 'work',    href: '#projects'     },
-  { label: 'skills',  href: '#toolbox'      },
-  { label: 'wins',    href: '#achievements' },
-  { label: 'xp',      href: '#experience'  },
+  { label: 'intro',   section: 'intro'        },
+  { label: 'work',    section: 'projects'     },
+  { label: 'skills',  section: 'toolbox'      },
+  { label: 'wins',    section: 'achievements' },
+  { label: 'xp',      section: 'experience'  },
   { label: 'cv',      href: '/cv', page: 'cv' },
-  { label: 'hi',      href: '#contact'      },
-];
+  { label: 'hi',      section: 'contact'      },
+].map((l) => l.section ? { ...l, href: `/${l.section}` } : l);
+
+function scrollToSection(section) {
+  document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+  history.pushState(null, '', `/${section}`);
+}
 
 export default function Nav({ onLogoClick, onCvClick }) {
   const scrolled     = useNavScroll();
@@ -20,10 +25,10 @@ export default function Nav({ onLogoClick, onCvClick }) {
   const [activeHref, setActive] = useState('');
 
   useEffect(() => {
-    const sectionLinks = links.filter((l) => l.href.startsWith('#'));
+    const sectionLinks = links.filter((l) => l.section);
     const els = sectionLinks.map((l) => ({
       href: l.href,
-      el: document.querySelector(l.href),
+      el: document.getElementById(l.section),
     })).filter((s) => s.el);
 
     if (!els.length) return;
@@ -67,7 +72,11 @@ export default function Nav({ onLogoClick, onCvClick }) {
               style={{ transform: `rotate(${(['-1deg','1deg','-0.5deg','1.5deg','-1deg','1deg','-0.5deg'])[i]})` }}
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noopener' : undefined}
-              onClick={link.page === 'cv' ? (e) => { e.preventDefault(); onCvClick(); } : undefined}
+              onClick={
+                link.page === 'cv'  ? (e) => { e.preventDefault(); onCvClick(); }
+                : link.section      ? (e) => { e.preventDefault(); scrollToSection(link.section); }
+                : undefined
+              }
               {...hover}
             >
               {link.label}
@@ -100,7 +109,11 @@ export default function Nav({ onLogoClick, onCvClick }) {
             className={`${styles.drawerLink} ${link.href === activeHref ? styles.drawerLinkActive : ''}`}
             target={link.external ? '_blank' : undefined}
             rel={link.external ? 'noopener' : undefined}
-            onClick={link.page === 'cv' ? (e) => { e.preventDefault(); onCvClick(); close(); } : close}
+            onClick={
+              link.page === 'cv'  ? (e) => { e.preventDefault(); onCvClick(); close(); }
+              : link.section      ? (e) => { e.preventDefault(); scrollToSection(link.section); close(); }
+              : close
+            }
           >
             {link.label}
           </a>

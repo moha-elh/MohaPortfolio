@@ -78,7 +78,7 @@ export default function Contact({ onOpenCv }) {
             <div className={styles.screen}>
               <span className="mono-cap">scan / download</span>
               <QRCodeSVG
-                value={window.location.origin + owner.cvPdf}
+                value={window.location.origin + '/cv'}
                 size={130}
                 bgColor="transparent"
                 fgColor="#1a1a1a"
