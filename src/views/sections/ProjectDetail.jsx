@@ -1,4 +1,15 @@
+import { Fragment } from 'react';
 import styles from './ProjectDetail.module.css';
+
+/* Render <br> tags in description text as real line breaks. */
+function withBreaks(text) {
+  return text.split(/<br\s*\/?>/i).map((part, i, arr) => (
+    <Fragment key={i}>
+      {part}
+      {i < arr.length - 1 && <br />}
+    </Fragment>
+  ));
+}
 
 const STATUS_LABEL = {
   live:        'live',
@@ -51,7 +62,7 @@ export default function ProjectDetail({ project, onBack }) {
 
         {/* ── Description + secondary preview beside it ── */}
         <div className={styles.descRow}>
-          <p className={styles.desc}>{detail.description}</p>
+          <p className={styles.desc}>{withBreaks(detail.description)}</p>
           {project.imgs.length > 1 && (
             <div className={styles.descAside}>
               {project.imgs.slice(1).map((src, i) => (

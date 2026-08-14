@@ -46,7 +46,7 @@ export const skillCategories = [
     topColor: '#c8f24a',
     items: [
       { name: 'Docker',     slug: 'docker',              desc: 'containerize everything'   },
-      { name: 'Terraform',  slug: 'terraform',           desc: 'IaC for AWS'               },
+      { name: 'Terraform',  slug: 'terraform',           desc: 'Provisioning Infra using code (IaC)'               },
       { name: 'Ansible',    slug: 'ansible',             desc: 'config management'         },
       { name: 'AWS',        slug: null, localImg: '/assets/icons/Amazon-Web-Service-Logo--Streamline-Ultimate.png', desc: 'EC2, S3, RDS, IAM'         },
       { name: 'CI/CD',      slug: 'githubactions',       desc: 'auto build + deploy'       },

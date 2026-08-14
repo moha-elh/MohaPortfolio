@@ -67,15 +67,22 @@ export default function Intro({ onEasterEgg, onOpenThoughts }) {
             <span className="hl">only breaks things occasionally</span>.
           </p>
           <div className={styles.memoFoot}>
-            <span
-              className={styles.sig}
-              onClick={handleSigClick}
-              role="button"
-              tabIndex={0}
-              onKeyDown={e => e.key === 'Enter' && handleSigClick()}
-              aria-label="Claude AI signature"
-              data-clicks={clicks || undefined}
-            >claude.ai</span>
+            <span className={styles.sigWrap}>
+              <span
+                className={styles.sig}
+                onClick={handleSigClick}
+                role="button"
+                tabIndex={0}
+                onKeyDown={e => e.key === 'Enter' && handleSigClick()}
+                aria-label="Claude AI signature"
+                data-clicks={clicks || undefined}
+              >claude.ai</span>
+              {clicks > 0 && (
+                <span key={clicks} className={styles.sigCount} aria-hidden="true">
+                  {7 - clicks} left
+                </span>
+              )}
+            </span>
             <span className="mono-cap">tangier, MA · 2026</span>
           </div>
         </div>

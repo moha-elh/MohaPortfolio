@@ -164,15 +164,49 @@
   border-top: 1px dashed var(--faint);
 }
 
+.sigWrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
 .sig {
   font-family: var(--f-hand);
   font-size: 26px;
   font-weight: 700;
   cursor: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.1s ease;
   user-select: none;
 }
 
 .sig:hover {
   color: #6ea80e;
+}
+
+/* Per-click press feedback */
+.sig:active {
+  transform: scale(0.9) rotate(-3deg);
+}
+
+/* Floating "N left" counter — keyed by click count so it replays each click */
+.sigCount {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  white-space: nowrap;
+  font-family: var(--f-hand);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--lime);
+  padding: 1px 8px;
+  box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.14);
+  transform-origin: left center;
+  animation: sigPop 0.35s ease;
+}
+
+@keyframes sigPop {
+  0%   { transform: translateY(-50%) scale(0.4); opacity: 0; }
+  55%  { transform: translateY(-50%) scale(1.18); opacity: 1; }
+  100% { transform: translateY(-50%) scale(1); opacity: 1; }
 }

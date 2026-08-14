@@ -76,6 +76,24 @@
   color: var(--paper);
 }
 
+/* Shrink the top-bar controls so they fit on narrow phones */
+@media (max-width: 520px) {
+  .topBar {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+  .back,
+  .download {
+    font-size: 9px;
+    letter-spacing: 0.04em;
+    padding: 5px 9px;
+  }
+  .identity {
+    font-size: 9px;
+    letter-spacing: 0.06em;
+  }
+}
+
 /* ── PDF viewer: fills the screen below the bar ── */
 .viewer {
   display: block;

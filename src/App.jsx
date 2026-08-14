@@ -58,8 +58,8 @@ export default function App() {
     window.scrollTo(0, 0);
   }, []);
 
-  const openProject = useCallback((id) => {
-    setPage({ type: 'project', id });
+  const openProject = useCallback((id, from) => {
+    setPage({ type: 'project', id, from });
     window.scrollTo(0, 0);
   }, []);
 
@@ -119,7 +119,7 @@ export default function App() {
     return (
       <>
         <Cursor />
-        <WorkPage onBack={goHome} onOpen={openProject} />
+        <WorkPage onBack={goHome} onOpen={(id) => openProject(id, 'work')} />
         {party$}
       </>
     );
@@ -130,7 +130,14 @@ export default function App() {
     return (
       <>
         <Cursor />
-        <ProjectDetail project={project} onBack={goHome} />
+        <ProjectDetail
+          project={project}
+          onBack={() => {
+            if (page.from === 'work') { setPage('work'); }
+            else { goHome(); }
+            window.scrollTo(0, 0);
+          }}
+        />
         {party$}
       </>
     );

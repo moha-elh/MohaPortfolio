@@ -1,9 +1,21 @@
+import { useEffect } from 'react';
 import { owner } from '../../models/contact';
 import { useHover } from '../../context/CursorContext';
 import styles from './CvPage.module.css';
 
 export default function CvPage({ onBack }) {
   const hover = useHover();
+
+  // Scanned QR lands here with ?dl=1 → fire the download immediately.
+  useEffect(() => {
+    if (!new URLSearchParams(window.location.search).get('dl')) return;
+    const a = document.createElement('a');
+    a.href = owner.cvPdf;
+    a.download = '';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }, []);
 
   return (
     <div className={styles.page}>
