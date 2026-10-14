@@ -140,6 +140,13 @@
   margin-bottom: 4px;
 }
 
+.cardBlurb {
+  font-family: var(--f-body);
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
 .cardTag {
   font-family: var(--f-mono);
   font-size: 10px;

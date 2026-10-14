@@ -37,6 +37,7 @@
 .name {
   font-family: var(--f-hand);
   font-size: 22px;
+  font-weight: 700;
   margin-top: 6px;
 }
 
@@ -46,4 +47,15 @@
   color: var(--faint);
   text-transform: uppercase;
   letter-spacing: 0.1em;
+}
+
+.blurb {
+  font-family: var(--f-body);
+  font-size: 14px;
+  line-height: 1.35;
+  margin: 2px 0 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

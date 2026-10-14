@@ -47,6 +47,7 @@ export default function WorkPage({ onBack, onOpen }) {
             </div>
             <div className={styles.cardBody}>
               <p className={styles.cardName}>{p.name}</p>
+              {p.blurb && <p className={styles.cardBlurb}>{p.blurb}</p>}
               <p className={styles.cardTag}>{p.tag}</p>
               <span className={`${styles.cardStatus} ${STATUS_CLASS[p.detail.status]}`}>
                 {STATUS_LABEL[p.detail.status]}

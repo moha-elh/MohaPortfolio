@@ -4,7 +4,7 @@
  */
 export const owner = {
   name:      'Mouhssine El Haouary',
-  shortName: 'm. el haouary',
+  shortName: 'Moha',
   location:  'Tangier, MA',
   school:    'ENSA Tanger',
   year:      '2026',
@@ -39,6 +39,15 @@ export const contactLinks = [
     bg:       '#fef4a8',
     rotation: 2,
     iconSlug: 'github',
+  },
+  {
+    id:       'x',
+    key:      'x',
+    value:    '@Mouhssine_elh',
+    href:     'https://x.com/Mouhssine_elh',
+    bg:       '#e8e8e4',
+    rotation: 1,
+    iconSlug: 'x',
   },
   {
     id:       'medium',

@@ -27,7 +27,7 @@ export default function Story({ onBack }) {
         <div className={styles.dossierMeta}>
           <span><strong>Subject:</strong> Mouhssine El Haouary</span>
           <span><strong>Location:</strong> Tangier, Morocco</span>
-          <span><strong>Status:</strong> Engineering student, 2nd year</span>
+          <span><strong>Status:</strong> Engineering student, 3rd year</span>
           <span><strong>Year:</strong> 2026</span>
         </div>
       </div>

@@ -33,6 +33,7 @@ export default function ProjectCard({ project, getNextZ, isMobile, onOpen }) {
         )}
       </div>
       <div className={styles.name}>{project.name}</div>
+      {project.blurb && <p className={styles.blurb}>{project.blurb}</p>}
       <div className={styles.tag}>{project.tag}</div>
     </div>
   );
