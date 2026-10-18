@@ -48,7 +48,7 @@ export default function Intro({ onEasterEgg, onOpenThoughts }) {
         </div>
         <div className={styles.memo}>
           <div className={styles.memoHead}>
-            <span className="mono-cap">{t('memo · 01 · about', 'mémo · 01 · à propos')}</span>
+            <span className="mono-cap">{t('memo · 01 · about', 'mémo · 01 · à propos')} <span className={styles.updated}>({t('updated', 'mis à jour')} · {new Date(import.meta.env.VITE_BUILD_DATE).toLocaleDateString(lang, { day: 'numeric', month: 'short', year: 'numeric' })})</span></span>
             <span className="mono-cap">{t('from', 'de')} / {fun ? 'claude.ai' : t('me', 'moi')}</span>
           </div>
           {fun && lang === 'fr' ? (
