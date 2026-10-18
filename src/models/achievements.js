@@ -12,6 +12,7 @@ export const domains = {
   ai:        { label: { en: 'AI', fr: 'IA' }, color: '#cde7ff' },
   hackathon: { label: 'hackathon',            color: '#c8f24a' },
   club:      { label: 'club',                 color: '#fce0d4' },
+  cloud:     { label: 'cloud',                color: '#fef4a8' },
 };
 
 export const certificates = [
@@ -24,6 +25,16 @@ export const certificates = [
     rot:       -1,
     img:       '/assets/certificates/ibm-python.jpg',
     verifyUrl: 'https://coursera.org/verify/AUQJUXZOK8DH',
+  },
+  {
+    id:        'aws-cloud-practitioner',
+    rank:      { en: 'Completed', fr: 'Validé' },
+    title:     'AWS Cloud Practitioner Essentials',
+    org:       'AWS Training & Certification · 2026',
+    domain:    'cloud',
+    rot:       1.5,
+    img:       '/assets/certificates/aws-cloud-practitioner.jpg',
+    verifyUrl: null,
   },
   {
     id:        'solihack',
