@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { owner } from '../../models/contact';
 import { useLang } from '../../context/LangContext';
 import styles from './Intro.module.css';
@@ -6,9 +7,20 @@ import styles from './Intro.module.css';
 export default function Intro({ onEasterEgg, onOpenThoughts }) {
   const [clicks, setClicks] = useState(0);
   const { lang, t } = useLang();
-  // hidden: 3 clicks on the footer date swaps in the fun intro
+  // hidden: every 3 clicks on the footer date toggles the fun intro on/off
   const [dateClicks, setDateClicks] = useState(0);
-  const fun = dateClicks >= 3;
+  const fun = Math.floor(dateClicks / 3) % 2 === 1;
+  // portrait → code prompt → thoughts page
+  // ponytail: client-side gate, keeps casual visitors out; /thoughts is still reachable by URL
+  const [asking, setAsking] = useState(false);
+  const [code, setCode] = useState('');
+  const [wrong, setWrong] = useState(false);
+  const openPrompt = () => { setAsking(true); setCode(''); setWrong(false); };
+  const submitCode = e => {
+    e.preventDefault();
+    if (code === '2004') { setAsking(false); onOpenThoughts?.(); }
+    else { setWrong(true); setCode(''); }
+  };
 
   const handleSigClick = useCallback(() => {
     setClicks(prev => {
@@ -26,10 +38,10 @@ export default function Intro({ onEasterEgg, onOpenThoughts }) {
       {/* Portrait polaroid — click to open thoughts page */}
       <div
         className={styles.polaroid}
-        onClick={() => onOpenThoughts?.()}
+        onClick={openPrompt}
         role="button"
         tabIndex={0}
-        onKeyDown={e => e.key === 'Enter' && onOpenThoughts?.()}
+        onKeyDown={e => e.key === 'Enter' && openPrompt()}
         aria-label={t('Open thoughts and moments', 'Ouvrir pensées et moments')}
       >
         <div className={styles.tape} />
@@ -152,6 +164,36 @@ export default function Intro({ onEasterEgg, onOpenThoughts }) {
           </div>
         </div>
       </div>
+
+      {asking && createPortal(
+        <div className={styles.backdrop} onClick={() => setAsking(false)}>
+          <form
+            className={`${styles.lock} ${wrong ? styles.lockWrong : ''}`}
+            onClick={e => e.stopPropagation()}
+            onSubmit={submitCode}
+            role="dialog"
+            aria-modal="true"
+            aria-label={t('Enter the code', 'Entre le code')}
+          >
+            <button type="button" className={styles.lockClose} onClick={() => setAsking(false)} aria-label={t('Close', 'Fermer')}>×</button>
+            <p className={styles.lockTitle}>{t('private corner. code?', 'coin privé. le code ?')}</p>
+            <input
+              className={styles.lockInput}
+              value={code}
+              onChange={e => { setCode(e.target.value.replace(/\D/g, '')); setWrong(false); }}
+              inputMode="numeric"
+              maxLength={4}
+              autoFocus
+              placeholder="····"
+              aria-label={t('Code', 'Code')}
+            />
+            <p className={styles.lockHint} aria-live="polite">
+              {wrong ? t('nope, try again', 'non, réessaie') : t('4 digits, press enter', '4 chiffres, puis entrée')}
+            </p>
+          </form>
+        </div>,
+        document.body
+      )}
     </section>
   );
 }

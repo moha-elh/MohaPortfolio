@@ -217,3 +217,85 @@
   color: #5a8a00;
   font-weight: 700;
 }
+
+/* ── Code prompt before the thoughts page ── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26, 26, 26, 0.35);
+}
+
+.lock {
+  position: relative;
+  width: min(88vw, 320px);
+  padding: 28px 28px 20px;
+  background: var(--yellow);
+  color: var(--ink);
+  transform: rotate(-2deg);
+  box-shadow: 3px 6px 24px rgba(0, 0, 0, 0.18);
+}
+
+.lockWrong {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(-2deg) translateX(0); }
+  25%      { transform: rotate(-2deg) translateX(-8px); }
+  75%      { transform: rotate(-2deg) translateX(8px); }
+}
+
+.lockClose {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--faint);
+  cursor: none;
+}
+
+.lockClose:hover {
+  color: var(--ink);
+}
+
+.lockTitle {
+  margin: 0 0 12px;
+  font-family: var(--f-hand);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.lockInput {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 0;
+  background: none;
+  border: none;
+  border-bottom: 2px solid var(--ink);
+  font-family: var(--f-hand);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-align: center;
+  color: var(--ink);
+  outline: none;
+  cursor: none;
+}
+
+.lockHint {
+  margin: 10px 0 0;
+  font-family: var(--f-hand);
+  font-size: 16px;
+  color: var(--faint);
+}
+
+.lockWrong .lockHint {
+  color: #b3261e;
+}
