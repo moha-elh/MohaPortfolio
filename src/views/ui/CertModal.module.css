@@ -92,15 +92,34 @@
   padding: 60px 0;
 }
 
-/* ── Verify link ── */
+/* ── Verify link: full-width CTA, same language as the Contact CV button ── */
 .verify {
-  padding: 14px 24px;
+  padding: 16px 24px 22px;
   border-top: 1px dashed var(--faint);
-  font-family: var(--f-mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
 }
 
 .verify a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 20px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1.5px solid var(--ink);
+  font-family: var(--f-hand);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.18);
+  transition: transform 0.15s, background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.verify a:hover,
+.verify a:focus-visible {
+  background: var(--lime);
   color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.22);
 }
