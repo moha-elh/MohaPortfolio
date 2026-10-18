@@ -5,11 +5,12 @@
  * rot        → base rotation in degrees
  * img        → path to certificate image, e.g. '/assets/certificates/solihack.jpg'
  * verifyUrl  → optional link to verify the certificate online
+ * rank/title/org may be { en, fr }; read them through useLang().t().
  */
 export const certificates = [
   {
     id:        'solihack',
-    rank:      '3rd place',
+    rank:      { en: '3rd place', fr: '3e place' },
     title:     'SoliHackathon ITWAVE',
     org:       'ITWAVE · 2025',
     sealColor: '#c8f24a',
@@ -19,7 +20,7 @@ export const certificates = [
   },
   {
     id:        'gemma',
-    rank:      'Finalist',
+    rank:      { en: 'Finalist', fr: 'Finaliste' },
     title:     'Google Gemma 3n Impact',
     org:       'Google · 2025',
     sealColor: '#fef4a8',
@@ -59,9 +60,9 @@ export const certificates = [
   },
   {
     id:        'csc',
-    rank:      'President',
-    title:     'CSC ENSAT Computer Club',
-    org:       '80+ members · 2025',
+    rank:      { en: 'President', fr: 'Président' },
+    title:     { en: 'CSC ENSAT Computer Club', fr: 'Club informatique CSC ENSAT' },
+    org:       { en: '80+ members · 2025', fr: '80+ membres · 2025' },
     sealColor: '#c8f24a',
     rot:       1,
     img:       null, // TODO: '/assets/certificates/csc.jpg'

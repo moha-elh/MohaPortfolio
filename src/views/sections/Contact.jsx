@@ -1,6 +1,7 @@
 import { QRCodeSVG } from 'qrcode.react';
 import { contactLinks, owner } from '../../models/contact';
 import { useHover } from '../../context/CursorContext';
+import { useLang } from '../../context/LangContext';
 import styles from './Contact.module.css';
 
 /* Inline SVGs — no CDN dependency, always renders */
@@ -29,16 +30,17 @@ const SERVICE_ICONS = {
 
 export default function Contact({ onOpenCv }) {
   const hover = useHover();
+  const { lang, t } = useLang();
 
   return (
     <section id="contact" className={styles.section} aria-label="Contact">
-      <p className="mono-cap">/ section · 06 · say hi</p>
+      <p className="mono-cap">{t('/ section · 06 · say hi', '/ section · 06 · dis bonjour')}</p>
       <div className={styles.grid}>
         {/* Left — CTA + sticker links */}
         <div>
           <p className={styles.cta}>
-            let's build<br />
-            <span className="hl">something good.</span>
+            {t("let's build", 'construisons')}<br />
+            <span className="hl">{t('something good.', 'quelque chose de bien.')}</span>
           </p>
           <div className={styles.stickers}>
             {contactLinks.map((link) => (
@@ -67,23 +69,23 @@ export default function Contact({ onOpenCv }) {
           {/* CV download button — shown on mobile instead of phone mock */}
           {owner.cvPdf && (
             <a
-              href={owner.cvPdf}
+              href={t(owner.cvPdf)}
               className={styles.cvBtn}
               download
               {...hover}
             >
-              Download CV →
+              {t('Download CV →', 'Télécharger le CV →')}
             </a>
           )}
         </div>
 
         {/* Right — phone mock with QR (desktop only) */}
         <div className={styles.phoneWrap}>
-          <div className={styles.phone} aria-label="Scan to download CV">
+          <div className={styles.phone} aria-label={t('Scan to download CV', 'Scanner pour télécharger le CV')}>
             <div className={styles.screen}>
-              <span className="mono-cap">scan / download</span>
+              <span className="mono-cap">{t('scan / download', 'scanner / télécharger')}</span>
               <QRCodeSVG
-                value={window.location.origin + '/cv?dl=1'}
+                value={`${window.location.origin}/cv?dl=1&lang=${lang}`}
                 size={130}
                 bgColor="transparent"
                 fgColor="#1a1a1a"

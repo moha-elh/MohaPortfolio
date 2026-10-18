@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { experiences } from '../../models/experience';
 import Filmstrip from './Filmstrip';
 import Dither from '../ui/Dither';
+import { useLang } from '../../context/LangContext';
 import styles from './Experience.module.css';
 
 /**
@@ -14,12 +15,13 @@ import styles from './Experience.module.css';
  * Below the grid: drag-scrollable Filmstrip contact sheet.
  */
 export default function Experience() {
+  const { t } = useLang();
   const [hovered, setHovered] = useState(null);
 
   return (
-    <section id="experience" className={styles.section} aria-label="Experience">
-      <p className="sec-label">/ section · 05 · experience</p>
-      <h2 className="sec-title">where I've been.</h2>
+    <section id="experience" className={styles.section} aria-label={t('Experience', 'Expérience')}>
+      <p className="sec-label">{t('/ section · 05 · experience', '/ section · 05 · expérience')}</p>
+      <h2 className="sec-title">{t("where I've been.", 'mon parcours.')}</h2>
 
       <div className={styles.grid}>
         {/* ── Left: timeline rows ── */}
@@ -38,15 +40,15 @@ export default function Experience() {
                   transform:  `rotate(${i % 2 === 0 ? -1.5 : 1.5}deg)`,
                 }}
               >
-                {exp.period}
+                {t(exp.period)}
               </div>
               <div>
-                <p className={styles.title}>{exp.title}</p>
-                <p className={styles.detail}>{exp.detail}</p>
+                <p className={styles.title}>{t(exp.title)}</p>
+                <p className={styles.detail}>{t(exp.detail)}</p>
               </div>
             </div>
           ))}
-          <p className={styles.hint}>↳ hover a row to see the moment</p>
+          <p className={styles.hint}>{t('↳ hover a row to see the moment', '↳ survole une ligne pour voir le moment')}</p>
         </div>
 
         {/* ── Right: sticky polaroid preview ── */}
@@ -66,9 +68,9 @@ export default function Experience() {
               <div className={styles.polaroidInner}>
                 <div className={styles.washi} />
                 <div className={styles.imgPlaceholder}>
-                  <img src={exp.imgSrc} alt={exp.title} loading="lazy" className={styles.img} />
+                  <img src={exp.imgSrc} alt={t(exp.title)} loading="lazy" className={styles.img} />
                 </div>
-                <p className={styles.polaroidCaption}>{exp.img}</p>
+                <p className={styles.polaroidCaption}>{t(exp.img)}</p>
               </div>
             </div>
           ))}
@@ -88,7 +90,7 @@ export default function Experience() {
               colors={['#fafaf7', '#e8e8e4', '#c8f24a', '#1a1a1a']}
             />
             <p className={styles.idleText}>
-              ← hover any row<br />and a moment will appear here
+              {t('← hover any row', '← survole une ligne')}<br />{t('and a moment will appear here', 'et un moment apparaîtra ici')}
             </p>
           </div>
         </div>
@@ -97,8 +99,8 @@ export default function Experience() {
       {/* ── Filmstrip contact sheet ── */}
       <div className={styles.filmstripWrap}>
         <div className={styles.filmstripHeader}>
-          <p className="sec-label">/ contact sheet · scroll →</p>
-          <h3 className={styles.filmstripTitle}>a few moments from the way.</h3>
+          <p className="sec-label">{t('/ contact sheet · scroll →', '/ planche contact · défile →')}</p>
+          <h3 className={styles.filmstripTitle}>{t('a few moments from the way.', 'quelques moments du chemin.')}</h3>
         </div>
         <Filmstrip />
       </div>

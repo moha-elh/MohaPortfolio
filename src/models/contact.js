@@ -9,7 +9,10 @@ export const owner = {
   school:    'ENSA Tanger',
   year:      '2026',
   photo:     '/assets/moha_cv.jpg',
-  cvPdf:     '/assets/CV%20-%20Mouhssine%20El%20Haouary.pdf',
+  cvPdf:     {
+    en: '/assets/CV%20-%20Mouhssine%20El%20Haouary%20-%20ENG.pdf',
+    fr: '/assets/CV%20-%20Mouhssine%20El%20Haouary.pdf',
+  },
 };
 
 export const contactLinks = [

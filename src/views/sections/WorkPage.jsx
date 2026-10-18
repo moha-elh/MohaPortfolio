@@ -1,4 +1,5 @@
 import { projects } from '../../models/projects';
+import { useLang } from '../../context/LangContext';
 import styles from './WorkPage.module.css';
 
 const STATUS_CLASS = {
@@ -8,27 +9,28 @@ const STATUS_CLASS = {
 };
 
 const STATUS_LABEL = {
-  live:          'live',
-  private:       'private',
-  'in-progress': 'in progress',
+  live:          { en: 'live',        fr: 'en ligne' },
+  private:       { en: 'private',     fr: 'privé' },
+  'in-progress': { en: 'in progress', fr: 'en cours' },
 };
 
 export default function WorkPage({ onBack, onOpen }) {
+  const { t } = useLang();
   const displayProjects = projects.filter(p => p.id !== 'more' && p.detail);
 
   return (
     <div className={styles.page}>
       {/* ── Top bar ── */}
       <div className={styles.topBar}>
-        <button className={styles.back} onClick={onBack} aria-label="Back to portfolio">
-          ← back
+        <button className={styles.back} onClick={onBack} aria-label={t('Back to portfolio', 'Retour au portfolio')}>
+          {t('← back', '← retour')}
         </button>
-        <span className={styles.topLabel}>/ work · all projects</span>
+        <span className={styles.topLabel}>{t('/ work · all projects', '/ projets · tous les projets')}</span>
       </div>
 
       <div className={styles.header}>
-        <p className={styles.sectionLabel}>/ section · 02 · work</p>
-        <h1 className={styles.title}>everything I built.</h1>
+        <p className={styles.sectionLabel}>{t('/ section · 02 · work', '/ section · 02 · projets')}</p>
+        <h1 className={styles.title}>{t('everything I built.', 'tout ce que j’ai construit.')}</h1>
       </div>
 
       <div className={styles.grid}>
@@ -40,17 +42,17 @@ export default function WorkPage({ onBack, onOpen }) {
             role="button"
             tabIndex={0}
             onKeyDown={e => e.key === 'Enter' && onOpen(p.id)}
-            aria-label={`Open ${p.name} project`}
+            aria-label={t(`Open ${p.name} project`, `Ouvrir le projet ${p.name}`)}
           >
             <div className={styles.cardImg}>
               {p.logo && <img src={p.logo} alt={p.name} loading="lazy" />}
             </div>
             <div className={styles.cardBody}>
               <p className={styles.cardName}>{p.name}</p>
-              {p.blurb && <p className={styles.cardBlurb}>{p.blurb}</p>}
+              {p.blurb && <p className={styles.cardBlurb}>{t(p.blurb)}</p>}
               <p className={styles.cardTag}>{p.tag}</p>
               <span className={`${styles.cardStatus} ${STATUS_CLASS[p.detail.status]}`}>
-                {STATUS_LABEL[p.detail.status]}
+                {t(STATUS_LABEL[p.detail.status])}
               </span>
             </div>
           </div>

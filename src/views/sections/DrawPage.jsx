@@ -1,5 +1,6 @@
 import { useRef, useEffect, useCallback, useState } from 'react';
 import { useCursor } from '../../context/CursorContext';
+import { useLang } from '../../context/LangContext';
 import styles from './DrawPage.module.css';
 
 const COLORS = [
@@ -18,6 +19,7 @@ const SIZES = [2, 5, 10, 20];
 export default function DrawPage({ onBack }) {
   const { pos } = useCursor();          // lerped cursor position — same as pencil tip
   const canvasRef  = useRef(null);
+  const { t } = useLang();
   const drawing    = useRef(false);
   const lastPos    = useRef(null);
   const [color, setColor] = useState('#1a1a1a');
@@ -106,7 +108,7 @@ export default function DrawPage({ onBack }) {
   return (
     <div className={styles.page}>
       <div className={styles.topBar}>
-        <button className={styles.back} onClick={onBack}>← back</button>
+        <button className={styles.back} onClick={onBack}>{t('← back', '← retour')}</button>
 
         <div className={styles.tools}>
           <div className={styles.palette}>
@@ -116,7 +118,7 @@ export default function DrawPage({ onBack }) {
                 className={`${styles.swatch} ${color === c ? styles.swatchActive : ''}`}
                 style={{ background: c, outline: c === '#ffffff' ? '1.5px solid #ccc' : undefined }}
                 onClick={() => setColor(c)}
-                aria-label={`Pick colour ${c}`}
+                aria-label={t(`Pick colour ${c}`, `Choisir la couleur ${c}`)}
               />
             ))}
           </div>
@@ -127,7 +129,7 @@ export default function DrawPage({ onBack }) {
                 key={s}
                 className={`${styles.sizeBtn} ${size === s ? styles.sizeBtnActive : ''}`}
                 onClick={() => setSize(s)}
-                aria-label={`Brush size ${s}`}
+                aria-label={t(`Brush size ${s}`, `Taille du pinceau ${s}`)}
               >
                 <div style={{
                   width:        Math.min(s * 1.8, 20),
@@ -139,10 +141,10 @@ export default function DrawPage({ onBack }) {
             ))}
           </div>
 
-          <button className={styles.clearBtn} onClick={clear}>clear canvas</button>
+          <button className={styles.clearBtn} onClick={clear}>{t('clear canvas', 'effacer')}</button>
         </div>
 
-        <span className={styles.topLabel}>draw something.</span>
+        <span className={styles.topLabel}>{t('draw something.', 'dessine quelque chose.')}</span>
       </div>
 
       <canvas

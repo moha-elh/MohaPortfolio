@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { projects } from './models/projects';
+import { useLang } from './context/LangContext';
 import { useKonami } from './controllers/useKonami';
 import Cursor        from './views/ui/Cursor';
 import PartyMode     from './views/ui/PartyMode';
@@ -39,6 +40,7 @@ function pathToPage(path) {
 // page: null | 'story' | 'work' | 'thoughts' | 'draw' | { type: 'project', id: string }
 export default function App() {
   const [page, setPage] = useState(() => pathToPage(window.location.pathname));
+  const { t } = useLang();
 
   useEffect(() => {
     const path = pageToPath(page);
@@ -156,7 +158,7 @@ export default function App() {
           onEasterEgg={() => { setPage('story'); window.scrollTo(0, 0); }}
           onOpenThoughts={() => { setPage('thoughts'); window.scrollTo(0, 0); }}
         />
-        <Divider label="/ section · 02 · work" />
+        <Divider label={t('/ section · 02 · work', '/ section · 02 · projets')} />
         <Projects
           onOpenProject={openProject}
           onOpenWork={() => { setPage('work'); window.scrollTo(0, 0); }}

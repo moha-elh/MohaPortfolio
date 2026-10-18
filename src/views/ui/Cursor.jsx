@@ -1,4 +1,5 @@
 import { useCursor } from '../../context/CursorContext';
+import { useLang } from '../../context/LangContext';
 import styles from './Cursor.module.css';
 
 const hasFinePointer =
@@ -6,6 +7,7 @@ const hasFinePointer =
 
 export default function Cursor() {
   const { pos, visible, hovered } = useCursor();
+  const { t } = useLang();
 
   if (!hasFinePointer) return null;
 
@@ -44,7 +46,7 @@ export default function Cursor() {
       <span
         className={`${styles.clickLabel} ${hovered ? styles.clickLabelVisible : ''}`}
       >
-        click
+        {t('click', 'clic')}
       </span>
     </div>
   );

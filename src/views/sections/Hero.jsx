@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useLang } from '../../context/LangContext';
 import styles from './Hero.module.css';
 
 export default function Hero() {
   const [hint, setHint] = useState(false);
+  const { t } = useLang();
   const close = () => setHint(false);
 
   return (
     <section id="hero" className={styles.hero} aria-label="Hero">
       <p className="mono-cap" style={{ marginBottom: 12 }}>
-        · My personal portfolio / made with love
+        {t('· My personal portfolio / made with love', '· Mon portfolio perso / fait avec amour')}
       </p>
       <div className={styles.nameWrap}>
         <div className={styles.name} onClick={() => setHint(true)}>Mouhssine</div>
@@ -36,10 +38,10 @@ export default function Hero() {
             onClick={e => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-label="Easter egg hint"
+            aria-label={t('Easter egg hint', 'Indice easter egg')}
           >
-            <button className={styles.closeBtn} onClick={close} aria-label="Close">×</button>
-            psst, this site is full of easter eggs.<br />find them all
+            <button className={styles.closeBtn} onClick={close} aria-label={t('Close', 'Fermer')}>×</button>
+            {t('psst, this site is full of easter eggs.', 'psst, ce site est plein d’easter eggs.')}<br />{t('find them all', 'trouve-les tous')}
           </div>
         </div>,
         document.body

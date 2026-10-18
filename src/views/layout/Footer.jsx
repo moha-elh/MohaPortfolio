@@ -1,11 +1,17 @@
 import { useHover } from '../../context/CursorContext';
 import { useState, useEffect, useRef } from 'react';
+import { useLang } from '../../context/LangContext';
 import styles from './Footer.module.css';
 
-const SECRET = "cs student @ ensa tanger · open to pfa internship · built with react, vite & obsession";
+const SECRET = {
+  en: "cs student @ ensa tanger · open to pfa internship · built with react, vite & obsession",
+  fr: "étudiant en info @ ensa tanger · ouvert à un stage pfa · fait avec react, vite & obsession",
+};
 
 export default function Footer() {
   const hover = useHover();
+  const { t } = useLang();
+  const secret = t(SECRET);
   const [revealed, setRevealed] = useState(false);
   const [typed,    setTyped]    = useState('');
   const [done,     setDone]     = useState(false);
@@ -16,11 +22,11 @@ export default function Footer() {
     let i = 0;
     timer.current = setInterval(() => {
       i++;
-      setTyped(SECRET.slice(0, i));
-      if (i >= SECRET.length) { clearInterval(timer.current); setDone(true); }
+      setTyped(secret.slice(0, i));
+      if (i >= secret.length) { clearInterval(timer.current); setDone(true); }
     }, 38);
     return () => clearInterval(timer.current);
-  }, [revealed]);
+  }, [revealed, secret]);
 
   return (
     <footer className={styles.footer}>
@@ -31,9 +37,9 @@ export default function Footer() {
           role="button"
           tabIndex={0}
           onKeyDown={e => e.key === 'Enter' && setRevealed(r => !r)}
-          aria-label="Toggle secret message"
+          aria-label={t('Toggle secret message', 'Afficher le message secret')}
         >
-          © Mouhssine El Haouary · 2026 · made in Tangier
+          © Mouhssine El Haouary · 2026 · {t('made in Tangier', 'fait à Tanger')}
         </span>
         {revealed && (
           <span className={styles.secret}>
@@ -42,7 +48,7 @@ export default function Footer() {
           </span>
         )}
       </div>
-      <a href="#hero" {...hover} className={styles.top}>↑ back to top</a>
+      <a href="#hero" {...hover} className={styles.top}>{t('↑ back to top', '↑ retour en haut')}</a>
     </footer>
   );
 }

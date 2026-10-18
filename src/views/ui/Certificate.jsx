@@ -1,8 +1,10 @@
 import { useHover } from '../../context/CursorContext';
+import { useLang } from '../../context/LangContext';
 import styles from './Certificate.module.css';
 
 export default function Certificate({ rank, title, org, sealColor, rot, onClick }) {
   const hover = useHover();
+  const { t } = useLang();
 
   return (
     <div
@@ -17,8 +19,8 @@ export default function Certificate({ rank, title, org, sealColor, rot, onClick 
       <div className={styles.innerFrame} />
 
       <div className={styles.content}>
-        <p className={styles.eyebrow}>· certificate ·</p>
-        <p className={styles.awarded}>awarded to</p>
+        <p className={styles.eyebrow}>{t('· certificate ·', '· certificat ·')}</p>
+        <p className={styles.awarded}>{t('awarded to', 'décerné à')}</p>
         <p className={styles.name}>Mouhssine El Haouary</p>
 
         <div className={styles.body}>

@@ -39,6 +39,13 @@
   color: var(--faint);
 }
 
+/* Holds tags + language toggle + burger */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* ── Desktop tag chips ── */
 .tags {
   display: none;
@@ -74,6 +81,24 @@
 
 .tag.active {
   background: var(--lime);
+}
+
+/* ── Language toggle ── */
+.lang {
+  gap: 6px;
+}
+
+.lang img {
+  display: block;
+  border-radius: 2px;
+  opacity: 0.35;
+  filter: grayscale(1);
+  transition: opacity 0.15s, filter 0.15s;
+}
+
+.lang img.langOn {
+  opacity: 1;
+  filter: none;
 }
 
 /* ── Mobile hamburger ── */

@@ -1,10 +1,12 @@
 import { useDraggable } from '../../controllers/useDraggable';
 import { useHover } from '../../context/CursorContext';
+import { useLang } from '../../context/LangContext';
 import styles from './ProjectCard.module.css';
 
 export default function ProjectCard({ project, getNextZ, isMobile, onOpen }) {
   const drag  = useDraggable(project.position, project.rotation, getNextZ, isMobile, onOpen);
   const hover = useHover();
+  const { t } = useLang();
 
   const cardStyle = isMobile
     ? { transform: `rotate(${project.rotation}deg)`, width: '100%', maxWidth: 280 }
@@ -33,8 +35,8 @@ export default function ProjectCard({ project, getNextZ, isMobile, onOpen }) {
         )}
       </div>
       <div className={styles.name}>{project.name}</div>
-      {project.blurb && <p className={styles.blurb}>{project.blurb}</p>}
-      <div className={styles.tag}>{project.tag}</div>
+      {project.blurb && <p className={styles.blurb}>{t(project.blurb)}</p>}
+      <div className={styles.tag}>{t(project.tag)}</div>
     </div>
   );
 }

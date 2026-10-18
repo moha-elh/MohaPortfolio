@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { useLang } from '../../context/LangContext';
 import styles from './ProjectDetail.module.css';
 
 /* Render <br> tags in description text as real line breaks. */
@@ -12,9 +13,9 @@ function withBreaks(text) {
 }
 
 const STATUS_LABEL = {
-  live:        'live',
-  private:     'private',
-  'in-progress': 'in progress',
+  live:          { en: 'live',        fr: 'en ligne' },
+  private:       { en: 'private',     fr: 'privé' },
+  'in-progress': { en: 'in progress', fr: 'en cours' },
 };
 
 const STATUS_CLASS = {
@@ -25,22 +26,23 @@ const STATUS_CLASS = {
 
 export default function ProjectDetail({ project, onBack }) {
   const { detail } = project;
+  const { t } = useLang();
 
   return (
     <div className={styles.page}>
       {/* ── Top bar ── */}
       <div className={styles.topBar}>
-        <button className={styles.back} onClick={onBack} aria-label="Back to projects">
-          ← back
+        <button className={styles.back} onClick={onBack} aria-label={t('Back to projects', 'Retour aux projets')}>
+          {t('← back', '← retour')}
         </button>
-        <span className={styles.topLabel}>/ work · {project.id}</span>
+        <span className={styles.topLabel}>/ {t('work', 'projets')} · {project.id}</span>
       </div>
 
       <div className={styles.inner}>
         {/* ── Meta ── */}
         <div className={styles.meta}>
           <span className={`${styles.status} ${STATUS_CLASS[detail.status]}`}>
-            {STATUS_LABEL[detail.status]}
+            {t(STATUS_LABEL[detail.status])}
           </span>
           <span className={styles.year}>{detail.year}</span>
         </div>
@@ -62,7 +64,7 @@ export default function ProjectDetail({ project, onBack }) {
 
         {/* ── Description + secondary preview beside it ── */}
         <div className={styles.descRow}>
-          <p className={styles.desc}>{withBreaks(detail.description)}</p>
+          <p className={styles.desc}>{withBreaks(t(detail.description))}</p>
           {project.imgs.length > 1 && (
             <div className={styles.descAside}>
               {project.imgs.slice(1).map((src, i) => (
@@ -75,9 +77,9 @@ export default function ProjectDetail({ project, onBack }) {
         </div>
 
         {/* ── Highlights ── */}
-        <p className={styles.highlightsLabel}>/ what I built</p>
+        <p className={styles.highlightsLabel}>{t('/ what I built', '/ ce que j’ai construit')}</p>
         <ul className={styles.highlights}>
-          {detail.highlights.map((h, i) => (
+          {t(detail.highlights).map((h, i) => (
             <li key={i} className={styles.highlight}>{h}</li>
           ))}
         </ul>
@@ -95,17 +97,17 @@ export default function ProjectDetail({ project, onBack }) {
           <div className={styles.ctaRow}>
             {project.githubUrl && (
               <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className={styles.cta}>
-                view on github →
+                {t('view on github →', 'voir sur github →')}
               </a>
             )}
             {project.siteUrl && (
               <a href={project.siteUrl} target="_blank" rel="noopener noreferrer" className={styles.cta}>
-                visit live site →
+                {t('visit live site →', 'voir le site →')}
               </a>
             )}
           </div>
         ) : (
-          <span className={styles.ctaDisabled}>private / not yet public</span>
+          <span className={styles.ctaDisabled}>{t('private / not yet public', 'privé / pas encore public')}</span>
         )}
       </div>
     </div>
