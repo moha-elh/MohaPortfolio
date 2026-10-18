@@ -25,12 +25,14 @@ export default function Certificate({ rank, title, org, img, sealColor, rot, onC
 
         <div className={styles.content}>
           <p className={styles.eyebrow}>{t('· certificate ·', '· certificat ·')}</p>
-          <p className={styles.name}>Mouhssine El Haouary</p>
 
           <div className={styles.body}>
             <p className={styles.rank}>{rank}</p>
             <p className={styles.title}>{title}</p>
           </div>
+
+          <p className={styles.awarded}>{t('awarded to', 'décerné à')}</p>
+          <p className={styles.name}>Mouhssine El Haouary</p>
 
           <p className={styles.org}>{org}</p>
         </div>

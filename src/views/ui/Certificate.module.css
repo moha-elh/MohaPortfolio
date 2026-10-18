@@ -34,18 +34,24 @@
   margin-bottom: 4px;
 }
 
+.awarded {
+  font-family: var(--f-hand);
+  font-size: 14px;
+  color: var(--faint);
+  margin-top: 10px;
+}
+
 .name {
   font-family: var(--f-hand);
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 10px;
 }
 
 .body {
   border-top: 0.5px solid var(--ink);
   border-bottom: 0.5px solid var(--ink);
   padding: 10px 0;
-  margin: 0 12px;
+  margin: 8px 12px 0;
 }
 
 .rank {
