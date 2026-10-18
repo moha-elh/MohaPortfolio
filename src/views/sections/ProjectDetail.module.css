@@ -172,6 +172,7 @@
 .status.live       { background: var(--lime); }
 .status.private    { background: var(--yellow); }
 .status.inProgress { background: var(--white); border-style: dashed; }
+.status.finished   { background: #e4f9a5; }
 
 .cardLabel {
   margin: 0 0 10px;

@@ -176,3 +176,11 @@
 .live       { background: var(--lime); }
 .private    { background: var(--yellow); }
 .inProgress { background: rgba(200,242,74,0.35); border: 1px dashed var(--ink); }
+.finished   { background: #e4f9a5; border: 1px solid var(--ink); }
+
+.cardMono {
+  font-family: var(--f-hand);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+}

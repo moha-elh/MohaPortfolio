@@ -17,12 +17,14 @@ const STATUS_LABEL = {
   live:          { en: 'live',        fr: 'en ligne' },
   private:       { en: 'private',     fr: 'privé' },
   'in-progress': { en: 'in progress', fr: 'en cours' },
+  finished:      { en: 'finished',    fr: 'terminé' },
 };
 
 const STATUS_CLASS = {
   live:          styles.live,
   private:       styles.private,
   'in-progress': styles.inProgress,
+  finished:      styles.finished,
 };
 
 export default function ProjectDetail({ project, onBack }) {

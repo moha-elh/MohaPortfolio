@@ -6,12 +6,14 @@ const STATUS_CLASS = {
   live:          styles.live,
   private:       styles.private,
   'in-progress': styles.inProgress,
+  finished:      styles.finished,
 };
 
 const STATUS_LABEL = {
   live:          { en: 'live',        fr: 'en ligne' },
   private:       { en: 'private',     fr: 'privé' },
   'in-progress': { en: 'in progress', fr: 'en cours' },
+  finished:      { en: 'finished',    fr: 'terminé' },
 };
 
 export default function WorkPage({ onBack, onOpen }) {
@@ -45,7 +47,7 @@ export default function WorkPage({ onBack, onOpen }) {
             aria-label={t(`Open ${p.name} project`, `Ouvrir le projet ${p.name}`)}
           >
             <div className={styles.cardImg}>
-              {p.logo && <img src={p.logo} alt={p.name} loading="lazy" />}
+              {p.logo ? <img src={p.logo} alt={p.name} loading="lazy" /> : <span className={styles.cardMono}>{p.name}</span>}
             </div>
             <div className={styles.cardBody}>
               <p className={styles.cardName}>{p.name}</p>

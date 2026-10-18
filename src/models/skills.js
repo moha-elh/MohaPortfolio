@@ -21,6 +21,8 @@ export const skillCategories = [
       { name: 'ASP.NET',    slug: 'dotnet',        desc: { en: 'gRPC microservices', fr: 'microservices gRPC' }          },
       { name: 'gRPC',       slug: null, localImg: '/assets/icons/grpc--logo.svg',                          desc: { en: 'service-to-service RPC', fr: 'RPC entre services' }      },
       { name: 'Kafka',      slug: 'apachekafka',   desc: { en: 'event streaming bus', fr: "bus d'événements en streaming" }         },
+      { name: 'Java',       slug: 'openjdk',       desc: { en: 'Java 21 microservices', fr: 'microservices Java 21' }       },
+      { name: 'Spring Boot', slug: 'springboot',   desc: { en: '+ Cloud Gateway, Eureka', fr: '+ Cloud Gateway, Eureka' }   },
     ],
   },
   {
@@ -53,6 +55,7 @@ export const skillCategories = [
       { name: 'CI/CD',      slug: 'githubactions',       desc: { en: 'auto build + deploy', fr: 'build + déploiement auto' }       },
       { name: 'Prometheus', slug: 'prometheus',          desc: { en: 'metrics scraping', fr: 'collecte de métriques' }          },
       { name: 'Grafana',    slug: 'grafana',             desc: { en: 'observability dashboards', fr: "dashboards d'observabilité" }  },
+      { name: 'Keycloak',   slug: 'keycloak',            desc: { en: 'SSO & identity provider', fr: "SSO & fournisseur d'identité" } },
     ],
   },
   {
@@ -68,6 +71,19 @@ export const skillCategories = [
       { name: 'Prisma',     slug: 'prisma',      desc: { en: 'typesafe ORM', fr: 'ORM typé' }              },
       { name: 'TypeORM',    slug: null, localImg: '/assets/icons/Typeorm--Streamline-Simple-Icons.svg', desc: { en: '.NET-friendly ORM', fr: 'ORM compatible .NET' }         },
       { name: 'MinIO',      slug: 'minio',       desc: { en: 'S3-compatible object store', fr: 'stockage objet compatible S3' }},
+      { name: 'Supabase',   slug: 'supabase',    desc: { en: 'Postgres, auth & edge functions', fr: 'Postgres, auth & edge functions' }},
+    ],
+  },
+  {
+    id: 'mobile',
+    title: { en: 'mobile', fr: 'mobile' },
+    rotation: -1,
+    bg: '#ffffff',
+    topColor: '#c8f24a',
+    items: [
+      { name: 'Flutter',    slug: 'flutter',     desc: { en: 'Android & iOS from one codebase', fr: 'Android & iOS avec un seul code' } },
+      { name: 'Dart',       slug: 'dart',        desc: { en: "Flutter's language", fr: 'le langage de Flutter' }        },
+      { name: 'Firebase',   slug: 'firebase',    desc: { en: 'Firestore, functions, push', fr: 'Firestore, functions, push' } },
     ],
   },
 ];

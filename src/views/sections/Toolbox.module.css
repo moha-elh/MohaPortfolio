@@ -10,7 +10,7 @@
   }
 }
 
-/* Mobile-first: 1 col → 2 col → 4 col */
+/* Mobile-first: 1 col → 2 col → 4 visible + slide */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -24,7 +24,7 @@
 
 @media (min-width: 720px) {
   .grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   /* Restore subtle rotations at tablet+ */
@@ -35,6 +35,92 @@
 
 @media (min-width: 1024px) {
   .grid {
-    grid-template-columns: repeat(4, 1fr);
+    /* one row, 4 visible, slide to the rest */
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    grid-auto-columns: calc((100% - 60px) / 4);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 12px 4px 16px; /* room for rotation + shadows */
   }
+
+  .grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .grid > * {
+    scroll-snap-align: start;
+  }
+
+  .section .slider {
+    display: flex;
+  }
+
+  .section .nudge {
+    display: block;
+  }
+}
+
+.slider {
+  display: none;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.arrow {
+  width: 40px;
+  height: 32px;
+  border: 1.5px solid var(--ink);
+  background: var(--white);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1;
+  box-shadow: 2px 3px 0 var(--ink);
+  cursor: none;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.arrow:hover:not(:disabled),
+.arrow:focus-visible {
+  background: var(--lime);
+  transform: translateY(-1px);
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  box-shadow: none;
+}
+
+.rowWrap {
+  position: relative;
+}
+
+/* big sticky-note nudge on the right edge, gone after the first slide */
+.nudge {
+  display: none;
+  position: absolute;
+  top: 80%;
+  right: -16px;
+  z-index: 2;
+  padding: 12px 20px 14px;
+  border: 1.5px solid var(--ink);
+  background: #e4f9a5;
+  color: var(--ink);
+  font-family: var(--f-hand);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 3px 4px 0 var(--ink);
+  transform: translateY(-50%) rotate(-6deg);
+  cursor: none;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.nudge:hover,
+.nudge:focus-visible {
+  background: var(--lime);
+  transform: translateY(-50%) rotate(-3deg) scale(1.04);
 }
