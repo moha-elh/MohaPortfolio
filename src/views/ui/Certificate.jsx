@@ -1,15 +1,16 @@
 import { useHover } from '../../context/CursorContext';
 import { useLang } from '../../context/LangContext';
+import { domains } from '../../models/achievements';
 import styles from './Certificate.module.css';
 
-export default function Certificate({ rank, title, org, img, sealColor, rot, onClick }) {
+export default function Certificate({ rank, title, org, img, domain, rot, onClick }) {
   const hover = useHover();
   const { t } = useLang();
 
   return (
     <div
       className={`${styles.cert} ${img ? styles.hasImg : ''}`}
-      style={{ '--rot': `${rot}deg`, '--seal': sealColor }}
+      style={{ '--rot': `${rot}deg`, '--seal': domains[domain].color }}
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -39,7 +40,7 @@ export default function Certificate({ rank, title, org, img, sealColor, rot, onC
         </>
       )}
 
-      <div className={styles.seal}>m.<br />2026</div>
+      <div className={styles.seal}>{t(domains[domain].label)}</div>
     </div>
   );
 }
