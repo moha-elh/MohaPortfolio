@@ -8,7 +8,7 @@ export default function Certificate({ rank, title, org, img, sealColor, rot, onC
 
   return (
     <div
-      className={styles.cert}
+      className={`${styles.cert} ${img ? styles.hasImg : ''}`}
       style={{ '--rot': `${rot}deg`, '--seal': sealColor }}
       onClick={onClick}
       role="button"
