@@ -34,7 +34,7 @@ export default function Contact({ onOpenCv }) {
 
   return (
     <section id="contact" className={styles.section} aria-label="Contact">
-      <p className="mono-cap">{t('/ section · 06 · say hi', '/ section · 06 · dis bonjour')}</p>
+      <p className="sec-label">{t('/ section · 06 · say hi', '/ section · 06 · dis bonjour')}</p>
       <div className={styles.grid}>
         {/* Left — CTA + sticker links */}
         <div>

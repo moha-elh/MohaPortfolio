@@ -3,7 +3,7 @@ import styles from './Divider.module.css';
 export default function Divider({ label }) {
   return (
     <div className={styles.divider} aria-hidden="true">
-      <span className="mono-cap">{label}</span>
+      <span className="sec-label">{label}</span>
       <svg
         width="100%"
         height="14"
