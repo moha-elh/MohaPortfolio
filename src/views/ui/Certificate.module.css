@@ -79,6 +79,14 @@
   color: var(--faint);
 }
 
+/* Real certificate scan, replaces the drawn content */
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 0.8px solid var(--ink);
+}
+
 .seal {
   position: absolute;
   bottom: -10px;

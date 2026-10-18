@@ -23,6 +23,7 @@ export default function Achievements({ onOpenCerts }) {
             rank={t(cert.rank)}
             title={t(cert.title)}
             org={t(cert.org)}
+            img={cert.img}
             sealColor={cert.sealColor}
             rot={cert.rot}
             onClick={() => setSelected(cert)}

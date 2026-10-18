@@ -4,10 +4,21 @@
  * sealColor  → the wax seal background colour
  * rot        → base rotation in degrees
  * img        → path to certificate image, e.g. '/assets/certificates/solihack.jpg'
+ *              (when set, the card shows the real certificate instead of the drawn one)
  * verifyUrl  → optional link to verify the certificate online
  * rank/title/org may be { en, fr }; read them through useLang().t().
  */
 export const certificates = [
+  {
+    id:        'ibm-python',
+    rank:      { en: 'Completed', fr: 'Validé' },
+    title:     'Python for Data Science, AI & Development',
+    org:       'IBM · Coursera · 2026',
+    sealColor: '#cde7ff',
+    rot:       -1,
+    img:       '/assets/certificates/ibm-python.jpg',
+    verifyUrl: 'https://coursera.org/verify/AUQJUXZOK8DH',
+  },
   {
     id:        'solihack',
     rank:      { en: '3rd place', fr: '3e place' },
