@@ -36,7 +36,9 @@ export default function ProjectCard({ project, getNextZ, isMobile, onOpen }) {
       </div>
       <div className={styles.name}>{project.name}</div>
       {project.blurb && <p className={styles.blurb}>{t(project.blurb)}</p>}
-      <div className={styles.tag}>{t(project.tag)}</div>
+      <div className={styles.tags}>
+        {t(project.tag).split(' · ').map((tech) => <span key={tech} className={styles.tag}>{tech}</span>)}
+      </div>
     </div>
   );
 }
