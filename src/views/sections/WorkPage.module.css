@@ -145,13 +145,23 @@
   margin-bottom: 6px;
 }
 
+.cardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
 .cardTag {
   font-family: var(--f-mono);
   font-size: 10px;
-  letter-spacing: 0.06em;
+  color: var(--ink);
+  padding: 2px 8px;
+  border: 1.2px solid var(--ink);
+  border-radius: 999px;
+  background: #e4f9a5;
   text-transform: uppercase;
-  color: var(--faint);
-  margin-bottom: 10px;
+  letter-spacing: 0.1em;
 }
 
 .cardStatus {

@@ -50,7 +50,9 @@ export default function WorkPage({ onBack, onOpen }) {
             <div className={styles.cardBody}>
               <p className={styles.cardName}>{p.name}</p>
               {p.blurb && <p className={styles.cardBlurb}>{t(p.blurb)}</p>}
-              <p className={styles.cardTag}>{p.tag}</p>
+              <div className={styles.cardTags}>
+                {p.tag.split(' · ').map(tech => <span key={tech} className={styles.cardTag}>{tech}</span>)}
+              </div>
               <span className={`${styles.cardStatus} ${STATUS_CLASS[p.detail.status]}`}>
                 {t(STATUS_LABEL[p.detail.status])}
               </span>
