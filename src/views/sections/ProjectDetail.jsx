@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { useLang } from '../../context/LangContext';
 import { useHover } from '../../context/CursorContext';
 import styles from './ProjectDetail.module.css';
@@ -29,7 +29,10 @@ export default function ProjectDetail({ project, onBack }) {
   const { detail } = project;
   const { t } = useLang();
   const hover = useHover();
-  const [cover, ...shots] = project.imgs;
+  const imgs = project.imgs;
+  const track = useRef(null);
+  const [slide, setSlide] = useState(0);
+  const go = (dir) => track.current.scrollBy({ left: dir * track.current.clientWidth, behavior: 'smooth' });
 
   return (
     <div className={styles.page}>
@@ -94,8 +97,31 @@ export default function ProjectDetail({ project, onBack }) {
         <main className={styles.main}>
           <figure className={styles.cover}>
             <span className={styles.tape} aria-hidden="true" />
-            {cover ? (
-              <img src={cover} alt={t(`${project.name} screenshot`, `capture de ${project.name}`)} className={styles.coverImg} />
+            {imgs.length > 0 ? (
+              <>
+                <div
+                  ref={track}
+                  className={styles.track}
+                  onScroll={e => setSlide(Math.round(e.currentTarget.scrollLeft / e.currentTarget.clientWidth))}
+                >
+                  {imgs.map((src, i) => (
+                    <img
+                      key={src}
+                      src={src}
+                      alt={t(`${project.name} screenshot ${i + 1}`, `capture ${i + 1} de ${project.name}`)}
+                      className={styles.coverImg}
+                      loading={i ? 'lazy' : undefined}
+                    />
+                  ))}
+                </div>
+                {imgs.length > 1 && (
+                  <figcaption className={styles.slider}>
+                    <button className={styles.arrow} onClick={() => go(-1)} disabled={slide === 0} aria-label={t('Previous screenshot', 'Capture précédente')} {...hover}>←</button>
+                    <span className={styles.count}>{slide + 1} / {imgs.length}</span>
+                    <button className={styles.arrow} onClick={() => go(1)} disabled={slide === imgs.length - 1} aria-label={t('Next screenshot', 'Capture suivante')} {...hover}>→</button>
+                  </figcaption>
+                )}
+              </>
             ) : (
               <div className={styles.noShot}>
                 {project.logo && <img src={project.logo} alt="" className={styles.noShotLogo} />}
@@ -106,16 +132,6 @@ export default function ProjectDetail({ project, onBack }) {
 
           <p className={styles.sectionLabel}>{t('/ the story', '/ l’histoire')}</p>
           <p className={styles.desc}>{withBreaks(t(detail.description))}</p>
-
-          {shots.length > 0 && (
-            <div className={styles.shots}>
-              {shots.map((src, i) => (
-                <figure key={src} className={styles.shot}>
-                  <img src={src} alt={t(`${project.name} screenshot ${i + 2}`, `capture ${i + 2} de ${project.name}`)} loading="lazy" />
-                </figure>
-              ))}
-            </div>
-          )}
 
           <p className={styles.sectionLabel}>{t('/ what I built', '/ ce que j’ai construit')}</p>
           <ol className={styles.highlights}>
