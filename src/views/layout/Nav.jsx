@@ -94,8 +94,8 @@ export default function Nav({ onLogoClick, onCvClick }) {
           aria-label={lang === 'fr' ? 'Switch to English' : 'Passer en français'}
           {...hover}
         >
-          <img src="https://api.iconify.design/flag:gb-4x3.svg" alt="" width={16} height={12} className={lang === 'en' ? styles.langOn : undefined} />
-          <img src="https://api.iconify.design/flag:fr-4x3.svg" alt="" width={16} height={12} className={lang === 'fr' ? styles.langOn : undefined} />
+          <img src="/assets/flags/gb.svg" alt="" width={16} height={12} className={lang === 'en' ? styles.langOn : undefined} />
+          <img src="/assets/flags/fr.svg" alt="" width={16} height={12} className={lang === 'fr' ? styles.langOn : undefined} />
         </button>
 
         {/* Mobile hamburger */}

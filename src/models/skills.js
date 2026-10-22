@@ -33,8 +33,8 @@ export const skillCategories = [
     topColor: '#1a1a1a',
     items: [
       { name: 'Python',     slug: 'python',        desc: { en: 'for everything AI', fr: "pour tout ce qui touche à l'IA" }              },
-      { name: 'RAG',        slug: null, localImg: 'https://api.iconify.design/mdi:database-search.svg',  desc: { en: 'retrieval-augmented LLMs', fr: 'LLM augmentés par recherche' }       },
-      { name: 'Embeddings', slug: null, localImg: 'https://api.iconify.design/mdi:brain.svg',             desc: { en: 'vector reps of text', fr: 'représentations vectorielles du texte' }            },
+      { name: 'RAG',        slug: null, localImg: '/assets/icons/database-search.svg',  desc: { en: 'retrieval-augmented LLMs', fr: 'LLM augmentés par recherche' }       },
+      { name: 'Embeddings', slug: null, localImg: '/assets/icons/brain.svg',             desc: { en: 'vector reps of text', fr: 'représentations vectorielles du texte' }            },
       { name: 'LangChain',  slug: 'langchain',     desc: { en: 'agent + chain orchestration', fr: "orchestration d'agents et de chaînes" }    },
       { name: 'PGVector',   slug: 'postgresql',    desc: { en: 'vector DB in Postgres', fr: 'base vectorielle dans Postgres' }          },
       { name: 'Power BI',   slug: null, localImg: '/assets/icons/Microsoft-Power-Bi--Streamline-Svg-Logos.svg', desc: { en: 'dashboards & KPIs', fr: 'dashboards & KPI' }           },
