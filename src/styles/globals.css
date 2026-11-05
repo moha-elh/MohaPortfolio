@@ -6,9 +6,14 @@
   padding: 0;
 }
 
-/* Custom cursor only on pointer-fine (mouse) devices — !important beats any component override */
+/* Pencil cursor on pointer-fine (mouse) devices — !important beats any component override.
+   It is a native cursor image, so the OS draws it with zero lag; hotspot = pencil tip.
+   The draw page (html.slow-pen) hides it and shows the slow, trailing DOM pencil instead. */
 @media (pointer: fine) {
   *, *::before, *::after {
+    cursor: url('/pen-cursor.png') 4 27, auto !important;
+  }
+  html.slow-pen *, html.slow-pen *::before, html.slow-pen *::after {
     cursor: none !important;
   }
 }

@@ -12,9 +12,10 @@ const hasFinePointer =
  * subscribers (the pencil element, the draw canvas) once per animation frame.
  * Re-rendering the app 60×/s just to move a cursor is what made pages stutter.
  *
- * The pencil tracks the mouse 1:1; a page can opt into the slow, trailing
- * "drawing" feel with useSmoothCursor() (the draw page does). The rAF loop only
- * runs while the pencil is catching up, and never on touch-only devices.
+ * Normally the pencil is the native cursor image (globals.css) and only the
+ * "click" label follows the mouse, updated straight from mousemove. A page can
+ * opt into the slow, trailing DOM pencil with useSmoothCursor() (the draw page
+ * does); only then does the rAF catch-up loop run. Never runs on touch devices.
  */
 export function CursorProvider({ children }) {
   const [visible, setVisible] = useState(false);
@@ -47,7 +48,12 @@ export function CursorProvider({ children }) {
     const onMove = (e) => {
       target.current = { x: e.clientX, y: e.clientY };
       setVisible(true); // no-op re-render when already visible
-      if (!rafId.current) rafId.current = requestAnimationFrame(tick);
+      if (!smooth.current) {           // native cursor: follow instantly, no frame wait
+        pos.current = { x: e.clientX, y: e.clientY };
+        emit();
+      } else if (!rafId.current) {
+        rafId.current = requestAnimationFrame(tick);
+      }
     };
     // Leaving the document (window edge, or into an iframe like the CV viewer):
     // hide the pencil instead of leaving it frozen at the edge.
@@ -85,7 +91,11 @@ export function useSmoothCursor() {
   const { smooth } = useCursor();
   useEffect(() => {
     smooth.current = true;
-    return () => { smooth.current = false; };
+    document.documentElement.classList.add('slow-pen');
+    return () => {
+      smooth.current = false;
+      document.documentElement.classList.remove('slow-pen');
+    };
   }, [smooth]);
 }
 

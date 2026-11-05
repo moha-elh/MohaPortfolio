@@ -11,9 +11,15 @@
 /* Shift the pencil so its writing tip sits at the exact mouse position.
    In the 22×22 SVG, the tip corner is at ≈ (2.75px, 19.25px). */
 .pencilWrap {
+  display: none;             /* native cursor image is the pencil… */
   position: absolute;
   transform: translate(-3px, -19px);
   filter: drop-shadow(1px 1px 0 rgba(255, 255, 255, 0.6));
+}
+
+/* …except on the draw page, where the slow DOM pencil replaces it */
+:global(html.slow-pen) .pencilWrap {
+  display: block;
 }
 
 /* "click" label — floats above-right of the pencil.
