@@ -15,6 +15,7 @@ const COLORS = [
 ];
 
 const SIZES = [2, 5, 10, 20];
+const PAPER = '#fafaf7';
 
 export default function DrawPage({ onBack }) {
   const { pos, subscribe } = useCursor(); // lerped cursor position — same as pencil tip
@@ -32,78 +33,107 @@ export default function DrawPage({ onBack }) {
   useEffect(() => { colorRef.current = color; }, [color]);
   useEffect(() => { sizeRef.current  = size;  }, [size]);
 
-  // Init canvas
+  // Canvas bitmap follows its on-screen size × devicePixelRatio (sharp on phones),
+  // and re-fits whenever the layout changes (toolbar wrapping, phone address bar,
+  // rotation) — keeping what was drawn instead of stretching it under the finger.
   useEffect(() => {
     const canvas = canvasRef.current;
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
     const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#fafaf7';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const fit = () => {
+      const dpr  = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      const w = Math.max(1, Math.round(rect.width * dpr));
+      const h = Math.max(1, Math.round(rect.height * dpr));
+      if (canvas.width === w && canvas.height === h) return;
+      const old = canvas.width > 1 ? canvas.cloneNode() : null;
+      if (old) old.getContext('2d').drawImage(canvas, 0, 0);
+      canvas.width = w;
+      canvas.height = h;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.fillStyle = PAPER;
+      ctx.fillRect(0, 0, w, h);
+      if (old) ctx.drawImage(old, 0, 0); // same device pixels → strokes stay put
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // draw in CSS pixels from here on
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(canvas);
+    return () => ro.disconnect();
   }, []);
 
-  // Called every rAF frame by CursorContext — if the mouse is held, draw to the lerped pos
-  useEffect(() => subscribe((p) => {
-    if (!drawing.current || !lastPos.current) return;
-    const canvas = canvasRef.current;
-    const rect   = canvas.getBoundingClientRect();
-    const cur    = { x: p.x - rect.left, y: p.y - rect.top };
-    const ctx    = canvas.getContext('2d');
+  // canvas-relative CSS pixels
+  const toCanvas = (x, y) => {
+    const rect = canvasRef.current.getBoundingClientRect();
+    return { x: x - rect.left, y: y - rect.top };
+  };
+
+  const segment = (from, to) => {
+    const ctx = canvasRef.current.getContext('2d');
     ctx.beginPath();
-    ctx.moveTo(lastPos.current.x, lastPos.current.y);
-    ctx.lineTo(cur.x, cur.y);
+    ctx.moveTo(from.x, from.y);
+    ctx.lineTo(to.x, to.y);
     ctx.strokeStyle = colorRef.current;
     ctx.lineWidth   = sizeRef.current;
     ctx.lineCap     = 'round';
     ctx.lineJoin    = 'round';
     ctx.stroke();
+  };
+
+  // stroke() drops zero-length lines, so a tap is drawn as a filled circle
+  const dot = (p) => {
+    const ctx = canvasRef.current.getContext('2d');
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, sizeRef.current / 2, 0, Math.PI * 2);
+    ctx.fillStyle = colorRef.current;
+    ctx.fill();
+  };
+
+  // Mouse: draw to the lerped (slow) pencil position every frame, as before.
+  const mode = useRef(null); // 'mouse' | 'direct' (touch / stylus) while drawing
+  useEffect(() => subscribe((p) => {
+    if (mode.current !== 'mouse' || !lastPos.current) return;
+    const cur = toCanvas(p.x, p.y);
+    segment(lastPos.current, cur);
     lastPos.current = cur;
   }), [subscribe]);
 
-  const onMouseDown = useCallback(() => {
-    const canvas = canvasRef.current;
-    const rect   = canvas.getBoundingClientRect();
+  // One input path for mouse, touch and stylus (Pointer Events). Pointer capture
+  // keeps the stroke alive when the finger slides off the canvas edge.
+  const onPointerDown = useCallback((e) => {
+    if (!e.isPrimary || e.button > 0) return; // ignore 2nd fingers and right-clicks
+    e.currentTarget.setPointerCapture(e.pointerId);
     drawing.current = true;
-    lastPos.current = { x: pos.current.x - rect.left, y: pos.current.y - rect.top };
+    mode.current = e.pointerType === 'mouse' ? 'mouse' : 'direct';
+    const start = mode.current === 'mouse' ? toCanvas(pos.current.x, pos.current.y) : toCanvas(e.clientX, e.clientY);
+    dot(start); // a tap leaves a dot
+    lastPos.current = start;
   }, [pos]);
+
+  const onPointerMove = useCallback((e) => {
+    if (mode.current !== 'direct' || !e.isPrimary || !lastPos.current) return;
+    // coalesced events = every point the finger passed since the last frame → smooth lines
+    const points = e.nativeEvent.getCoalescedEvents?.() ?? [];
+    for (const ev of points.length ? points : [e]) {
+      const cur = toCanvas(ev.clientX, ev.clientY);
+      segment(lastPos.current, cur);
+      lastPos.current = cur;
+    }
+  }, []);
 
   const stopDraw = useCallback(() => {
     drawing.current = false;
+    mode.current = null;
     lastPos.current = null;
-  }, []);
-
-  // Touch drawing: the lerped cursor is mouse-only, so on touch we draw
-  // straight from the touch coordinates. touch-action:none (CSS) blocks scroll.
-  const touchPos = (t) => {
-    const rect = canvasRef.current.getBoundingClientRect();
-    return { x: t.clientX - rect.left, y: t.clientY - rect.top };
-  };
-
-  const onTouchStart = useCallback((e) => {
-    drawing.current = true;
-    lastPos.current = touchPos(e.touches[0]);
-  }, []);
-
-  const onTouchMove = useCallback((e) => {
-    if (!drawing.current || !lastPos.current) return;
-    const cur = touchPos(e.touches[0]);
-    const ctx = canvasRef.current.getContext('2d');
-    ctx.beginPath();
-    ctx.moveTo(lastPos.current.x, lastPos.current.y);
-    ctx.lineTo(cur.x, cur.y);
-    ctx.strokeStyle = colorRef.current;
-    ctx.lineWidth   = sizeRef.current;
-    ctx.lineCap     = 'round';
-    ctx.lineJoin    = 'round';
-    ctx.stroke();
-    lastPos.current = cur;
   }, []);
 
   const clear = useCallback(() => {
     const canvas = canvasRef.current;
     const ctx    = canvas.getContext('2d');
-    ctx.fillStyle = '#fafaf7';
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = PAPER;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
   }, []);
 
   return (
@@ -151,13 +181,10 @@ export default function DrawPage({ onBack }) {
       <canvas
         ref={canvasRef}
         className={styles.canvas}
-        onMouseDown={onMouseDown}
-        onMouseUp={stopDraw}
-        onMouseLeave={stopDraw}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={stopDraw}
-        onTouchCancel={stopDraw}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={stopDraw}
+        onPointerCancel={stopDraw}
       />
     </div>
   );
