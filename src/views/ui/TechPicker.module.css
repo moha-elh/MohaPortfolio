@@ -32,7 +32,7 @@
 }
 
 .field:focus {
-  outline: none;
+  outline: none;             /* focus shows as the white fill + deeper shadow */
   background: var(--white);
   box-shadow: 3px 5px 0 var(--ink);
 }
@@ -44,11 +44,6 @@
 @media (hover: hover) {
   .field:hover { background: var(--yellow); }
   .field:focus:hover { background: var(--white); }
-}
-
-.field:focus-visible {
-  outline: 2px dashed var(--ink);
-  outline-offset: 3px;
 }
 
 /* Arrow button inside the field: opens the full list */
