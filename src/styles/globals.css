@@ -11,7 +11,10 @@
    The draw page (html.slow-pen) hides it and shows the slow, trailing DOM pencil instead. */
 @media (pointer: fine) {
   *, *::before, *::after {
-    cursor: url('/pen-cursor.png') 4 27, auto !important;
+    /* same 22px pencil as the draw page's DOM pen; 2x image for sharp hi-DPI screens
+       (browsers without image-set keep the first declaration) */
+    cursor: url('/pen-cursor.png') 3 19, auto !important;
+    cursor: image-set(url('/pen-cursor.png') 1x, url('/pen-cursor@2x.png') 2x) 3 19, auto !important;
   }
   html.slow-pen *, html.slow-pen *::before, html.slow-pen *::after {
     cursor: none !important;
