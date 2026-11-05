@@ -127,8 +127,9 @@ export default function App() {
     );
   }
 
-  if (page?.type === 'project') {
-    const project = projects.find(p => p.id === page.id);
+  // unknown /work/<id> falls through to the home page instead of crashing
+  const project = page?.type === 'project' && projects.find(p => p.id === page.id);
+  if (project) {
     return (
       <>
         <Cursor />

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { certificates } from '../../models/achievements';
+import { certificates, certTypes } from '../../models/achievements';
 import Certificate from '../ui/Certificate';
 import CertModal from '../ui/CertModal';
+import FilterBar from '../ui/FilterBar';
 import { useHover } from '../../context/CursorContext';
 import { useLang } from '../../context/LangContext';
 import styles from './CertificatesPage.module.css';
@@ -10,6 +11,8 @@ export default function CertificatesPage({ onBack }) {
   const hover = useHover();
   const { t } = useLang();
   const [selected, setSelected] = useState(null);
+  const [type, setType] = useState('all');
+  const shown = type === 'all' ? certificates : certificates.filter((c) => c.type === type);
 
   return (
     <div className={styles.page}>
@@ -25,8 +28,10 @@ export default function CertificatesPage({ onBack }) {
         <p className={styles.sectionLabel}>{t('/ section · 04 · certificates', '/ section · 04 · certificats')}</p>
         <h1 className={styles.title}>{t('certificates & wins.', 'certificats & prix.')}</h1>
 
+        <FilterBar options={certTypes} value={type} onChange={setType} label={t('Filter certificates', 'Filtrer les certificats')} />
+
         <div className={styles.grid}>
-          {certificates.map((cert) => (
+          {shown.map((cert) => (
             <Certificate
               key={cert.id}
               rank={t(cert.rank)}
@@ -35,6 +40,7 @@ export default function CertificatesPage({ onBack }) {
               img={cert.img}
               domain={cert.domain}
               rot={cert.rot}
+            gold={cert.type === 'course'}
               onClick={() => setSelected(cert)}
             />
           ))}

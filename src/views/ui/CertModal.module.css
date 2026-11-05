@@ -77,8 +77,22 @@
 
 .img {
   display: block;
+  margin-bottom: 20px;
   width: 100%;
   background: var(--white);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.img:last-child {
+  margin-bottom: 0;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: var(--ink);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 

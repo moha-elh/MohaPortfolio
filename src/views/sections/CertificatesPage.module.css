@@ -71,7 +71,7 @@
   font-size: clamp(36px, 7vw, 64px);
   font-weight: 700;
   line-height: 1;
-  margin-bottom: 60px;
+  margin-bottom: 32px;
 }
 
 /* ── Grid: 1 col → 2 col → 3 col ── */

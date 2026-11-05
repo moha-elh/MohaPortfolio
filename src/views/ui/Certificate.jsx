@@ -3,13 +3,14 @@ import { useLang } from '../../context/LangContext';
 import { domains } from '../../models/achievements';
 import styles from './Certificate.module.css';
 
-export default function Certificate({ rank, title, org, img, domain, rot, onClick }) {
+export default function Certificate({ rank, title, org, img, domain, rot, fit, gold, onClick }) {
   const hover = useHover();
   const { t } = useLang();
+  const imgs = img ? [].concat(img) : [];
 
   return (
     <div
-      className={`${styles.cert} ${img ? styles.hasImg : ''}`}
+      className={`${styles.cert} ${img ? styles.hasImg : ''} ${img && fit ? styles.fit : ''} ${imgs.length > 1 ? styles.stack : ''} ${gold ? styles.gold : ''}`}
       style={{ '--rot': `${rot}deg`, '--seal': domains[domain].color }}
       onClick={onClick}
       role="button"
@@ -19,7 +20,7 @@ export default function Certificate({ rank, title, org, img, domain, rot, onClic
       {...hover}
     >
       {img ? (
-        <img src={img} alt={title} loading="lazy" className={styles.photo} />
+        <img src={imgs[0]} alt={title} loading="lazy" className={styles.photo} />
       ) : (
         <>
         <div className={styles.innerFrame} />

@@ -74,7 +74,7 @@ export default function Nav({ onLogoClick, onCvClick }) {
               className={`${styles.tag} ${link.href === activeHref ? styles.active : ''}`}
               style={{ transform: `rotate(${(['-1deg','1deg','-0.5deg','1.5deg','-1deg','1deg','-0.5deg'])[i]})` }}
               target={link.external ? '_blank' : undefined}
-              rel={link.external ? 'noopener' : undefined}
+              rel={link.external ? 'noopener noreferrer' : undefined}
               onClick={
                 link.page === 'cv'  ? (e) => { e.preventDefault(); onCvClick(); }
                 : link.section      ? (e) => { e.preventDefault(); scrollToSection(link.section); }
@@ -123,7 +123,7 @@ export default function Nav({ onLogoClick, onCvClick }) {
             href={link.href}
             className={`${styles.drawerLink} ${link.href === activeHref ? styles.drawerLinkActive : ''}`}
             target={link.external ? '_blank' : undefined}
-            rel={link.external ? 'noopener' : undefined}
+            rel={link.external ? 'noopener noreferrer' : undefined}
             onClick={
               link.page === 'cv'  ? (e) => { e.preventDefault(); onCvClick(); close(); }
               : link.section      ? (e) => { e.preventDefault(); scrollToSection(link.section); close(); }

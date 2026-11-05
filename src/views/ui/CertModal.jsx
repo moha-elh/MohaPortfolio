@@ -33,7 +33,17 @@ export default function CertModal({ cert, onClose }) {
         {/* Certificate image */}
         <div className={styles.imgWrap}>
           {cert.img ? (
-            <img src={cert.img} alt={t(cert.title)} className={styles.img} />
+            [].concat(cert.img).map((src) => (
+              <img key={src} src={src} alt={t(cert.title)} className={styles.img} />
+            ))
+          ) : cert.video ? (
+            <iframe
+              className={styles.video}
+              src={cert.video}
+              title={t(cert.title)}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           ) : (
             <p className={styles.noImg}>{t('no image added yet', 'pas encore d’image')}</p>
           )}

@@ -84,6 +84,7 @@ export const skillCategories = [
       { name: 'Flutter',    slug: 'flutter',     desc: { en: 'Android & iOS from one codebase', fr: 'Android & iOS avec un seul code' } },
       { name: 'Dart',       slug: 'dart',        desc: { en: "Flutter's language", fr: 'le langage de Flutter' }        },
       { name: 'Firebase',   slug: 'firebase',    desc: { en: 'Firestore, functions, push', fr: 'Firestore, functions, push' } },
+      { name: 'Supabase',   slug: 'supabase',    desc: { en: 'auth, realtime & storage for apps', fr: 'auth, temps réel & stockage pour apps' } },
     ],
   },
 ];

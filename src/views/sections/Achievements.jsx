@@ -9,7 +9,8 @@ import styles from './Achievements.module.css';
 export default function Achievements({ onOpenCerts }) {
   const { t } = useLang();
   const [selected, setSelected] = useState(null);
-  const visible = certificates.slice(0, 5);
+  // only certs with a real scan on the landing page; drawn placeholders live on /certificates
+  const visible = certificates.filter((c) => c.img).slice(0, 5);
 
   return (
     <section id="achievements" className={styles.section} aria-label={t('Certificates', 'Certificats')}>
@@ -26,11 +27,13 @@ export default function Achievements({ onOpenCerts }) {
             img={cert.img}
             domain={cert.domain}
             rot={cert.rot}
+            gold={cert.type === 'course'}
+            fit
             onClick={() => setSelected(cert)}
           />
         ))}
 
-        {/* 1 skeleton card — teases more certificates on the full page */}
+        {/* 6th tile — teases more certificates on the full page */}
         <CertSkeleton rot={1.5} onClick={onOpenCerts} />
       </div>
 

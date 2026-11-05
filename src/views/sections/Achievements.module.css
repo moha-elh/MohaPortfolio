@@ -14,7 +14,7 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 22px;
+  gap: 28px;
   /* leave room for wax seals that overflow the cards */
   padding-bottom: 20px;
 }
@@ -25,8 +25,11 @@
   }
 }
 
+/* 3 × 2: five certificates + the "see all" tile. Wide gaps keep the cards compact. */
 @media (min-width: 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
+    column-gap: 56px;
+    row-gap: 40px;
   }
 }

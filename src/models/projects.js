@@ -1,9 +1,11 @@
-/* detail.status: 'live' | 'finished' | 'private' | 'in-progress'. blurb, tag ('more' only), detail.description and detail.highlights are { en, fr }; read via useLang().t(). */
+/* category: filter groups on /work (keys of `projectCategories`).
+   detail.status: 'live' | 'finished' | 'private' | 'in-progress'. blurb, tag ('more' only), detail.description and detail.highlights are { en, fr }; read via useLang().t(). */
 export const projects = [
   /* ── Featured board: live / recruiter-friendly first ── */
   {
     id: 'bezel',
     name: 'Bezel',
+    category: ['web'],
     tag: 'react · typescript · canvas · vite',
     blurb: { en: 'A LinkedIn profile frame maker that runs in the browser', fr: "Un générateur de cadres de profil LinkedIn qui tourne dans le navigateur" },
     logo: '/assets/projects/logos/BezelLogo.png',
@@ -40,6 +42,7 @@ export const projects = [
   {
     id: 'bready-on-fire',
     name: 'Bready on Fire',
+    category: ['web', 'game'],
     tag: 'react · typescript · game · vite',
     blurb: { en: 'A Flappy Bird-style game made with TypeScript', fr: "Un jeu façon Flappy Bird fait en TypeScript" },
     logo: '/assets/projects/logos/BreadyLogo.png',
@@ -76,6 +79,7 @@ export const projects = [
   {
     id: 'propel',
     name: 'Propel',
+    category: ['ai', 'backend'],
     tag: 'langchain · gRPC · kafka · c#',
     blurb: { en: 'An AI pipeline that applies to jobs with tailored CVs', fr: "Un pipeline IA qui postule aux offres avec des CV sur mesure" },
     logo: '/assets/projects/logos/PropelLogo.png',
@@ -114,6 +118,7 @@ export const projects = [
   {
     id: 'skillios',
     name: 'SKILLIOS',
+    category: ['web'],
     tag: 'vue · team lead · x10',
     blurb: { en: 'A 360° skills evaluation platform for students', fr: "Une plateforme d'évaluation des compétences à 360° pour étudiants" },
     logo: '/assets/projects/logos/SkilliosLogo.png',
@@ -150,6 +155,7 @@ export const projects = [
   {
     id: 'bi-pipeline',
     name: 'BI Pipeline',
+    category: ['data'],
     tag: 'pentaho · powerBI · ETL',
     blurb: { en: 'An ETL pipeline feeding Power BI sales dashboards', fr: "Un pipeline ETL qui alimente des dashboards de ventes Power BI" },
     logo: '/assets/projects/logos/PowerBiLogo.png',
@@ -185,6 +191,7 @@ export const projects = [
     id: 'dirhamy',
     board: false,
     name: 'DIRHAMY',
+    category: ['web', 'ai'],
     tag: 'finance · RAG · groq',
     blurb: { en: 'An AI finance assistant for Moroccan users', fr: "Un assistant financier IA pour les utilisateurs marocains" },
     logo: '/assets/projects/logos/dirhamyLogo.png',
@@ -226,6 +233,7 @@ export const projects = [
     id: 'projexis',
     board: false,
     name: 'PROJEXIS',
+    category: ['web'],
     tag: 'node · react · postgres',
     blurb: { en: 'A project management tool built during an internship', fr: "Un outil de gestion de projet construit pendant un stage" },
     logo: '/assets/projects/logos/ProjexisLogo.png',
@@ -263,6 +271,7 @@ export const projects = [
     id: 'vc-worldwide',
     board: false,
     name: 'VC Worldwide',
+    category: ['web'],
     tag: 'node · react · global', // TODO: update tag
     blurb: { en: 'A global directory of VCs, filtered by funding stage', fr: "Un annuaire mondial de VC, filtrable par stade de financement" },
     logo: '/assets/projects/logos/VCLogo.png',
@@ -298,6 +307,7 @@ export const projects = [
     id: 'smart-clinic',
     board: false,
     name: 'Smart Clinic',
+    category: ['web', 'backend'],
     tag: 'spring boot · keycloak · microservices',
     blurb: { en: 'A microservices clinic platform built during my internship', fr: "Une plateforme clinique en microservices construite pendant mon stage" },
     logo: '/assets/projects/logos/SmartClinicLogo.png',
@@ -335,6 +345,7 @@ export const projects = [
     id: 'grasp',
     board: false,
     name: 'Grasp',
+    category: ['mobile', 'ai'],
     tag: 'flutter · supabase · AI',
     blurb: { en: 'A flashcard app that turns your notes into cards with AI', fr: "Une app de flashcards qui transforme tes notes en cartes avec l'IA" },
     logo: '/assets/projects/logos/GraspLogo.png',
@@ -374,6 +385,7 @@ export const projects = [
     id: 'habit-chronicle',
     board: false,
     name: 'Habit Chronicle',
+    category: ['desktop', 'ai'],
     tag: 'tauri · fastapi · opencv',
     blurb: { en: 'A desktop app that reads your paper habit journal from a photo', fr: "Une app de bureau qui lit ton carnet d'habitudes papier à partir d'une photo" },
     logo: '/assets/projects/logos/HabitChronicleLogo.png',
@@ -413,6 +425,7 @@ export const projects = [
     id: 'questhub',
     board: false,
     name: 'QuestHub',
+    category: ['mobile', 'game'],
     tag: 'flutter · firebase · realtime',
     blurb: { en: 'A real-time party game of photo-proof side quests', fr: "Un jeu de groupe en temps réel avec des quêtes à prouver en photo" },
     logo: null,
@@ -463,3 +476,13 @@ export const projects = [
     detail: null,
   },
 ];
+
+export const projectCategories = {
+  web:     'web',
+  mobile:  'mobile',
+  ai:      { en: 'AI', fr: 'IA' },
+  backend: 'backend',
+  data:    'data',
+  desktop: { en: 'desktop', fr: 'bureau' },
+  game:    { en: 'games', fr: 'jeux' },
+};
