@@ -6,16 +6,12 @@ const hasFinePointer =
   typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches;
 
 /**
- * Provides the pencil cursor's position and hover state to the whole app.
+ * Provides the mouse position and hover state to the whole app.
  *
- * Position never goes through React state: it lives in a ref and is pushed to
- * subscribers (the pencil element, the draw canvas) once per animation frame.
- * Re-rendering the app 60×/s just to move a cursor is what made pages stutter.
- *
- * Normally the pencil is the native cursor image (globals.css) and only the
- * "click" label follows the mouse, updated straight from mousemove. A page can
- * opt into the slow, trailing DOM pencil with useSmoothCursor() (the draw page
- * does); only then does the rAF catch-up loop run. Never runs on touch devices.
+ * The pencil itself is the native cursor image (globals.css), drawn by the OS
+ * with zero lag. Only the "click" label follows the mouse: position lives in a
+ * ref and is pushed to subscribers straight from mousemove — no React re-render.
+ * Nothing runs on touch-only devices.
  */
 export function CursorProvider({ children }) {
   const [visible, setVisible] = useState(false);
@@ -23,40 +19,18 @@ export function CursorProvider({ children }) {
   // overlapping enters/leaves stay balanced and one stuck element can't pin it.
   const [hoverCount, setHoverCount] = useState(0);
 
-  const pos       = useRef({ x: 0, y: 0 });   // rendered (possibly lagging) position
-  const target    = useRef({ x: 0, y: 0 });   // real mouse position
-  const smooth    = useRef(false);
+  const pos       = useRef({ x: 0, y: 0 });
   const listeners = useRef(new Set());
-  const rafId     = useRef(0);
 
   useEffect(() => {
     if (!hasFinePointer) return;
-
-    const emit = () => listeners.current.forEach((fn) => fn(pos.current));
-
-    const tick = () => {
-      const p = pos.current;
-      const t = target.current;
-      const k = smooth.current ? 0.14 : 1; // 0.14 = slow trailing pen
-      p.x += (t.x - p.x) * k;
-      p.y += (t.y - p.y) * k;
-      if (Math.abs(t.x - p.x) < 0.1 && Math.abs(t.y - p.y) < 0.1) { p.x = t.x; p.y = t.y; }
-      emit();
-      rafId.current = p.x === t.x && p.y === t.y ? 0 : requestAnimationFrame(tick);
-    };
-
     const onMove = (e) => {
-      target.current = { x: e.clientX, y: e.clientY };
+      pos.current = { x: e.clientX, y: e.clientY };
       setVisible(true); // no-op re-render when already visible
-      if (!smooth.current) {           // native cursor: follow instantly, no frame wait
-        pos.current = { x: e.clientX, y: e.clientY };
-        emit();
-      } else if (!rafId.current) {
-        rafId.current = requestAnimationFrame(tick);
-      }
+      listeners.current.forEach((fn) => fn(pos.current));
     };
     // Leaving the document (window edge, or into an iframe like the CV viewer):
-    // hide the pencil instead of leaving it frozen at the edge.
+    // hide the label instead of leaving it frozen at the edge.
     const onOut = (e) => { if (!e.relatedTarget) setVisible(false); };
 
     document.addEventListener('mousemove', onMove, { passive: true });
@@ -64,7 +38,6 @@ export function CursorProvider({ children }) {
     return () => {
       document.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseout', onOut);
-      cancelAnimationFrame(rafId.current);
     };
   }, []);
 
@@ -78,26 +51,13 @@ export function CursorProvider({ children }) {
   const dec = useCallback(() => setHoverCount(c => Math.max(0, c - 1)), []);
 
   return (
-    <CursorCtx.Provider value={{ visible, hovered: hoverCount > 0, inc, dec, smooth, subscribe, pos }}>
+    <CursorCtx.Provider value={{ visible, hovered: hoverCount > 0, inc, dec, subscribe }}>
       {children}
     </CursorCtx.Provider>
   );
 }
 
 export const useCursor = () => useContext(CursorCtx);
-
-/** Slow, trailing pencil while the calling component is mounted. */
-export function useSmoothCursor() {
-  const { smooth } = useCursor();
-  useEffect(() => {
-    smooth.current = true;
-    document.documentElement.classList.add('slow-pen');
-    return () => {
-      smooth.current = false;
-      document.documentElement.classList.remove('slow-pen');
-    };
-  }, [smooth]);
-}
 
 /**
  * Convenience: returns onMouseEnter / onMouseLeave handlers that flip

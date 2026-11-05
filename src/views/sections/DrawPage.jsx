@@ -1,5 +1,4 @@
 import { useRef, useEffect, useCallback, useState } from 'react';
-import { useCursor, useSmoothCursor } from '../../context/CursorContext';
 import { useLang } from '../../context/LangContext';
 import styles from './DrawPage.module.css';
 
@@ -18,8 +17,6 @@ const SIZES = [2, 5, 10, 20];
 const PAPER = '#fafaf7';
 
 export default function DrawPage({ onBack }) {
-  const { pos, subscribe } = useCursor(); // lerped cursor position — same as pencil tip
-  useSmoothCursor();                    // the draw page keeps the slow pen
   const canvasRef  = useRef(null);
   const { t } = useLang();
   const drawing    = useRef(false);
@@ -88,29 +85,20 @@ export default function DrawPage({ onBack }) {
     ctx.fill();
   };
 
-  // Mouse: draw to the lerped (slow) pencil position every frame, as before.
-  const mode = useRef(null); // 'mouse' | 'direct' (touch / stylus) while drawing
-  useEffect(() => subscribe((p) => {
-    if (mode.current !== 'mouse' || !lastPos.current) return;
-    const cur = toCanvas(p.x, p.y);
-    segment(lastPos.current, cur);
-    lastPos.current = cur;
-  }), [subscribe]);
-
-  // One input path for mouse, touch and stylus (Pointer Events). Pointer capture
-  // keeps the stroke alive when the finger slides off the canvas edge.
+  // One input path for mouse, touch and stylus (Pointer Events): the line is drawn
+  // exactly under the pointer. Pointer capture keeps the stroke alive when the
+  // finger slides off the canvas edge.
   const onPointerDown = useCallback((e) => {
     if (!e.isPrimary || e.button > 0) return; // ignore 2nd fingers and right-clicks
     e.currentTarget.setPointerCapture(e.pointerId);
     drawing.current = true;
-    mode.current = e.pointerType === 'mouse' ? 'mouse' : 'direct';
-    const start = mode.current === 'mouse' ? toCanvas(pos.current.x, pos.current.y) : toCanvas(e.clientX, e.clientY);
+    const start = toCanvas(e.clientX, e.clientY);
     dot(start); // a tap leaves a dot
     lastPos.current = start;
-  }, [pos]);
+  }, []);
 
   const onPointerMove = useCallback((e) => {
-    if (mode.current !== 'direct' || !e.isPrimary || !lastPos.current) return;
+    if (!drawing.current || !e.isPrimary || !lastPos.current) return;
     // coalesced events = every point the finger passed since the last frame → smooth lines
     const points = e.nativeEvent.getCoalescedEvents?.() ?? [];
     for (const ev of points.length ? points : [e]) {
@@ -122,7 +110,6 @@ export default function DrawPage({ onBack }) {
 
   const stopDraw = useCallback(() => {
     drawing.current = false;
-    mode.current = null;
     lastPos.current = null;
   }, []);
 
