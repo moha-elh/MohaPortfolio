@@ -32,11 +32,16 @@ export default function Dither({
   colorNum      = 4,
   pixelSize     = 4,
   colors        = ['#fafaf7', '#1a1a1a', '#c8f24a', '#9a9a9a'],
+  paused        = false,
   style,
   className,
 }) {
   const canvasRef = useRef(null);
   const offRef    = useRef(document.createElement('canvas'));
+  const pausedRef = useRef(paused);
+  const wakeRef   = useRef(() => {});
+  pausedRef.current = paused;
+  useEffect(() => { if (!paused) wakeRef.current(); }, [paused]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -48,7 +53,12 @@ export default function Dither({
     const palette = colors.slice(0, colorNum).map(hexToRgb);
 
     let time  = 0;
-    let rafId = null;
+    let rafId = 0;
+    let last  = 0;
+    let imageData = null;
+    let onScreen  = true;
+    const FRAME_MS = 1000 / 30; // 30fps is plenty for a dithered wave
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -58,20 +68,14 @@ export default function Dither({
       canvas.height = h;
       off.width     = Math.ceil(w / pixelSize);
       off.height    = Math.ceil(h / pixelSize);
+      imageData     = offCtx.createImageData(off.width, off.height);
+      if (!rafId) draw(); // keep a frame on screen while paused
     };
-    resize();
-
-    const ro = new ResizeObserver(resize);
-    ro.observe(canvas);
-
     const TWO_PI = Math.PI * 2;
 
-    const animate = () => {
-      time += waveSpeed;
+    const draw = () => {
       const sw = off.width;
       const sh = off.height;
-
-      const imageData = offCtx.createImageData(sw, sh);
       const data = imageData.data;
 
       for (let y = 0; y < sh; y++) {
@@ -120,15 +124,37 @@ export default function Dither({
       // Scale up with no anti-aliasing → crisp pixel art look
       ctx.imageSmoothingEnabled = false;
       ctx.drawImage(off, 0, 0, canvas.width, canvas.height);
-
-      rafId = requestAnimationFrame(animate);
     };
 
-    rafId = requestAnimationFrame(animate);
+    // Only animate while visible on screen, tab is shown, and not covered.
+    const shouldRun = () => onScreen && !document.hidden && !pausedRef.current && !reduceMotion;
+
+    const animate = (now) => {
+      if (!shouldRun()) { rafId = 0; return; }
+      if (now - last >= FRAME_MS) {
+        last = now;
+        time += waveSpeed * 2; // compensate for half the frames
+        draw();
+      }
+      rafId = requestAnimationFrame(animate);
+    };
+    const wake = () => { if (!rafId && shouldRun()) rafId = requestAnimationFrame(animate); };
+    wakeRef.current = wake;
+
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+    const io = new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; wake(); });
+    io.observe(canvas);
+    document.addEventListener('visibilitychange', wake);
+    wake();
 
     return () => {
       cancelAnimationFrame(rafId);
       ro.disconnect();
+      io.disconnect();
+      document.removeEventListener('visibilitychange', wake);
+      wakeRef.current = () => {};
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [waveSpeed, waveFrequency, waveAmplitude, colorNum, pixelSize, colors.join(',')]);

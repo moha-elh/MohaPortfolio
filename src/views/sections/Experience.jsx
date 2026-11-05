@@ -88,6 +88,7 @@ export default function Experience() {
               colorNum={4}
               pixelSize={4}
               colors={['#fafaf7', '#e8e8e4', '#c8f24a', '#1a1a1a']}
+              paused={hovered !== null}
             />
             <p className={styles.idleText}>
               {t('← hover any row', '← survole une ligne')}<br />{t('and a moment will appear here', 'et un moment apparaîtra ici')}
