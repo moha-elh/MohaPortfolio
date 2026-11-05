@@ -179,7 +179,7 @@ Replace `public/assets/moha_cv.jpg` (same filename), or update `photo` in `src/m
 
 ### Update your CV
 
-Drop the PDF into `public/assets/` and update `cvPdf` in `src/models/contact.js`.
+CVs live in `public/assets/cv/` as `cv-<domain>-<en|fr>.pdf` (domains: dev, ai, data, mobile). Replace a file with the same name, or add a domain to `cvDomains` in `src/models/contact.js`. `/cv` opens the `dev` CV by default, lets the visitor switch domain, and follows the site language.
 
 ---
 
@@ -212,7 +212,7 @@ personalPortfolio/
 │   └── assets/
 │       ├── moha_cv.jpg                    portrait photo
 │       ├── project-preview.png            shared project thumbnail
-│       ├── CV - Mouhssine El Haouary.pdf  CV file
+│       ├── cv/                            CVs per domain × language (cv-dev-en.pdf …)
 │       └── icons/                         local SVG logos (grpc, aws, powerbi, pentaho, typeorm)
 ├── src/
 │   ├── models/

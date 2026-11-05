@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
-import { owner } from '../../models/contact';
+import { useEffect, useState } from 'react';
+import { cvs, cvDomains, DEFAULT_CV } from '../../models/contact';
+import FilterBar from '../ui/FilterBar';
 import { useHover } from '../../context/CursorContext';
 import { useLang } from '../../context/LangContext';
 import styles from './CvPage.module.css';
@@ -7,7 +8,8 @@ import styles from './CvPage.module.css';
 export default function CvPage({ onBack }) {
   const hover = useHover();
   const { t } = useLang();
-  const pdf = t(owner.cvPdf);
+  const [domain, setDomain] = useState(DEFAULT_CV);
+  const pdf = t(cvs[domain]);
 
   // Scanned QR lands here with ?dl=1 → fire the download immediately.
   useEffect(() => {
@@ -32,6 +34,16 @@ export default function CvPage({ onBack }) {
           {t('download pdf →', 'télécharger le pdf →')}
         </a>
       </div>
+
+      {/* ── Domain switch: dev by default; language follows the site ── */}
+      <FilterBar
+        options={cvDomains}
+        value={domain}
+        onChange={setDomain}
+        withAll={false}
+        className={styles.switch}
+        label={t('Choose a CV', 'Choisir un CV')}
+      />
 
       {/* ── PDF viewer, full-bleed below the bar ── */}
       <iframe

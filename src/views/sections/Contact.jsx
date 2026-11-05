@@ -1,5 +1,5 @@
 import { QRCodeSVG } from 'qrcode.react';
-import { contactLinks, owner } from '../../models/contact';
+import { contactLinks, owner, cvs, DEFAULT_CV } from '../../models/contact';
 import { useHover } from '../../context/CursorContext';
 import { useLang } from '../../context/LangContext';
 import styles from './Contact.module.css';
@@ -67,9 +67,9 @@ export default function Contact({ onOpenCv }) {
           </div>
 
           {/* CV download button — shown on mobile instead of phone mock */}
-          {owner.cvPdf && (
+          {cvs[DEFAULT_CV] && (
             <a
-              href={t(owner.cvPdf)}
+              href={t(cvs[DEFAULT_CV])}
               className={styles.cvBtn}
               download
               {...hover}

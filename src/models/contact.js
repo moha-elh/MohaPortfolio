@@ -9,11 +9,22 @@ export const owner = {
   school:    'ENSA Tanger',
   year:      '2026',
   photo:     '/assets/moha_cv.jpg',
-  cvPdf:     {
-    en: '/assets/CV%20-%20Mouhssine%20El%20Haouary%20-%20ENG.pdf',
-    fr: '/assets/CV%20-%20Mouhssine%20El%20Haouary.pdf',
-  },
 };
+
+/* One CV per domain, each in English and French. `dev` is the default;
+   the language follows the site language (t(cvs[domain])). */
+export const cvDomains = {
+  dev:    { en: 'full stack dev', fr: 'dev full stack' },
+  ai:     { en: 'AI', fr: 'IA' },
+  data:   'data & BI',
+  mobile: 'mobile',
+};
+
+export const cvs = Object.fromEntries(
+  Object.keys(cvDomains).map((d) => [d, { en: `/assets/cv/cv-${d}-en.pdf`, fr: `/assets/cv/cv-${d}-fr.pdf` }])
+);
+
+export const DEFAULT_CV = 'dev';
 
 export const contactLinks = [
   {
