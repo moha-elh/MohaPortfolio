@@ -33,30 +33,29 @@ export default function CvPage({ onBack }) {
 
   return (
     <div className={styles.page}>
-      {/* ── Top bar: back · identity · download ── */}
+      {/* ── Top bar: back · identity · domain switch · download ──
+          The switch lives in the bar so the viewer gets the full height. */}
       <div className={styles.topBar}>
         <button className={styles.back} onClick={onBack} aria-label={t('Back home', 'Retour à l’accueil')} {...hover}>
           {t('← back', '← retour')}
         </button>
         <span className={styles.identity}>cv · mouhssine el haouary</span>
+        <div className={styles.tabs} role="group" aria-label={t('Choose a CV', 'Choisir un CV')}>
+          {Object.entries(cvDomains).map(([key, label]) => (
+            <button
+              key={key}
+              className={styles.tab}
+              aria-pressed={domain === key}
+              onClick={() => setDomain(key)}
+              {...hover}
+            >
+              {t(label)}
+            </button>
+          ))}
+        </div>
         <a href={pdf} download className={styles.download} {...hover}>
           {t('download pdf →', 'télécharger le pdf →')}
         </a>
-      </div>
-
-      {/* ── Domain switch: dev by default; language follows the site ── */}
-      <div className={styles.tabs} role="group" aria-label={t('Choose a CV', 'Choisir un CV')}>
-        {Object.entries(cvDomains).map(([key, label]) => (
-          <button
-            key={key}
-            className={styles.tab}
-            aria-pressed={domain === key}
-            onClick={() => setDomain(key)}
-            {...hover}
-          >
-            {t(label)}
-          </button>
-        ))}
       </div>
 
       {/* ── PDF viewer, full-bleed below the bar ── */}
