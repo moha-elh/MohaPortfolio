@@ -9,6 +9,12 @@ export default function CvPage({ onBack }) {
   const { t } = useLang();
   const [domain, setDomain] = useState(DEFAULT_CV);
   const pdf = t(cvs[domain]);
+  // Every CV opened so far stays mounted (just hidden), so switching back is
+  // instant instead of rebuilding the PDF viewer. Lazy: nothing loads until picked.
+  const [opened, setOpened] = useState(() => [pdf]);
+  useEffect(() => {
+    setOpened((list) => (list.includes(pdf) ? list : [...list, pdf]));
+  }, [pdf]);
 
   // Scanned QR lands here with ?dl=1 → fire the download immediately.
   useEffect(() => {
@@ -50,11 +56,18 @@ export default function CvPage({ onBack }) {
       </div>
 
       {/* ── PDF viewer, full-bleed below the bar ── */}
-      <iframe
-        src={`${pdf}#zoom=100`}
-        title={t('CV preview', 'Aperçu du CV')}
-        className={styles.viewer}
-      />
+      <div className={styles.viewer}>
+        {opened.map((src) => (
+          <iframe
+            key={src}
+            src={`${src}#zoom=100`}
+            title={t('CV preview', 'Aperçu du CV')}
+            className={`${styles.frame} ${src === pdf ? styles.frameOn : ''}`}
+            aria-hidden={src !== pdf}
+            tabIndex={src === pdf ? 0 : -1}
+          />
+        ))}
+      </div>
     </div>
   );
 }
