@@ -17,7 +17,7 @@ const COLORS = [
 const SIZES = [2, 5, 10, 20];
 
 export default function DrawPage({ onBack }) {
-  const { pos } = useCursor();          // lerped cursor position — same as pencil tip
+  const { pos, subscribe } = useCursor(); // lerped cursor position — same as pencil tip
   useSmoothCursor();                    // the draw page keeps the slow pen
   const canvasRef  = useRef(null);
   const { t } = useLang();
@@ -42,12 +42,12 @@ export default function DrawPage({ onBack }) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }, []);
 
-  // This runs every rAF frame via CursorContext — if mouse is held, draw to current lerped pos
-  useEffect(() => {
+  // Called every rAF frame by CursorContext — if the mouse is held, draw to the lerped pos
+  useEffect(() => subscribe((p) => {
     if (!drawing.current || !lastPos.current) return;
     const canvas = canvasRef.current;
     const rect   = canvas.getBoundingClientRect();
-    const cur    = { x: pos.x - rect.left, y: pos.y - rect.top };
+    const cur    = { x: p.x - rect.left, y: p.y - rect.top };
     const ctx    = canvas.getContext('2d');
     ctx.beginPath();
     ctx.moveTo(lastPos.current.x, lastPos.current.y);
@@ -58,13 +58,13 @@ export default function DrawPage({ onBack }) {
     ctx.lineJoin    = 'round';
     ctx.stroke();
     lastPos.current = cur;
-  }, [pos]);
+  }), [subscribe]);
 
   const onMouseDown = useCallback(() => {
     const canvas = canvasRef.current;
     const rect   = canvas.getBoundingClientRect();
     drawing.current = true;
-    lastPos.current = { x: pos.x - rect.left, y: pos.y - rect.top };
+    lastPos.current = { x: pos.current.x - rect.left, y: pos.current.y - rect.top };
   }, [pos]);
 
   const stopDraw = useCallback(() => {

@@ -2,53 +2,77 @@ import { createContext, useContext, useEffect, useRef, useState, useCallback } f
 
 const CursorCtx = createContext(null);
 
+const hasFinePointer =
+  typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches;
+
 /**
- * Provides cursor position and hover state to the whole app.
+ * Provides the pencil cursor's position and hover state to the whole app.
+ *
+ * Position never goes through React state: it lives in a ref and is pushed to
+ * subscribers (the pencil element, the draw canvas) once per animation frame.
+ * Re-rendering the app 60×/s just to move a cursor is what made pages stutter.
+ *
  * The pencil tracks the mouse 1:1; a page can opt into the slow, trailing
- * "drawing" feel with useSmoothCursor() (the draw page does).
- * Wrap <App> in this provider so any component can read/set cursor state.
+ * "drawing" feel with useSmoothCursor() (the draw page does). The rAF loop only
+ * runs while the pencil is catching up, and never on touch-only devices.
  */
 export function CursorProvider({ children }) {
-  const [pos,     setPos]     = useState({ x: 0, y: 0 });
   const [visible, setVisible] = useState(false);
   // Count of currently-hovered interactive elements. A counter (not a bool) so
   // overlapping enters/leaves stay balanced and one stuck element can't pin it.
   const [hoverCount, setHoverCount] = useState(0);
 
-  const current = useRef({ x: 0, y: 0 });
-  const target  = useRef({ x: 0, y: 0 });
-  const smooth  = useRef(false);
+  const pos       = useRef({ x: 0, y: 0 });   // rendered (possibly lagging) position
+  const target    = useRef({ x: 0, y: 0 });   // real mouse position
+  const smooth    = useRef(false);
+  const listeners = useRef(new Set());
+  const rafId     = useRef(0);
 
   useEffect(() => {
-    const onMove = (e) => {
-      target.current = { x: e.clientX, y: e.clientY };
-      setVisible(true);
-    };
-    document.addEventListener('mousemove', onMove, { passive: true });
+    if (!hasFinePointer) return;
 
-    let rafId;
+    const emit = () => listeners.current.forEach((fn) => fn(pos.current));
+
     const tick = () => {
-      const c = current.current;
+      const p = pos.current;
       const t = target.current;
       const k = smooth.current ? 0.14 : 1; // 0.14 = slow trailing pen
-      c.x += (t.x - c.x) * k;
-      c.y += (t.y - c.y) * k;
-      setPos({ x: c.x, y: c.y });
-      rafId = requestAnimationFrame(tick);
+      p.x += (t.x - p.x) * k;
+      p.y += (t.y - p.y) * k;
+      if (Math.abs(t.x - p.x) < 0.1 && Math.abs(t.y - p.y) < 0.1) { p.x = t.x; p.y = t.y; }
+      emit();
+      rafId.current = p.x === t.x && p.y === t.y ? 0 : requestAnimationFrame(tick);
     };
-    rafId = requestAnimationFrame(tick);
 
+    const onMove = (e) => {
+      target.current = { x: e.clientX, y: e.clientY };
+      setVisible(true); // no-op re-render when already visible
+      if (!rafId.current) rafId.current = requestAnimationFrame(tick);
+    };
+    // Leaving the document (window edge, or into an iframe like the CV viewer):
+    // hide the pencil instead of leaving it frozen at the edge.
+    const onOut = (e) => { if (!e.relatedTarget) setVisible(false); };
+
+    document.addEventListener('mousemove', onMove, { passive: true });
+    document.addEventListener('mouseout', onOut);
     return () => {
       document.removeEventListener('mousemove', onMove);
-      cancelAnimationFrame(rafId);
+      document.removeEventListener('mouseout', onOut);
+      cancelAnimationFrame(rafId.current);
     };
+  }, []);
+
+  const subscribe = useCallback((fn) => {
+    listeners.current.add(fn);
+    fn(pos.current);
+    return () => listeners.current.delete(fn);
   }, []);
 
   const inc = useCallback(() => setHoverCount(c => c + 1), []);
   const dec = useCallback(() => setHoverCount(c => Math.max(0, c - 1)), []);
 
   return (
-    <CursorCtx.Provider value={{ pos, visible, hovered: hoverCount > 0, inc, dec, smooth }}>
+    <CursorCtx.Provider value={{ visible, hovered: hoverCount > 0, inc, dec, smooth, subscribe, pos }}>
       {children}
     </CursorCtx.Provider>
   );
