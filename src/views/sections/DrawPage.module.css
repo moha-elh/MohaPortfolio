@@ -135,6 +135,35 @@
   flex-shrink: 0;
 }
 
+/* ── Phones: back + clear on top, then colours, then brush sizes, all centered ──
+   .tools dissolves (display: contents) so its children can be ordered with back. */
+@media (max-width: 719px) {
+  .topBar {
+    gap: 10px 8px;
+    padding: 10px 12px;
+  }
+  .tools { display: contents; }
+  .back    { order: 1; }
+  .clearBtn { order: 2; margin-left: auto; }
+  .palette {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
+    gap: 8px;
+  }
+  .swatch { width: 30px; height: 30px; }   /* finger-sized */
+  .sizes {
+    order: 4;
+    flex-basis: 100%;
+    justify-content: center;
+    gap: 10px;
+    border-left: none;
+    padding-left: 0;
+  }
+  .sizeBtn { width: 36px; height: 36px; }
+  .topLabel { display: none; }
+}
+
 /* ── Canvas ── */
 .canvas {
   flex: 1;
