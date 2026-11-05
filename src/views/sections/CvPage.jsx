@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { cvs, cvDomains, DEFAULT_CV } from '../../models/contact';
-import FilterBar from '../ui/FilterBar';
 import { useHover } from '../../context/CursorContext';
 import { useLang } from '../../context/LangContext';
 import styles from './CvPage.module.css';
@@ -36,14 +35,19 @@ export default function CvPage({ onBack }) {
       </div>
 
       {/* ── Domain switch: dev by default; language follows the site ── */}
-      <FilterBar
-        options={cvDomains}
-        value={domain}
-        onChange={setDomain}
-        withAll={false}
-        className={styles.switch}
-        label={t('Choose a CV', 'Choisir un CV')}
-      />
+      <div className={styles.tabs} role="group" aria-label={t('Choose a CV', 'Choisir un CV')}>
+        {Object.entries(cvDomains).map(([key, label]) => (
+          <button
+            key={key}
+            className={styles.tab}
+            aria-pressed={domain === key}
+            onClick={() => setDomain(key)}
+            {...hover}
+          >
+            {t(label)}
+          </button>
+        ))}
+      </div>
 
       {/* ── PDF viewer, full-bleed below the bar ── */}
       <iframe

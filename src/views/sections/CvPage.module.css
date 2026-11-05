@@ -7,6 +7,7 @@
 
 /* ── Top bar: back (left) · identity (center) · download (right) ── */
 .topBar {
+  flex-shrink: 0;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -90,10 +91,9 @@
     letter-spacing: 0.04em;
     padding: 5px 9px;
   }
-  .identity {
-    font-size: 9px;
-    letter-spacing: 0.06em;
-  }
+  /* the name is already on the CV itself; give back/download the width */
+  .topBar { grid-template-columns: 1fr 1fr; }
+  .identity { display: none; }
 }
 
 /* ── PDF viewer: fills the screen below the bar ── */
@@ -107,10 +107,53 @@
 }
 
 
-/* ── Domain switch row between the bar and the viewer ── */
-.switch {
+/* ── Domain switch: folder tabs sitting on the viewer ── */
+.tabs {
+  flex-shrink: 0;            /* overflow-x would otherwise let the column squeeze it to 0 */
+  display: flex;
   justify-content: center;
-  margin: 0;
-  padding: 14px 20px 16px;
-  border-bottom: 1px dashed var(--faint);
+  gap: 6px;
+  padding: 14px 20px 0;
+  border-bottom: 1.5px solid var(--ink);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tab {
+  flex-shrink: 0;
+  font-family: var(--f-hand);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--ink);
+  background: var(--cream);
+  border: 1.5px solid var(--ink);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 6px 18px 5px;
+  margin-top: 6px;           /* inactive tabs sit lower… */
+  cursor: none;
+  transition: background 0.15s ease, margin-top 0.15s ease, padding 0.15s ease;
+}
+
+@media (hover: hover) {
+  .tab:hover { background: var(--yellow); }
+}
+
+.tab[aria-pressed='true'] {
+  background: var(--lime);
+  margin-top: 0;             /* …the open one stands taller */
+  padding-bottom: 11px;
+}
+
+.tab:focus-visible {
+  outline: 2px dashed var(--ink);
+  outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+  .tabs { justify-content: flex-start; padding: 10px 12px 0; }
+  .tab  { font-size: 16px; padding: 5px 12px 4px; }
+  .tab[aria-pressed='true'] { padding-bottom: 9px; }
 }
