@@ -102,3 +102,21 @@ body::before {
   background: var(--lime);
   padding: 0 4px;
 }
+
+/* Page-chunk fallback (see App.jsx): appears only after 400ms, so fast loads never flash it */
+.page-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--f-hand);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--faint);
+  opacity: 0;
+  animation: page-loading-in 0.3s ease 0.4s forwards;
+}
+
+@keyframes page-loading-in {
+  to { opacity: 1; }
+}

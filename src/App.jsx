@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, lazy, Suspense } from 'react';
 import { projects } from './models/projects';
 import { useLang } from './context/LangContext';
 import { useKonami } from './controllers/useKonami';
@@ -14,13 +14,32 @@ import Toolbox       from './views/sections/Toolbox';
 import Achievements  from './views/sections/Achievements';
 import Experience    from './views/sections/Experience';
 import Contact       from './views/sections/Contact';
-import Story         from './views/sections/Story';
-import ProjectDetail from './views/sections/ProjectDetail';
-import WorkPage      from './views/sections/WorkPage';
-import Thoughts      from './views/sections/Thoughts';
-import DrawPage      from './views/sections/DrawPage';
-import CvPage            from './views/sections/CvPage';
-import CertificatesPage  from './views/sections/CertificatesPage';
+
+// Sub-pages are split into their own chunks: the home page no longer downloads
+// and parses every page (and GSAP) up front. They are prefetched once the home
+// page is idle, so opening one still feels instant.
+const pageImports = {
+  Story:            () => import('./views/sections/Story'),
+  ProjectDetail:    () => import('./views/sections/ProjectDetail'),
+  WorkPage:         () => import('./views/sections/WorkPage'),
+  Thoughts:         () => import('./views/sections/Thoughts'),
+  DrawPage:         () => import('./views/sections/DrawPage'),
+  CvPage:           () => import('./views/sections/CvPage'),
+  CertificatesPage: () => import('./views/sections/CertificatesPage'),
+};
+const Story            = lazy(pageImports.Story);
+const ProjectDetail    = lazy(pageImports.ProjectDetail);
+const WorkPage         = lazy(pageImports.WorkPage);
+const Thoughts         = lazy(pageImports.Thoughts);
+const DrawPage         = lazy(pageImports.DrawPage);
+const CvPage           = lazy(pageImports.CvPage);
+const CertificatesPage = lazy(pageImports.CertificatesPage);
+
+const prefetchPages = () => Object.values(pageImports).forEach((load) => load().catch(() => {}));
+
+// Shown only if a page chunk is still downloading (slow networks); fades in late
+// so fast loads never flash it.
+const pageLoading = <div className="page-loading" role="status">{'one sec…'}</div>;
 
 function pageToPath(page) {
   if (!page) return '/';
@@ -52,6 +71,14 @@ export default function App() {
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
   }, []);
+  // once the first page is idle, fetch the other pages' code in the background
+  useEffect(() => {
+    const idle = window.requestIdleCallback ?? ((fn) => setTimeout(fn, 2000));
+    const cancel = window.cancelIdleCallback ?? clearTimeout;
+    const handle = idle(prefetchPages, { timeout: 4000 });
+    return () => cancel(handle);
+  }, []);
+
   const [party, setParty] = useState(false);
   useKonami(useCallback(() => setParty(true), []));
 
@@ -71,7 +98,9 @@ export default function App() {
     return (
       <>
         <Cursor />
-        <Story onBack={goHome} />
+        <Suspense fallback={pageLoading}>
+          <Story onBack={goHome} />
+        </Suspense>
         {party$}
       </>
     );
@@ -81,7 +110,9 @@ export default function App() {
     return (
       <>
         <Cursor />
-        <DrawPage onBack={goHome} />
+        <Suspense fallback={pageLoading}>
+          <DrawPage onBack={goHome} />
+        </Suspense>
         {party$}
       </>
     );
@@ -91,7 +122,9 @@ export default function App() {
     return (
       <>
         <Cursor />
-        <Thoughts onBack={goHome} />
+        <Suspense fallback={pageLoading}>
+          <Thoughts onBack={goHome} />
+        </Suspense>
         {party$}
       </>
     );
@@ -101,7 +134,9 @@ export default function App() {
     return (
       <>
         <Cursor />
-        <CertificatesPage onBack={goHome} />
+        <Suspense fallback={pageLoading}>
+          <CertificatesPage onBack={goHome} />
+        </Suspense>
         {party$}
       </>
     );
@@ -111,7 +146,9 @@ export default function App() {
     return (
       <>
         <Cursor />
-        <CvPage onBack={goHome} />
+        <Suspense fallback={pageLoading}>
+          <CvPage onBack={goHome} />
+        </Suspense>
         {party$}
       </>
     );
@@ -121,7 +158,9 @@ export default function App() {
     return (
       <>
         <Cursor />
-        <WorkPage onBack={goHome} onOpen={(id) => openProject(id, 'work')} />
+        <Suspense fallback={pageLoading}>
+          <WorkPage onBack={goHome} onOpen={(id) => openProject(id, 'work')} />
+        </Suspense>
         {party$}
       </>
     );
@@ -133,14 +172,16 @@ export default function App() {
     return (
       <>
         <Cursor />
-        <ProjectDetail
-          project={project}
-          onBack={() => {
-            if (page.from === 'work') { setPage('work'); }
-            else { goHome(); }
-            window.scrollTo(0, 0);
-          }}
-        />
+        <Suspense fallback={pageLoading}>
+          <ProjectDetail
+            project={project}
+            onBack={() => {
+              if (page.from === 'work') { setPage('work'); }
+              else { goHome(); }
+              window.scrollTo(0, 0);
+            }}
+          />
+        </Suspense>
         {party$}
       </>
     );
