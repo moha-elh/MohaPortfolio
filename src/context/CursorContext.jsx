@@ -3,7 +3,9 @@ import { createContext, useContext, useEffect, useRef, useState, useCallback } f
 const CursorCtx = createContext(null);
 
 /**
- * Provides cursor position (with lerp lag) and hover state to the whole app.
+ * Provides cursor position and hover state to the whole app.
+ * The pencil tracks the mouse 1:1; a page can opt into the slow, trailing
+ * "drawing" feel with useSmoothCursor() (the draw page does).
  * Wrap <App> in this provider so any component can read/set cursor state.
  */
 export function CursorProvider({ children }) {
@@ -15,6 +17,7 @@ export function CursorProvider({ children }) {
 
   const current = useRef({ x: 0, y: 0 });
   const target  = useRef({ x: 0, y: 0 });
+  const smooth  = useRef(false);
 
   useEffect(() => {
     const onMove = (e) => {
@@ -27,8 +30,9 @@ export function CursorProvider({ children }) {
     const tick = () => {
       const c = current.current;
       const t = target.current;
-      c.x += (t.x - c.x) * 0.14;
-      c.y += (t.y - c.y) * 0.14;
+      const k = smooth.current ? 0.14 : 1; // 0.14 = slow trailing pen
+      c.x += (t.x - c.x) * k;
+      c.y += (t.y - c.y) * k;
       setPos({ x: c.x, y: c.y });
       rafId = requestAnimationFrame(tick);
     };
@@ -44,13 +48,22 @@ export function CursorProvider({ children }) {
   const dec = useCallback(() => setHoverCount(c => Math.max(0, c - 1)), []);
 
   return (
-    <CursorCtx.Provider value={{ pos, visible, hovered: hoverCount > 0, inc, dec }}>
+    <CursorCtx.Provider value={{ pos, visible, hovered: hoverCount > 0, inc, dec, smooth }}>
       {children}
     </CursorCtx.Provider>
   );
 }
 
 export const useCursor = () => useContext(CursorCtx);
+
+/** Slow, trailing pencil while the calling component is mounted. */
+export function useSmoothCursor() {
+  const { smooth } = useCursor();
+  useEffect(() => {
+    smooth.current = true;
+    return () => { smooth.current = false; };
+  }, [smooth]);
+}
 
 /**
  * Convenience: returns onMouseEnter / onMouseLeave handlers that flip

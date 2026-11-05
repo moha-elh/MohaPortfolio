@@ -1,5 +1,5 @@
 import { useRef, useEffect, useCallback, useState } from 'react';
-import { useCursor } from '../../context/CursorContext';
+import { useCursor, useSmoothCursor } from '../../context/CursorContext';
 import { useLang } from '../../context/LangContext';
 import styles from './DrawPage.module.css';
 
@@ -18,6 +18,7 @@ const SIZES = [2, 5, 10, 20];
 
 export default function DrawPage({ onBack }) {
   const { pos } = useCursor();          // lerped cursor position — same as pencil tip
+  useSmoothCursor();                    // the draw page keeps the slow pen
   const canvasRef  = useRef(null);
   const { t } = useLang();
   const drawing    = useRef(false);
