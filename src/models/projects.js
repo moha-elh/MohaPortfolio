@@ -42,7 +42,7 @@ export const projects = [
   {
     id: 'bready-on-fire',
     name: 'Bready on Fire',
-    category: ['web', 'game'],
+    category: ['web'],
     tag: 'react · typescript · game · vite',
     blurb: { en: 'A Flappy Bird-style game made with TypeScript', fr: "Un jeu façon Flappy Bird fait en TypeScript" },
     logo: '/assets/projects/logos/BreadyLogo.png',
@@ -79,7 +79,7 @@ export const projects = [
   {
     id: 'propel',
     name: 'Propel',
-    category: ['ai', 'backend'],
+    category: ['ai'],
     tag: 'langchain · gRPC · kafka · c#',
     blurb: { en: 'An AI pipeline that applies to jobs with tailored CVs', fr: "Un pipeline IA qui postule aux offres avec des CV sur mesure" },
     logo: '/assets/projects/logos/PropelLogo.png',
@@ -307,7 +307,7 @@ export const projects = [
     id: 'smart-clinic',
     board: false,
     name: 'Smart Clinic',
-    category: ['web', 'backend'],
+    category: ['web'],
     tag: 'spring boot · keycloak · microservices',
     blurb: { en: 'A microservices clinic platform built during my internship', fr: "Une plateforme clinique en microservices construite pendant mon stage" },
     logo: '/assets/projects/logos/SmartClinicLogo.png',
@@ -385,7 +385,7 @@ export const projects = [
     id: 'habit-chronicle',
     board: false,
     name: 'Habit Chronicle',
-    category: ['desktop', 'ai'],
+    category: ['ai'],
     tag: 'tauri · fastapi · opencv',
     blurb: { en: 'A desktop app that reads your paper habit journal from a photo', fr: "Une app de bureau qui lit ton carnet d'habitudes papier à partir d'une photo" },
     logo: '/assets/projects/logos/HabitChronicleLogo.png',
@@ -425,7 +425,7 @@ export const projects = [
     id: 'questhub',
     board: false,
     name: 'QuestHub',
-    category: ['mobile', 'game'],
+    category: ['mobile'],
     tag: 'flutter · firebase · realtime',
     blurb: { en: 'A real-time party game of photo-proof side quests', fr: "Un jeu de groupe en temps réel avec des quêtes à prouver en photo" },
     logo: null,
@@ -478,11 +478,8 @@ export const projects = [
 ];
 
 export const projectCategories = {
-  web:     'web',
-  mobile:  'mobile',
-  ai:      { en: 'AI', fr: 'IA' },
-  backend: 'backend',
-  data:    'data',
-  desktop: { en: 'desktop', fr: 'bureau' },
-  game:    { en: 'games', fr: 'jeux' },
+  web:    'web',
+  mobile: 'mobile',
+  data:   'data',
+  ai:     { en: 'AI', fr: 'IA' },
 };
