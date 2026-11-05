@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { projects, projectCategories } from '../../models/projects';
 import { useLang } from '../../context/LangContext';
 import FilterBar from '../ui/FilterBar';
-import filterStyles from '../ui/FilterBar.module.css';
+import TechPicker from '../ui/TechPicker';
 import styles from './WorkPage.module.css';
 
 const STATUS_CLASS = {
@@ -48,15 +48,12 @@ export default function WorkPage({ onBack, onOpen }) {
 
       <div className={styles.filters}>
         <FilterBar options={projectCategories} value={category} onChange={setCategory} label={t('Filter projects', 'Filtrer les projets')}>
-          <select
-            className={filterStyles.select}
+          <TechPicker
+            options={techs}
             value={activeTech}
-            onChange={e => setTech(e.target.value)}
-            aria-label={t('Filter by tech', 'Filtrer par techno')}
-          >
-            <option value="all">{t('any tech', 'toutes les technos')}</option>
-            {techs.map(name => <option key={name} value={name}>{name}</option>)}
-          </select>
+            onChange={setTech}
+            label={t('Filter by tech', 'Filtrer par techno')}
+          />
         </FilterBar>
       </div>
 

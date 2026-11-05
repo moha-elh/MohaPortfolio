@@ -1,0 +1,133 @@
+/* Searchable tech picker — same paper-tag look as the filter chips. */
+.picker {
+  position: relative;
+  margin-left: auto;
+  width: 220px;
+  max-width: 100%;
+}
+
+@media (max-width: 560px) {
+  .picker { margin-left: 0; width: 100%; }
+}
+
+.field {
+  width: 100%;
+  font-family: var(--f-hand);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+  background: var(--cream);
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  padding: 4px 38px 5px 14px;
+  box-shadow: 2px 3px 0 var(--ink);
+  text-overflow: ellipsis;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field::placeholder {
+  color: var(--ink);
+  opacity: 1;
+}
+
+.field:focus {
+  outline: none;
+  background: var(--white);
+  box-shadow: 3px 5px 0 var(--ink);
+}
+
+.field:focus::placeholder {
+  color: var(--faint);
+}
+
+@media (hover: hover) {
+  .field:hover { background: var(--yellow); }
+  .field:focus:hover { background: var(--white); }
+}
+
+.field:focus-visible {
+  outline: 2px dashed var(--ink);
+  outline-offset: 3px;
+}
+
+/* Arrow button inside the field: opens the full list */
+.toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+}
+
+.chevron {
+  width: 12px;
+  height: 8px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
+  transition: rotate 0.15s ease;
+}
+
+.chevronUp {
+  rotate: 180deg;
+}
+
+/* ── Option list ── */
+.list {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 20;
+  min-width: 100%;
+  max-height: min(55vh, 320px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  padding: 6px;
+  background: var(--cream);
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  box-shadow: 3px 4px 0 var(--ink);
+}
+
+.option {
+  font-family: var(--f-hand);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 3px 10px;
+  border-radius: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.active {
+  background: var(--yellow);
+}
+
+.option[aria-selected='true'] {
+  background: var(--lime);
+}
+
+.empty {
+  font-family: var(--f-hand);
+  font-size: 20px;
+  font-weight: 700;
+  padding: 6px 10px;
+  max-width: 260px;
+  white-space: normal;
+}
+
+.empty span {
+  display: block;
+  font-family: var(--f-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--faint);
+  margin-top: 2px;
+}
