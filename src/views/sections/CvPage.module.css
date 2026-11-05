@@ -89,7 +89,7 @@
 /* Phones: back + download on the first row, the switch on its own row below */
 @media (max-width: 600px) {
   .topBar {
-    gap: 10px 8px;
+    gap: 5px 8px;              /* the line-break spacer adds a second row gap */
     padding: 10px 12px;
   }
   .back,
@@ -99,11 +99,17 @@
     padding: 5px 9px;
   }
   .download { margin-left: auto; }
+  /* own row, but the pill hugs its words and sits centered
+     (a zero-height full-width spacer forces the line break) */
+  .topBar::after {
+    content: '';
+    order: 2;
+    flex-basis: 100%;
+    height: 0;
+  }
   .tabs {
     order: 3;
-    flex-basis: 100%;
-    margin-left: 0;
-    justify-content: center;
+    margin: 0 auto;
   }
 }
 
