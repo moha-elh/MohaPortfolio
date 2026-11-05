@@ -6,6 +6,8 @@
  * rot        → base rotation in degrees
  * img        → path to certificate image, e.g. '/assets/certificates/solihack.jpg',
  *              or an array of paths to group same-design certificates into one card
+ *              Also add a ~900px-wide copy under /assets/certificates/thumbs/ (same name):
+ *              cards load the thumb, the modal loads the full scan.
  *              (when set, the card shows the real certificate instead of the drawn one)
  * verifyUrl  → optional link to verify the certificate online
  * video      → optional YouTube embed URL, shown in the modal when there's no image

@@ -3,6 +3,9 @@ import { useLang } from '../../context/LangContext';
 import { domains } from '../../models/achievements';
 import styles from './Certificate.module.css';
 
+// Cards show a 900px copy from certificates/thumbs/; the modal opens the full scan.
+const thumb = (src) => src.replace('/assets/certificates/', '/assets/certificates/thumbs/');
+
 export default function Certificate({ rank, title, org, img, domain, rot, fit, gold, onClick }) {
   const hover = useHover();
   const { t } = useLang();
@@ -20,7 +23,7 @@ export default function Certificate({ rank, title, org, img, domain, rot, fit, g
       {...hover}
     >
       {img ? (
-        <img src={imgs[0]} alt={title} loading="lazy" className={styles.photo} />
+        <img src={thumb(imgs[0])} alt={title} loading="lazy" className={styles.photo} />
       ) : (
         <>
         <div className={styles.innerFrame} />
