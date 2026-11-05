@@ -14,7 +14,7 @@ export const owner = {
 /* One CV per domain, each in English and French. `dev` is the default;
    the language follows the site language (t(cvs[domain])). */
 export const cvDomains = {
-  dev:    { en: 'full stack dev', fr: 'dev full stack' },
+  dev:    'full stack',
   ai:     { en: 'AI', fr: 'IA' },
   data:   'data & BI',
   mobile: 'mobile',
