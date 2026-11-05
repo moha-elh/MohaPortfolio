@@ -9,12 +9,16 @@ export default function CvPage({ onBack }) {
   const { t } = useLang();
   const [domain, setDomain] = useState(DEFAULT_CV);
   const pdf = t(cvs[domain]);
-  // Every CV opened so far stays mounted (just hidden), so switching back is
-  // instant instead of rebuilding the PDF viewer. Lazy: nothing loads until picked.
+  // Every CV stays mounted (just hidden), so switching never rebuilds the PDF
+  // viewer. The selected one loads first; once it has loaded, the other domains
+  // (same language) load in the background so their tabs open without a blank flash.
   const [opened, setOpened] = useState(() => [pdf]);
+  const addAll = (list, urls) => [...list, ...urls.filter((u) => !list.includes(u))];
   useEffect(() => {
-    setOpened((list) => (list.includes(pdf) ? list : [...list, pdf]));
+    setOpened((list) => addAll(list, [pdf]));
   }, [pdf]);
+  const preloadRest = () =>
+    setOpened((list) => addAll(list, Object.values(cvs).map((c) => t(c))));
 
   // Scanned QR lands here with ?dl=1 → fire the download immediately.
   useEffect(() => {
@@ -65,6 +69,7 @@ export default function CvPage({ onBack }) {
             className={`${styles.frame} ${src === pdf ? styles.frameOn : ''}`}
             aria-hidden={src !== pdf}
             tabIndex={src === pdf ? 0 : -1}
+            onLoad={src === pdf ? preloadRest : undefined}
           />
         ))}
       </div>
