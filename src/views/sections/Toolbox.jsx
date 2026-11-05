@@ -5,7 +5,7 @@ import { useLang } from '../../context/LangContext';
 import { useHover } from '../../context/CursorContext';
 import styles from './Toolbox.module.css';
 
-export default function Toolbox() {
+export default function Toolbox({ onOpenCert }) {
   const { t } = useLang();
   const hover = useHover();
   const track = useRef(null);
@@ -26,6 +26,7 @@ export default function Toolbox() {
       <div ref={track} className={styles.grid} onScroll={onScroll}>
         {skillCategories.map((cat, i) => (
           <IndexCard
+            onOpenCert={onOpenCert}
             key={cat.id}
             number={i + 1}
             title={t(cat.title)}

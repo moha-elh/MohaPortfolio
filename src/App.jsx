@@ -87,6 +87,13 @@ export default function App() {
     window.scrollTo(0, 0);
   }, []);
 
+  // certified skill → certificates page with that certificate's modal open
+  const openCert = useCallback((id) => {
+    history.pushState(null, '', `/certificates?cert=${encodeURIComponent(id)}`);
+    setPage('certificates');
+    window.scrollTo(0, 0);
+  }, []);
+
   const openProject = useCallback((id, from) => {
     setPage({ type: 'project', id, from });
     window.scrollTo(0, 0);
@@ -205,7 +212,7 @@ export default function App() {
           onOpenProject={openProject}
           onOpenWork={() => { setPage('work'); window.scrollTo(0, 0); }}
         />
-        <Toolbox />
+        <Toolbox onOpenCert={openCert} />
         <Achievements onOpenCerts={() => { setPage('certificates'); window.scrollTo(0, 0); }} />
         <Experience />
         <Contact onOpenCv={() => { setPage('cv'); window.scrollTo(0, 0); }} />

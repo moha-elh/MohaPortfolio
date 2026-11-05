@@ -10,7 +10,15 @@ import styles from './CertificatesPage.module.css';
 export default function CertificatesPage({ onBack }) {
   const hover = useHover();
   const { t } = useLang();
-  const [selected, setSelected] = useState(null);
+  // /certificates?cert=<id> (e.g. from a certified skill) opens that certificate
+  const [selected, setSelected] = useState(() => {
+    const id = new URLSearchParams(window.location.search).get('cert');
+    return certificates.find((c) => c.id === id) ?? null;
+  });
+  const close = () => {
+    setSelected(null);
+    if (window.location.search) history.replaceState(null, '', window.location.pathname);
+  };
   const [type, setType] = useState('all');
   const shown = type === 'all' ? certificates : certificates.filter((c) => c.type === type);
 
@@ -47,7 +55,7 @@ export default function CertificatesPage({ onBack }) {
         </div>
       </div>
 
-      <CertModal cert={selected} onClose={() => setSelected(null)} />
+      <CertModal cert={selected} onClose={close} />
     </div>
   );
 }

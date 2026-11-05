@@ -77,8 +77,11 @@
   transform: translateX(0);
 }
 
-/* Certified skill: same gold as the course certificates (Certificate.module.css .gold) */
+/* Certified skill: same gold as the course certificates (Certificate.module.css .gold).
+   It is a link to the certificate. */
 .certified {
+  text-decoration: none;
+  color: inherit;
   background: #f7e27a;
   box-shadow: inset 0 0 0 1.5px #d9b52c;
 }
@@ -100,4 +103,9 @@
   border-radius: 999px;
   background: radial-gradient(circle at 35% 30%, #fff3a6, #f2d24a 70%);
   transform: rotate(-4deg);
+}
+
+.certified:focus-visible {
+  outline: 2px dashed var(--ink);
+  outline-offset: 2px;
 }

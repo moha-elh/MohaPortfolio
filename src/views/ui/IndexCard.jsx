@@ -5,7 +5,7 @@ import styles from './IndexCard.module.css';
  * Toolbox index card — one per skill category.
  * Passes desc through to TechItem for the hover description.
  */
-export default function IndexCard({ number, title, items, rotation, bg, topColor }) {
+export default function IndexCard({ number, title, items, rotation, bg, topColor, onOpenCert }) {
   return (
     <div
       className={styles.card}
@@ -21,7 +21,7 @@ export default function IndexCard({ number, title, items, rotation, bg, topColor
       </div>
       <div className={styles.list}>
         {items.map((item) => (
-          <TechItem key={item.name} name={item.name} slug={item.slug} localImg={item.localImg} desc={item.desc} certified={item.certified} />
+          <TechItem key={item.name} name={item.name} slug={item.slug} localImg={item.localImg} desc={item.desc} certificate={item.certificate} onOpenCert={onOpenCert} />
         ))}
       </div>
     </div>

@@ -32,7 +32,7 @@ export const skillCategories = [
     bg: '#fefbf2',
     topColor: '#1a1a1a',
     items: [
-      { name: 'Python',     slug: 'python',        desc: { en: 'for everything AI', fr: "pour tout ce qui touche à l'IA" }, certified: true }, // IBM · Coursera certificate
+      { name: 'Python',     slug: 'python',        desc: { en: 'for everything AI', fr: "pour tout ce qui touche à l'IA" }, certificate: 'ibm-python' }, // gold + links to that certificate (achievements.js id)
       { name: 'RAG',        slug: null, localImg: '/assets/icons/database-search.svg',  desc: { en: 'retrieval-augmented LLMs', fr: 'LLM augmentés par recherche' }       },
       { name: 'Embeddings', slug: null, localImg: '/assets/icons/brain.svg',             desc: { en: 'vector reps of text', fr: 'représentations vectorielles du texte' }            },
       { name: 'LangChain',  slug: 'langchain',     desc: { en: 'agent + chain orchestration', fr: "orchestration d'agents et de chaînes" }    },
